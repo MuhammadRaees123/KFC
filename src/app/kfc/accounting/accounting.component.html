@@ -1,0 +1,228 @@
+
+<!-- start Heading Part -->
+<div class="col-md-12">
+    <div class="row">
+      <div class="col-md-2">
+          <app-sidebaar></app-sidebaar>   
+      </div>
+      <div class="col-md-10 PageBody">
+         <!-- Start Body Part -->
+         <app-accounting-header></app-accounting-header>
+        <div class="row">
+
+         <div class="DetailsTbl col-md-8">
+          <h4>Accounts</h4>
+  
+                  <!-- Start Table Part -->
+                  <div class="overflow">
+                      <table class="table table-sm table-hover data-table" id="datatableexample">
+                      <thead>
+                        <tr style="background-color: #716ACA !important;">
+                          <td>Rider Name</td>
+                          <td>Branch</td>
+                          <td>Total Orders</td>
+                          <td>Total Amount</td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>{{RiderName}}</td>
+                          <td>{{Branch}}</td>
+                          <td>{{TotalOrders}}</td>
+                          <td>{{TotalAmount}}</td>
+                          <td> <button>Details</button></td>   
+                          <td> <button type="button" #btnAlert (click)="openModal()">Acceptance Log</button></td>           
+                      </tr>
+                      <tr>
+                        <td>{{RiderName}}</td>
+                        <td>{{Branch}}</td>
+                        <td>{{TotalOrders}}</td>
+                        <td>{{TotalAmount}}</td>
+                        <td> <button>Details</button></td>   
+                        <td> <button type="button" #btnAlert (click)="openModal()">Acceptance Log</button></td>                            
+                    </tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr>
+                        <td>{{RiderName}}</td>
+                        <td>{{Branch}}</td>
+                        <td>{{TotalOrders}}</td>
+                        <td>{{TotalAmount}}</td>
+                        <td> <button>Details</button></td>   
+                        <td> <button type="button" #btnAlert (click)="openModal()">Acceptance Log</button></td>              
+                    </tr>
+                    <tr>
+                      <td>{{RiderName}}</td>
+                      <td>{{Branch}}</td>
+                      <td>{{TotalOrders}}</td>
+                      <td>{{TotalAmount}}</td>
+                      <td> <button>Details</button></td>   
+                      <td> <button type="button" #btnAlert (click)="openModal()">Acceptance Log</button></td>             
+                  </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                    <!-- End Table Part -->
+         </div>
+
+         <div class="AccountingDetails col-md-4">
+          <h4>Details</h4>
+          <table class="table table-hover">
+            <thead>
+              <tr style="background-color: #716ACA !important;">
+                <td>Order No</td>
+                <td>Name</td>
+                <td>Total Amount</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{TotalOrders}}</td>
+                <td>{{RiderName}}</td>
+                <td>{{TotalAmount}}</td>
+            </tr>
+            <tr>
+              <td>{{TotalOrders}}</td>
+              <td>{{RiderName}}</td>
+              <td>{{TotalAmount}}</td>
+          </tr>
+          <tr>
+            <td>{{TotalOrders}}</td>
+            <td>{{RiderName}}</td>
+            <td>{{TotalAmount}}</td>
+        </tr>
+        <tr>
+          <td>{{TotalOrders}}</td>
+          <td>{{RiderName}}</td>
+          <td>{{TotalAmount}}</td>
+      </tr>
+      <tr>
+        <td>{{TotalOrders}}</td>
+        <td>{{RiderName}}</td>
+        <td>{{TotalAmount}}</td>
+    </tr>
+    <tr>
+      <td>{{TotalOrders}}</td>
+      <td>{{RiderName}}</td>
+      <td>{{TotalAmount}}</td>
+  </tr>
+  <tr>
+    <td>{{TotalOrders}}</td>
+    <td>{{RiderName}}</td>
+    <td>{{TotalAmount}}</td>
+</tr>
+<tr>
+  <td>{{TotalOrders}}</td>
+  <td>{{RiderName}}</td>
+  <td>{{TotalAmount}}</td>
+</tr>
+<tr>
+  <td>{{TotalOrders}}</td>
+  <td>{{RiderName}}</td>
+  <td>{{TotalAmount}}</td>
+</tr>
+<tr>
+<td>{{TotalOrders}}</td>
+<td>{{RiderName}}</td>
+<td>{{TotalAmount}}</td>
+</tr>
+<tr>
+<td>{{TotalOrders}}</td>
+<td>{{RiderName}}</td>
+<td>{{TotalAmount}}</td>
+</tr>
+<tr>
+<td>{{TotalOrders}}</td>
+<td>{{RiderName}}</td>
+<td>{{TotalAmount}}</td>
+</tr>
+            </tbody>
+          </table>
+         </div>
+
+        </div>
+  
+         <!-- End Body Part -->
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="height: 100vh;">
+      <div class="modal-content" style="border: 2px solid lightblue">
+        <div class="modal-header">
+          <h4 class="modaltitle" id="staticBackdropLabel">Trace Log</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button> 
+        </div>
+        <div class="modalbody">
+          <h4 class="modaltitle" id="staticBackdropLabel"> Admin Log</h4>
+          <table>
+            <thead>
+            <tr>
+              <th>Entry By</th>
+              <th>Event</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Ali</td>
+              <td>View Order Details</td>
+              <td>05:25 AM</td>
+            </tr>
+            <tr>
+              <td>Ali</td>
+              <td>View Order Details</td>
+              <td>05:25 AM</td>
+            </tr>
+          </tbody>
+        </table>
+        <h4 class="modaltitle" id="staticBackdropLabel">Auto assign Log</h4>
+        <table>
+          <thead>
+          <tr>
+            <th>Action</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Search in radius 100m</td>
+            <td>05:25 AM</td>
+          </tr>
+          <tr>
+            <td>1 Driver found.</td>
+            <td>05:25 AM</td>
+          </tr>
+          <tr>
+            <td>Notification send to Muhanmmad</td>
+            <td>05:25 AM</td>
+          </tr>
+        </tbody>
+      </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary btn-sm" data="modal">Save Change</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,703 @@
+
+<!-- start Heading Part -->
+<div class="col-md-12">
+    <div class="row">
+      <div class="col-md-2">
+         
+          <app-sidebaar></app-sidebaar>
+      
+      </div>
+      <div class="col-md-10 PageBody">
+         <!-- Start Body Part -->
+         <app-report-header></app-report-header>
+
+
+         <div class="DetailsTbl col-md-12">
+          <h4>Reports</h4>
+          <div tabLink>
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="tablink nav-link" (click)="openPage('Lead', $event)" [ngClass]="{'active': currentTab === 'Lead'}"><b>Resturance Performance Report</b></a>
+              </li>
+              <li class="nav-item">
+                <a class="tablink nav-link" (click)="openPage('Login', $event)" [ngClass]="{'active': currentTab === 'Login'}"><b>Rider Perfrmance</b></a>
+              </li>
+
+              <li class="nav-item">
+                <a class="tablink nav-link" (click)="openPage('Location', $event)" [ngClass]="{'active': currentTab === 'Location'}"><b>Order Location</b></a>
+              </li>
+
+              <li class="nav-item">
+                <a class="tablink nav-link" (click)="openPage('Details', $event)" [ngClass]="{'active': currentTab === 'Details'}"><b>Rider Order Details</b></a>
+              </li>
+            </ul>
+          </div>
+
+                  <!-- Start Table Part -->
+                  <div id="Lead" class="tabcontent" [hidden]="currentTab !== 'Lead'">
+                  <div class="overflow">
+                      <table class="table table-sm table-hover data-table" id="datatableexample">
+                      <thead>
+                        <tr style="background-color: #716ACA !important;">
+                          <td>Store</td>
+                          <td>Store Id</td>
+                          <td># Orders</td>
+                          <td># Canceled</td>
+                          <td># Delivered</td>
+                          <td>Revenue Delivered</td>
+                          <td>Revenue Lost</td>
+                          <td>AVG Check Value</td>
+                          <td>%1X</td>
+                          <td>%2X</td>
+                          <td>%3X</td>
+                          <td>AVG In Store</td>
+                          <td>AVG Deive</td>
+                          <td>AVG Delivery</td>
+                          <td>%SOS Under 30</td>
+                          <td>%SOS Under 20</td>
+                          <td>Manual Dispatch</td>
+                          <td>Manual Dispatch%</td>
+                          <td>Auto Dispatch</td>
+                          <td>Auto Dispatch%</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Burger</td>
+                          <td>101</td>
+                          <td>101</td>
+                          <td>102</td>
+                          <td>112</td>
+                          <td>Burger</td>
+                          <td>101</td>
+                          <td>101</td>
+                          <td>102</td>
+                          <td>112</td> 
+                          <td>Burger</td>
+                          <td>101</td>
+                          <td>101</td>
+                          <td>102</td>
+                          <td>112</td>
+                          <td>Burger</td>
+                          <td>101</td>
+                          <td>101</td>
+                          <td>102</td>
+                          <td>112</td>                
+                      </tr>
+                      <tr>
+                        <td>Burger</td>
+                        <td>101</td>
+                        <td>101</td>
+                        <td>102</td>
+                        <td>112</td>
+                        <td>Burger</td>
+                        <td>101</td>
+                        <td>101</td>
+                        <td>102</td>
+                        <td>112</td> 
+                        <td>Burger</td>
+                        <td>101</td>
+                        <td>101</td>
+                        <td>102</td>
+                        <td>112</td>
+                        <td>Burger</td>
+                        <td>101</td>
+                        <td>101</td>
+                        <td>102</td>
+                        <td>112</td>                
+                    </tr>
+                    <tr>
+                      <td>Burger</td>
+                      <td>101</td>
+                      <td>101</td>
+                      <td>102</td>
+                      <td>112</td>
+                      <td>Burger</td>
+                      <td>101</td>
+                      <td>101</td>
+                      <td>102</td>
+                      <td>112</td> 
+                      <td>Burger</td>
+                      <td>101</td>
+                      <td>101</td>
+                      <td>102</td>
+                      <td>112</td>
+                      <td>Burger</td>
+                      <td>101</td>
+                      <td>101</td>
+                      <td>102</td>
+                      <td>112</td>                
+                  </tr>
+                  <tr>
+                    <td>Burger</td>
+                    <td>101</td>
+                    <td>101</td>
+                    <td>102</td>
+                    <td>112</td>
+                    <td>Burger</td>
+                    <td>101</td>
+                    <td>101</td>
+                    <td>102</td>
+                    <td>112</td> 
+                    <td>Burger</td>
+                    <td>101</td>
+                    <td>101</td>
+                    <td>102</td>
+                    <td>112</td>
+                    <td>Burger</td>
+                    <td>101</td>
+                    <td>101</td>
+                    <td>102</td>
+                    <td>112</td>                
+                </tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr></tr>
+                      <tr>
+                        <td>Burger</td>
+                        <td>101</td>
+                        <td>101</td>
+                        <td>102</td>
+                        <td>112</td>
+                        <td>Burger</td>
+                        <td>101</td>
+                        <td>101</td>
+                        <td>102</td>
+                        <td>112</td> 
+                        <td>Burger</td>
+                        <td>101</td>
+                        <td>101</td>
+                        <td>102</td>
+                        <td>112</td>
+                        <td>Burger</td>
+                        <td>101</td>
+                        <td>101</td>
+                        <td>102</td>
+                        <td>112</td>                
+                    </tr>
+                    <tr>
+                      <td>Burger</td>
+                      <td>101</td>
+                      <td>101</td>
+                      <td>102</td>
+                      <td>112</td>
+                      <td>Burger</td>
+                      <td>101</td>
+                      <td>101</td>
+                      <td>102</td>
+                      <td>112</td> 
+                      <td>Burger</td>
+                      <td>101</td>
+                      <td>101</td>
+                      <td>102</td>
+                      <td>112</td>
+                      <td>Burger</td>
+                      <td>101</td>
+                      <td>101</td>
+                      <td>102</td>
+                      <td>112</td>                
+                  </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div id="Login" class="tabcontent" [hidden]="currentTab !== 'Login'">
+                  <div class="overflow">
+                    <table class="table table-sm table-hover data-table" id="datatableexample">
+                    <thead>
+                      <tr style="background-color: #716ACA !important;">
+                        <td>Rider Name</td>
+                        <td>Branch</td>
+                        <td># Orders</td>
+                        <td># Delivered Orders</td>
+                        <td>Delivered Revenue</td>
+                        <td>Cancel Orders</td>
+                        <td>Lost Revenue</td>
+                        <td>Avg Check Value</td>
+                        <td>In Store Time</td>
+                        <td>Drive Time</td>
+                        <td>Delivery Time</td>
+                        <td>SOS < 20</td>
+                        <td>SOS < 30</td>
+                        <td>Manual Dispatch	</td>
+                        <td>Rating</td>
+                       
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{{FirstName}}</td>
+                        <td>{{Branch}}</td>
+                        <td>101</td>
+                        <td>101</td>
+                        <td>112</td>
+                        <td>101</td>
+                        <td>2500</td>
+                        <td>11:00</td>
+                        <td>30:00</td>
+                        <td>11:30</td>
+                        <td>112</td>
+                        <td>101</td>
+                        <td>2500</td>
+                        <td>2500</td>
+                        <td>5*</td>          
+                    </tr>
+                    <tr>
+                      <td>{{FirstName}}</td>
+                      <td>{{Branch}}</td>
+                      <td>101</td>
+                      <td>101</td>
+                      <td>112</td>
+                      <td>101</td>
+                      <td>2500</td>
+                      <td>11:00</td>
+                      <td>30:00</td>
+                      <td>11:30</td>
+                      <td>112</td>
+                      <td>101</td>
+                      <td>2500</td>
+                      <td>2500</td>
+                      <td>5*</td>          
+                  </tr>
+                  <tr>
+                    <td>{{FirstName}}</td>
+                    <td>{{Branch}}</td>
+                    <td>101</td>
+                    <td>101</td>
+                    <td>112</td>
+                    <td>101</td>
+                    <td>2500</td>
+                    <td>11:00</td>
+                    <td>30:00</td>
+                    <td>11:30</td>
+                    <td>112</td>
+                    <td>101</td>
+                    <td>2500</td>
+                    <td>2500</td>
+                    <td>5*</td>          
+                </tr>
+                <tr>
+                  <td>{{FirstName}}</td>
+                  <td>{{Branch}}</td>
+                  <td>101</td>
+                  <td>101</td>
+                  <td>112</td>
+                  <td>101</td>
+                  <td>2500</td>
+                  <td>11:00</td>
+                  <td>30:00</td>
+                  <td>11:30</td>
+                  <td>112</td>
+                  <td>101</td>
+                  <td>2500</td>
+                  <td>2500</td>
+                  <td>5*</td>          
+              </tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr>
+                      <td>{{FirstName}}</td>
+                      <td>{{Branch}}</td>
+                      <td>101</td>
+                      <td>101</td>
+                      <td>112</td>
+                      <td>101</td>
+                      <td>2500</td>
+                      <td>11:00</td>
+                      <td>30:00</td>
+                      <td>11:30</td>
+                      <td>112</td>
+                      <td>101</td>
+                      <td>2500</td>
+                      <td>2500</td>
+                      <td>5*</td>          
+                  </tr>
+                  <tr>
+                    <td>{{FirstName}}</td>
+                    <td>{{Branch}}</td>
+                    <td>101</td>
+                    <td>101</td>
+                    <td>112</td>
+                    <td>101</td>
+                    <td>2500</td>
+                    <td>11:00</td>
+                    <td>30:00</td>
+                    <td>11:30</td>
+                    <td>112</td>
+                    <td>101</td>
+                    <td>2500</td>
+                    <td>2500</td>
+                    <td>5*</td>          
+                </tr>
+                    </tbody>
+                  </table>
+                </div>
+                </div>
+
+                <div id="Login" class="tabcontent" [hidden]="currentTab !== 'Location'">
+                  <div class="overflow">
+                    <table class="table table-sm table-hover data-table" id="datatableexample">
+                    <thead>
+                      <tr style="background-color: #716ACA !important;">
+                        <td>Branch</td>
+                        <td>Order No</td>
+                        <td>Customer Name</td>
+                        <td>Contact No</td>
+                        <td>Recieve Time</td>
+                        <td>Dispatch Time</td>
+                        <td>Delivery Time</td>
+                        <td>Rider Name</td>
+                        <td>Latitude</td>
+                        <td>Longitude</td>
+                        <td>Distance</td>
+                        <td>C Latitude</td>
+                        <td>C Latitude</td>
+                        <td>Diff in</td>
+                        <td>Distance</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{{FirstName}}</td>
+                        <td>{{Branch}}</td>
+                        <td>101</td>
+                        <td>101</td>
+                        <td>112</td>
+                        <td>101</td>
+                        <td>2500</td>
+                        <td>11:00</td>
+                        <td>30:00</td>
+                        <td>11:30</td>
+                        <td>112</td>
+                        <td>101</td>
+                        <td>2500</td>
+                        <td>2500</td>
+                        <td>5*</td>          
+                    </tr>
+                    <tr>
+                      <td>{{FirstName}}</td>
+                      <td>{{Branch}}</td>
+                      <td>101</td>
+                      <td>101</td>
+                      <td>112</td>
+                      <td>101</td>
+                      <td>2500</td>
+                      <td>11:00</td>
+                      <td>30:00</td>
+                      <td>11:30</td>
+                      <td>112</td>
+                      <td>101</td>
+                      <td>2500</td>
+                      <td>2500</td>
+                      <td>5*</td>          
+                  </tr>
+                  <tr>
+                    <td>{{FirstName}}</td>
+                    <td>{{Branch}}</td>
+                    <td>101</td>
+                    <td>101</td>
+                    <td>112</td>
+                    <td>101</td>
+                    <td>2500</td>
+                    <td>11:00</td>
+                    <td>30:00</td>
+                    <td>11:30</td>
+                    <td>112</td>
+                    <td>101</td>
+                    <td>2500</td>
+                    <td>2500</td>
+                    <td>5*</td>          
+                </tr>
+                <tr>
+                  <td>{{FirstName}}</td>
+                  <td>{{Branch}}</td>
+                  <td>101</td>
+                  <td>101</td>
+                  <td>112</td>
+                  <td>101</td>
+                  <td>2500</td>
+                  <td>11:00</td>
+                  <td>30:00</td>
+                  <td>11:30</td>
+                  <td>112</td>
+                  <td>101</td>
+                  <td>2500</td>
+                  <td>2500</td>
+                  <td>5*</td>          
+              </tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr>
+                      <td>{{FirstName}}</td>
+                      <td>{{Branch}}</td>
+                      <td>101</td>
+                      <td>101</td>
+                      <td>112</td>
+                      <td>101</td>
+                      <td>2500</td>
+                      <td>11:00</td>
+                      <td>30:00</td>
+                      <td>11:30</td>
+                      <td>112</td>
+                      <td>101</td>
+                      <td>2500</td>
+                      <td>2500</td>
+                      <td>5*</td>          
+                  </tr>
+                  <tr>
+                    <td>{{FirstName}}</td>
+                    <td>{{Branch}}</td>
+                    <td>101</td>
+                    <td>101</td>
+                    <td>112</td>
+                    <td>101</td>
+                    <td>2500</td>
+                    <td>11:00</td>
+                    <td>30:00</td>
+                    <td>11:30</td>
+                    <td>112</td>
+                    <td>101</td>
+                    <td>2500</td>
+                    <td>2500</td>
+                    <td>5*</td>          
+                </tr>
+                    </tbody>
+                  </table>
+                </div>
+                </div>
+
+                <div id="Login" class="tabcontent" [hidden]="currentTab !== 'Details'">
+                  <div class="overflow">
+                    <table class="table table-sm table-hover data-table" id="datatableexample">
+                    <thead>
+                      <tr style="background-color: #716ACA !important;">
+                        <td>Sr #</td>
+                        <td>Branch</td>
+                        <td>Rider</td>
+                        <td>Order No</td>
+                        <td>Customer</td>
+                        <td>Book Time</td>
+                        <td>Receive Time</td>
+                        <td>Dispatch Time</td>
+                        <td>Arrive Time</td>
+                        <td>Final Status</td>
+                        <td>RiAddress	Amountder</td>
+                        <td>IST</td>
+                        <td>Deliver Time</td>
+                        <td>Rating</td>
+                        <td>Comments</td>
+                        <td>Order Status</td>
+                        <td>Dispatch Status</td>
+                        <td>Latitude</td>
+                        <td>Latitude</td>
+                        <td>Distance</td>
+                       
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{{FirstName}}</td>
+                        <td>{{Branch}}</td>
+                        <td>101</td>
+                        <td>101</td>
+                        <td>112</td>
+                        <td>101</td>
+                        <td>2500</td>
+                        <td>11:00</td>
+                        <td>30:00</td>
+                        <td>11:30</td>
+                        <td>112</td>
+                        <td>101</td>
+                        <td>2500</td>
+                        <td>2500</td>
+                        <td>5*</td>  
+                        <td>112</td>
+                        <td>101</td>
+                        <td>2500</td>
+                        <td>2500</td>
+                        <td>5*</td>          
+                    </tr>
+                    <tr>
+                      <td>{{FirstName}}</td>
+                      <td>{{Branch}}</td>
+                      <td>101</td>
+                      <td>101</td>
+                      <td>112</td>
+                      <td>101</td>
+                      <td>2500</td>
+                      <td>11:00</td>
+                      <td>30:00</td>
+                      <td>11:30</td>
+                      <td>112</td>
+                      <td>101</td>
+                      <td>2500</td>
+                      <td>2500</td>
+                      <td>5*</td>  
+                      <td>112</td>
+                      <td>101</td>
+                      <td>2500</td>
+                      <td>2500</td>
+                      <td>5*</td>          
+                  </tr>
+                  <tr>
+                    <td>{{FirstName}}</td>
+                    <td>{{Branch}}</td>
+                    <td>101</td>
+                    <td>101</td>
+                    <td>112</td>
+                    <td>101</td>
+                    <td>2500</td>
+                    <td>11:00</td>
+                    <td>30:00</td>
+                    <td>11:30</td>
+                    <td>112</td>
+                    <td>101</td>
+                    <td>2500</td>
+                    <td>2500</td>
+                    <td>5*</td>  
+                    <td>112</td>
+                    <td>101</td>
+                    <td>2500</td>
+                    <td>2500</td>
+                    <td>5*</td>          
+                </tr>
+                <tr>
+                  <td>{{FirstName}}</td>
+                  <td>{{Branch}}</td>
+                  <td>101</td>
+                  <td>101</td>
+                  <td>112</td>
+                  <td>101</td>
+                  <td>2500</td>
+                  <td>11:00</td>
+                  <td>30:00</td>
+                  <td>11:30</td>
+                  <td>112</td>
+                  <td>101</td>
+                  <td>2500</td>
+                  <td>2500</td>
+                  <td>5*</td>  
+                  <td>112</td>
+                  <td>101</td>
+                  <td>2500</td>
+                  <td>2500</td>
+                  <td>5*</td>          
+              </tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr>
+                      <td>{{FirstName}}</td>
+                      <td>{{Branch}}</td>
+                      <td>101</td>
+                      <td>101</td>
+                      <td>112</td>
+                      <td>101</td>
+                      <td>2500</td>
+                      <td>11:00</td>
+                      <td>30:00</td>
+                      <td>11:30</td>
+                      <td>112</td>
+                      <td>101</td>
+                      <td>2500</td>
+                      <td>2500</td>
+                      <td>5*</td>  
+                      <td>112</td>
+                      <td>101</td>
+                      <td>2500</td>
+                      <td>2500</td>
+                      <td>5*</td>          
+                  </tr>
+                      <tr>
+                        <td>{{FirstName}}</td>
+                        <td>{{Branch}}</td>
+                        <td>101</td>
+                        <td>101</td>
+                        <td>112</td>
+                        <td>101</td>
+                        <td>2500</td>
+                        <td>11:00</td>
+                        <td>30:00</td>
+                        <td>11:30</td>
+                        <td>112</td>
+                        <td>101</td>
+                        <td>2500</td>
+                        <td>2500</td>
+                        <td>5*</td>  
+                        <td>112</td>
+                        <td>101</td>
+                        <td>2500</td>
+                        <td>2500</td>
+                        <td>5*</td>          
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+                </div>
+
+                    <!-- End Table Part -->
+        </div>
+  
+         <!-- End Body Part -->
+      </div>
+    </div>
+  </div>

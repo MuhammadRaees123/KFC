@@ -1,0 +1,200 @@
+
+
+.PageBody
+{
+    padding: 10px 10px;
+    overflow-y: auto;
+    height: auto;
+    overflow-x: hidden !important;
+}
+
+
+/* End SearchBar Part stylling */
+.DetailsTbl
+{
+    height: auto;
+    border-radius: 10px;
+    padding: 10px 0px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.DetailsTbl h4
+{
+    color: #000000;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    margin: 5px 10px;
+}
+
+.orderFirmate
+{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.orderFirmate p
+{
+    padding: 0px 10px;
+}
+
+.Detailslist .justify{
+    display: flex; /* Use flexbox to align items horizontally */
+    flex-wrap: wrap; /* Allow items to wrap to the next line if necessary */
+    justify-content: space-between;
+}
+
+
+.overflow {
+    height: 73vh;
+    overflow-y: auto;
+    padding: 0px;
+    overflow-x: auto;
+}
+
+#datatableexample tr {
+    border-bottom: 1px solid #E2E8F0;
+    height: 40px;
+}
+table
+{
+    width: 100%;
+}
+
+table thead td
+{
+    color: #fff;
+    Size:14px;
+    font-weight: bold;
+    font-family: 'Inter' Arial, Helvetica, sans-serif;
+    line-height:12px;
+    height: 10px;
+    padding: 20px 5px;
+    background-color: #716ACA !important;
+    align-items: left;
+}
+table td
+{
+    font-family: 'Inter' Arial, Helvetica, sans-serif;
+    font-size: 12px;    
+    font-weight: 400;
+    line-height: 10px;
+    letter-spacing: 1px;
+    text-align: left;
+    padding: 20px 5px;
+    color: #000000;
+
+}
+table td button
+{
+    border: none;
+    padding: 5px 10px;
+    color: #ffffff;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    border-radius: 20px;
+    background-color: #716ACA;
+    height: 35px;
+    margin: -20px 0px;
+}
+
+/* Start Map & Maptable Stylling  */
+
+.map
+{
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    padding: 0px 5px;
+}
+
+.mapDetails
+{
+    padding: 0px; 
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+
+/* Check if the styles are being applied */
+.DetailsTbl [tabLink] ul {
+    display: flex; /* Use flexbox to align items horizontally */
+     justify-content: space-between !important;    
+}
+
+.DetailsTbl [tabLink] a {
+    text-decoration: none;
+    color: #000000;
+    margin: 10px 5px; /* Adjust the margin as needed */
+    padding: 7px 5px; /* Adjust the padding as needed */
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid lightblue;
+}
+.nav.nav-tabs .nav-link.active {
+    background-color: #5867DD;
+    color: #ffffff;
+  }
+
+  /* .tabcontent table th
+  {
+    width: 100%;
+    color: #fff;
+    Size:14px;
+    font-weight: bold;
+    font-family: 'Inter' Arial, Helvetica, sans-serif;
+    line-height:12px;
+    height: 10px;
+    padding: 20px 3px;
+    background-color: #716ACA !important;
+    align-items: center;
+  } */
+  /* .tabcontent table tbody td
+  {
+    width: 100%;
+    color: #000000;
+    Size:14px;
+    font-family: 'Inter' Arial, Helvetica, sans-serif;
+    line-height:12px;
+    height: 10px;
+    padding: 20px 3px;
+    align-items: left;
+  } */
+
+  /* Start PopUp Stylling  */
+
+.modaltitle
+{
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-left: 15px;
+}
+
+.modalbody table
+{
+    width: 100%;
+}
+
+.modalbody table th
+{
+    color: #fff;
+    Size:12px;
+    font-weight: bold;
+    font-family: 'Inter' Arial, Helvetica, sans-serif;
+    line-height:12px;
+    height: 10px;
+    padding: 10px 15px;
+    background-color: #716ACA !important;
+}
+.modalbody table td
+{
+    font-family: 'Inter' Arial, Helvetica, sans-serif;
+    font-size: 12px;    
+    line-height: 10px;
+    color: #000000;
+    padding: 10px 15px;
+}
+
+
+/* app.component.css */
+agm-map {
+    height: 400px;
+    width: 100%;
+  }
+  

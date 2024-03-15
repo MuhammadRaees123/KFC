@@ -1,0 +1,49 @@
+<div class="headerIcon">
+    <div class="filter">
+        <div tabLink>
+            <a class="tablink nav-link" (click)="openPage('filter', $event)" [ngClass]="{'active': currentTab === 'filter'}"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 100 512 312"><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg></a>
+        </div>
+        <p>{{filter}}</p>
+    </div>
+    <div class="userIcon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 100 448 312"><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
+        <p>{{user}}</p>
+    </div>
+</div>
+
+<div class="filterDetails">
+    <div id="filter" class="tabcontent" [hidden]="currentTab !== 'filter'">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="branch">Branch:</label>
+                    <select id="branch" class="form-control">
+                        <option value="Abbottabad">Abbottabad</option>
+                        <option value="Mall Road">Mall Road</option>
+                        <option value="Behriya">Behriya</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="branch">Status:</label>
+                    <select id="branch" class="form-control">
+                        <option value="Assigned">Assigned</option>
+                        <option value="Cancel">Cancel</option>
+                        <option value="Done">Done</option>
+                        <option value="Assigned">In Process</option>
+                        <option value="Cancel">Unassigned</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <div class="col-md-12">
+            <div class="col-md-1 float-end">
+                <button class="rest">Reset</button>
+            </div>
+            <div class=" col-md-1 float-end">
+                <button class="filter">Filter</button>
+            </div>
+        </div><br><br>
+    </div>
+</div>

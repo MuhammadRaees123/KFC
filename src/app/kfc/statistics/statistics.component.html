@@ -1,0 +1,102 @@
+
+
+<!-- start Heading Part -->
+<div class="col-md-12">
+    <div class="row">
+      <div class="col-md-2">
+         
+          <app-sidebaar></app-sidebaar>
+      
+      </div>
+      <div class="col-md-10 PageBody">
+         <!-- Start Body Part -->
+         <app-statistics-header></app-statistics-header>
+        <!-- Start Avg Time Breakdown Section -->
+         <div class="DetailsTbl">
+          <div class="col-xl-6 col-sm-12 timegrapg">
+            <h5>Avg Time Breakdown</h5><hr>
+            <app-highchart-avgtime></app-highchart-avgtime>
+          </div>
+
+          <div class="col-xl-6 col-sm-12 timegrapg">
+            <h5>Dispatch</h5><hr>
+            <app-highchart-dispatch></app-highchart-dispatch>
+          </div>
+         </div>
+        <!-- End Average Graph Section -->
+
+        <!-- Start Meter Graph Section -->
+         <div class="DetailsTbl">
+          
+
+          <div class="col-xl-3 col-sm-6 metergraph">
+            <h5>In Store < 7</h5>
+            <p>In Store = 8 Orders</p>
+            <app-highchart-storemeter></app-highchart-storemeter>
+          </div>
+
+          <div class="col-xl-3 col-sm-6 metergraph">
+            <h5>Drive Time < 15</h5>
+            <p>Drive = 14 Orders</p>
+            <app-highchart-drivemeter></app-highchart-drivemeter>
+          </div>
+
+          <div class="col-xl-3 col-sm-6 metergraph">
+            <h5>Deliver Time < 20</h5>
+            <p>SOS = 1 Orders</p>
+            <app-highchart-delivertime></app-highchart-delivertime>
+          </div>
+
+          <div class="col-xl-3 col-sm-6 metergraph">
+            <h5>Deliver Time < 30</h5>
+            <p>SOS = 11 Orders</p>
+            <app-highchart-timedeliver></app-highchart-timedeliver>
+          </div>
+       
+         </div>
+        <!-- End Meter Graph Section -->
+
+        <!-- Start Avg Graph Section -->
+         <div class="DetailsTbl">
+          <div class="col-xl-6 col-sm-12 timegrapg">
+            <h5>In Store Time(Average Time: 9.18)</h5><hr>
+            <app-highchart-storetime></app-highchart-storetime>
+          </div>
+          <div class="col-xl-6 col-sm-12 timegrapg">
+            <h5>Order Details</h5><hr>
+            <app-highchart-orderdetails></app-highchart-orderdetails>
+          </div>
+         </div>
+        <!-- End Avg Graph Section -->
+
+                <!-- Start Avg Graph Section -->
+                <div class="DetailsTbl">
+                  <div class="col-xl-6 col-sm-12 timegrapg">
+                    <h5>Drive Time</h5><hr>
+                    <app-highchart-drivetime></app-highchart-drivetime>
+                  </div>
+                  <div class="col-xl-6 col-sm-12 timegrapg">
+                    <h5>Revenue</h5><hr>
+                    <app-highchart-revenue></app-highchart-revenue>
+                  </div>
+                 </div>
+                <!-- End Avg Graph Section -->
+
+                        <!-- Start Avg Graph Section -->
+         <div class="DetailsTbl">
+          <div class="col-xl-6 col-sm-12 timegrapg">
+            <h5>Speed of Service (Average Time :24)</h5><hr>
+            <app-highchart-speedservices></app-highchart-speedservices>
+          </div>
+          <div class="col-xl-6 col-sm-12 timegrapg">
+            <h5>Source</h5><hr>
+            <app-highchart-source></app-highchart-source>
+          </div>
+         </div>
+        <!-- End Avg Graph Section -->
+
+         <!-- End Body Part -->
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,52 @@
+.PageBody
+{
+    height: 100vh;
+    padding: 10px 30px;
+    height: auto;
+    overflow-y: auto;
+}
+/* End SearchBar Part stylling */
+.DetailsTbl
+{
+    height: 100vh;
+    width: 100%;
+    overflow-y: hidden;
+    border-radius: 10px;
+    padding: 10px 5px;
+    margin: 25px 0px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.DetailsTbl h4
+{
+    color: #000000;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+.overflow {
+    height: 90vh;
+    overflow-y: auto;
+    width: 100%;
+}
+.riderDetails
+{
+    width: 250px;
+    height: 250px;
+    background-color: rgb(227, 227, 227);
+    border: 1px solid black;
+    border-radius: 6px;
+    margin: 0px 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.DetailsTbl .overflow {
+    display: flex; /* Use flexbox to align items horizontally */
+    flex-wrap: wrap; /* Allow items to wrap to the next line if necessary */
+    justify-content: center;
+}
+
+
+.imag, .contant
+{
+    width: 50% !important;
+    margin-top: 60px;
+    color: #000000;
+}

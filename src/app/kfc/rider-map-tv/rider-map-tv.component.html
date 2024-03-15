@@ -1,0 +1,342 @@
+<!-- start Heading Part -->
+<div class="col-md-12">
+    <div class="row">
+      <div class="col-md-2">
+          <app-sidebaar></app-sidebaar>
+      </div>
+      <div class="col-md-10 PageBody">
+         <!-- Start Body Part -->
+         <app-map-tvheader></app-map-tvheader>
+         <!-- Start Map scale Value Part -->
+         <div class="mapScal">
+
+            <!-- 1-Transactions Table start -->
+            <table>
+                <thead><tr><th colspan="2">Transactions</th></tr></thead>
+                <tbody>
+                    <tr class="scale">
+                        <td>11</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>Total</td>
+                        <td>Canceled</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- 2-Sales Table start -->
+            <table>
+                <thead><tr><th colspan="2">Sales</th></tr></thead>
+                <tbody>
+                    <tr class="scale">
+                        <td>50850</td>
+                        <td>4060</td>
+                    </tr>
+                    <tr>
+                        <td>Total</td>
+                        <td>Canceled</td>
+                    </tr>
+                </tbody>
+            </table>
+                        <!-- 3-store time Table start -->
+                        <table>
+                            <thead><tr><th colspan="2">In store time</th></tr></thead>
+                            <tbody>
+                                <tr class="scale">
+                                    <td>4</td>
+                                    <td>4</td>
+                                    <td>4</td>
+                                </tr>
+                                <tr>
+                                    <td>AVG</td>
+                                    <td>10 M</td>
+                                    <td>+10 M</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                                    <!-- 4-Drive Time Table start -->
+            <table>
+                <thead><tr><th colspan="2">Drive Time</th></tr></thead>
+                <tbody>
+                    <tr class="scale">
+                        <td>4</td>
+                        <td>4</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>AVG</td>
+                        <td>10 M</td>
+                        <td>+10 M</td>
+                    </tr>
+                </tbody>
+            </table>
+                        <!-- 5-SOS Table start -->
+                        <table>
+                            <thead><tr><th colspan="2">SOS</th></tr></thead>
+                            <tbody>
+                                <tr class="scale">
+                                    <td>30</td>
+                                    <td>7</td>
+                                    <td>4</td>
+                                </tr>
+                                <tr>
+                                    <td>AVG</td>
+                                    <td>30 m</td>
+                                    <td>+30 m</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                                    <!-- 6-Multiple Dispatched Table start -->
+            <table>
+                <thead><tr><th colspan="2" style="padding-left: 0px !important;font-size: 14px;">Multiple Dispatched</th></tr></thead>
+                <tbody>
+                    <tr class="scale">
+                        <td>4</td>
+                        <td>2</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1X</td>
+                        <td>2X</td>
+                        <td>3X+</td>
+                    </tr>
+                </tbody>
+            </table>
+         </div>
+         <!-- Start Map Scale Value Part -->
+
+        <!-- Start Map Riders Part -->
+         <div class="DetailsTbl col-md-12">
+          <div class="overflow">
+            <div class="mapTv">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3404.005245148182!2d73.0106508!3d33.6943601!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfbe14da7f2dd1%3A0xcbeecb4d8d4414b2!2sKFC!5e0!3m2!1sen!2suk!4v1646005222159!5m2!1sen!2suk" width="100%" height="530" style="border:0;" loading="lazy"></iframe>
+            </div>
+            <div class="mapDetails">
+                <div tabLink>
+                    <ul class="nav nav-tabs">
+                      <li class="nav-item">
+                        <a class="tablink nav-link" (click)="openPage('Lead', $event)" [ngClass]="{'active': currentTab === 'Lead'}"><b>Assigned</b></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="tablink nav-link" (click)="openPage('Login', $event)" [ngClass]="{'active': currentTab === 'Login'}"><b>Unassigned</b></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="tablink nav-link" (click)="openPage('Location', $event)" [ngClass]="{'active': currentTab === 'Location'}"><b>delayed</b></a>
+                      </li>
+        
+                      <li class="nav-item">
+                        <a class="tablink nav-link" (click)="openPage('Details', $event)" [ngClass]="{'active': currentTab === 'Details'}"><b>In Progress</b></a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div id="Lead" class="tabcontent" [hidden]="currentTab !== 'Lead'">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order Number</th>
+                                <th>driver</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>43360457</td>
+                                <td>Khuram</td>
+                                <td>700</td>
+                            </tr>
+                            <tr>
+                                <td>43360454</td>
+                                <td>Rana</td>
+                                <td>2000</td>
+                            </tr>
+                            <tr>
+                                <td>43360455</td>
+                                <td>Bilal</td>
+                                <td>2300</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                  </div>
+
+                  <div id="Login" class="tabcontent" [hidden]="currentTab !== 'Login'">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order Number</th>
+                                <th>driver</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>336045</td>
+                                <td>Iqbal</td>
+                                <td>3400</td>
+                            </tr>
+                            <tr>
+                                <td>3360</td>
+                                <td>Mihsin</td>
+                                <td>400</td>
+                            </tr>
+                            <tr>
+                                <td>33604</td>
+                                <td>Adil</td>
+                                <td>9800</td>
+                            </tr>
+                            <tr>
+                                <td>336045</td>
+                                <td>sajid</td>
+                                <td>400</td>
+                            </tr>
+                            <tr>
+                                <td>3045</td>
+                                <td>Amna</td>
+                                <td>9800</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                  </div>
+
+                  <div id="Location" class="tabcontent" [hidden]="currentTab !== 'Location'">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order Number</th>
+                                <th>driver</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>43360</td>
+                                <td>Fiaz</td>
+                                <td>750</td>
+                            </tr>
+                            <tr>
+                                <td>43361</td>
+                                <td>Zohaib</td>
+                                <td>1200</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                  </div>
+
+                  <div id="Details" class="tabcontent" [hidden]="currentTab !== 'Details'">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order Number</th>
+                                <th>driver</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>43360451</td>
+                                <td>Khuram</td>
+                                <td>700</td>
+                            </tr>
+                            <tr>
+                                <td>43360452</td>
+                                <td>Rana</td>
+                                <td>2000</td>
+                            </tr>
+                            <tr>
+                                <td>43360453</td>
+                                <td>Bilal</td>
+                                <td>2300</td>
+                            </tr>
+                            <tr>
+                                <td>43360453</td>
+                                <td>Bilal</td>
+                                <td>2300</td>
+                            </tr>
+                            <tr>
+                                <td>43360453</td>
+                                <td>Bilal</td>
+                                <td>2300</td>
+                            </tr>
+                            <tr>
+                                <td>43360453</td>
+                                <td>Bilal</td>
+                                <td>2300</td>
+                            </tr>
+                            <tr>
+                                <td>43360453</td>
+                                <td>Bilal</td>
+                                <td>2300</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                  </div>
+                  <br>
+                  <table class="table-hover">
+                    <thead>
+                        <tr>
+                            <th>Order Number</th>
+                            <th>driver</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>43360451</td>
+                            <td>Khuram</td>
+                            <td>700</td>
+                        </tr>
+                        <tr>
+                            <td>43360452</td>
+                            <td>Rana</td>
+                            <td>2000</td>
+                        </tr>
+                        <tr>
+                            <td>43360453</td>
+                            <td>Bilal</td>
+                            <td>2300</td>
+                        </tr>
+                        <tr>
+                            <td>43360453</td>
+                            <td>Bilal</td>
+                            <td>2300</td>
+                        </tr>
+                        <tr>
+                            <td>43360453</td>
+                            <td>Bilal</td>
+                            <td>2300</td>
+                        </tr>
+                        <tr>
+                            <td>43360453</td>
+                            <td>Bilal</td>
+                            <td>2300</td>
+                        </tr>
+                        <tr>
+                            <td>43360453</td>
+                            <td>Bilal</td>
+                            <td>2300</td>
+                        </tr>
+                        <tr>
+                            <td>43360453</td>
+                            <td>Bilal</td>
+                            <td>2300</td>
+                        </tr>
+                        <tr>
+                            <td>43360453</td>
+                            <td>Bilal</td>
+                            <td>2300</td>
+                        </tr>
+                        <tr>
+                            <td>43360453</td>
+                            <td>Bilal</td>
+                            <td>2300</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+          </div>
+         </div>
+         <!-- Start Map Riders Part -->
+      </div>
+    </div>
+</div>

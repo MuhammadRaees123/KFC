@@ -1,0 +1,38 @@
+<!-- <button type="button" class="btn btn-primary" (click)="openModal()">Alert</button> -->
+<main id="main" class="main">
+    <section class="section" style="width: 100%;">
+      <div class="row col-md-12" style="width: 100%; margin: auto;">
+        <div class="col-md-8" style="margin: auto;">
+          <div class="card" style="width: 100%">
+            <div class="card-body">
+              <div class="col-md-12 border1">
+                <legend>Alert</legend><br>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" #btnAlert (click)="openModal()">Alert</button>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main><!-- End #main -->
+  
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="height: 100vh;">
+      <div class="modal-content" style="border: 2px solid rgba(147, 16, 16, 0.674);">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Insert Successfully!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button> 
+        </div>
+        <div class="modal-body">
+          Alert Box 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary btn-sm" data="modal">Save Change</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  

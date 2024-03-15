@@ -1,0 +1,298 @@
+
+
+<!-- start Heading Part -->
+<div class="col-md-12">
+  <div class="row">
+    <div class="col-md-2">
+        <app-sidebaar></app-sidebaar>
+    </div>
+    <div class="col-10 PageBody">
+       <!-- Start Body Part -->
+       <div class="header">
+        <app-index-header></app-index-header>
+       </div>
+       
+       <div class="DetailsTbl">
+        <h4>Order List</h4>
+
+        <div class="orderFirmate">
+            <p><span>{{Orders }}</span> Orders</p>
+            <select class="form-select select-form" style="width: 30%;">
+                <option>Order Id asc</option>
+                <option>Order Id desc</option>
+                <option>Driver asc</option>
+                <option>Driver desc</option>
+                <option>Creation Date asc</option>
+                <option>Creation Date desc</option>
+            </select>
+            <p>
+                Page size: <select>
+                    <option>5</option>
+                    <option>10</option>
+                    <option>15</option>
+                    <option>20</option>
+                    <option>40</option>
+                    <option>100</option>
+                </select>
+            </p>
+        </div>
+        <div class="orderFirmate" >
+            <p><span>{{Orders }}</span> Orders 28-02-24 10:00 AM to 29/02/24 9:59 AM</p>
+        </div>
+      
+
+        <div class="Detailslist col-md-12">
+          <div class="justify">
+                <!-- Start Table Part -->
+                <div class="col-xl-8 col-sm-12 overflow">
+                    <table class="table table-sm table-hover data-table" id="datatableexample">
+                    <thead>
+                      <tr style="background-color: #716ACA !important;">
+                        <td></td>
+                        <td>Order No</td>
+                        <td>Status</td>
+                        <td>Date</td>
+                        <td>Time</td>
+                        <td>Customer</td>
+                        <td>Address</td>
+                        <td>Dispatch By</td>
+                        <td>Driver</td>
+                        <td>Remaining Time</td>
+                        <td></td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td> <input type="checkbox"> </td>
+                        <td>{{OrderNo}}</td>
+                        <td>{{Status}}</td>
+                        <td>{{Date}}</td>
+                        <td>{{Time}}</td>
+                        <td>{{Customer}}</td>   
+                        <td>{{Address}}</td>
+                        <td>{{DispatchBy}}</td>
+                        <td>{{Driver}}</td>
+                        <td>{{RemainingTime}}</td>     
+                        <td> <button type="button" #btnAlert (click)="openModal()">Trace Log</button></td>                 
+                    </tr>
+                    <tr>
+                        <td> <input type="checkbox"> </td>
+                        <td>{{OrderNo}}</td>
+                        <td>{{Status}}</td>
+                        <td>{{Date}}</td>
+                        <td>{{Time}}</td>
+                        <td>{{Customer}}</td>   
+                        <td>{{Address}}</td>
+                        <td>{{DispatchBy}}</td>
+                        <td>{{Driver}}</td>
+                        <td>{{RemainingTime}}</td>  
+                        <td> <button type="button" #btnAlert (click)="openModal()">Trace Log</button></td>                    
+                    </tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr>
+                        <td> <input type="checkbox"> </td>
+                        <td>{{OrderNo}}</td>
+                        <td>{{Status}}</td>
+                        <td>{{Date}}</td>
+                        <td>{{Time}}</td>
+                        <td>{{Customer}}</td>   
+                        <td>{{Address}}</td>
+                        <td>{{DispatchBy}}</td>
+                        <td>{{Driver}}</td>
+                        <td>{{RemainingTime}}</td>          
+                        <td> <button type="button" #btnAlert (click)="openModal()">Trace Log</button></td>                       
+                    </tr>
+                    <tr>
+                        <td> <input type="checkbox"> </td>
+                        <td>{{OrderNo}}</td>
+                        <td>{{Status}}</td>
+                        <td>{{Date}}</td>
+                        <td>{{Time}}</td>
+                        <td>{{Customer}}</td>   
+                        <td>{{Address}}</td>
+                        <td>{{DispatchBy}}</td>
+                        <td>{{Driver}}</td>
+                        <td>{{RemainingTime}}</td>      
+                        <td> <button type="button" #btnAlert (click)="openModal()">Trace Log</button></td>                           
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+                  <!-- End Table Part -->
+                  <br><br>
+                <div class="col-xl-4 col-sm-12 map">
+                  <div class="mapDetails">
+                  <div tabLink>
+                    <ul class="nav nav-tabs">
+                      <li class="nav-item">
+                        <a class="tablink nav-link" (click)="openPage('Lead', $event)" [ngClass]="{'active': currentTab === 'Lead'}"><b>Order Details</b></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="tablink nav-link" (click)="openPage('Login', $event)" [ngClass]="{'active': currentTab === 'Login'}"><b>Trace Log</b></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="tablink nav-link" (click)="openPage('Location', $event)" [ngClass]="{'active': currentTab === 'Location'}"><b>Items</b></a>
+                      </li>
+                    </ul>
+                  </div>
+                    <!-- Embed Google Maps iframe with the given location URL -->
+                    <div id="Lead" class="tabcontent" [hidden]="currentTab !== 'Lead'">
+                      <div class="mapDetails">
+                        <!-- app.component.html -->
+                          <!-- <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+                            <agm-marker [latitude]="lat" [longitude]="lng" [label]="'KFC'"></agm-marker>
+                          </agm-map> -->
+                          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3404.005245148182!2d73.0106508!3d33.6943601!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfbe14da7f2dd1%3A0xcbeecb4d8d4414b2!2sKFC!5e0!3m2!1sen!2suk!4v1646005222159!5m2!1sen!2suk" width="100%" height="300px" style="border:0;" loading="lazy"></iframe>
+                      </div>
+                    </div>
+
+                    <div id="Login" class="tabcontent" [hidden]="currentTab !== 'Login'">
+                      <div class="mapDetails">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3404.005245148182!2d73.0106508!3d33.6943601!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfbe14da7f2dd1%3A0xcbeecb4d8d4414b2!2sKFC!5e0!3m2!1sen!2suk!4v1646005222159!5m2!1sen!2suk" width="100%" height="300px" style="border:0;" loading="lazy"></iframe>
+                      </div>
+                    </div>
+
+                    <div id="Location" class="tabcontent" [hidden]="currentTab !== 'Location'">
+                      <table id="datatableexample">
+                          <thead>
+                              <tr>
+                                  <td>Order Number</td>
+                                  <td>driver</td>
+                                  <td>Amount</td>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td>336045</td>
+                                  <td>Iqbal</td>
+                                  <td>3400</td>
+                              </tr>
+                              <tr>
+                                  <td>3360</td>
+                                  <td>Mihsin</td>
+                                  <td>400</td>
+                              </tr>
+                              <tr>
+                                  <td>33604</td>
+                                  <td>Adil</td>
+                                  <td>9800</td>
+                              </tr>
+                              <tr>
+                                  <td>336045</td>
+                                  <td>sajid</td>
+                                  <td>400</td>
+                              </tr>
+                              <tr>
+                                  <td>3045</td>
+                                  <td>Amna</td>
+                                  <td>9800</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                    </div>
+
+                </div>
+                </div>
+          </div>
+        </div>
+       <!-- End Body Part -->
+    </div>
+  </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="height: 100vh;">
+    <div class="modal-content" style="border: 2px solid lightblue">
+      <div class="modal-header">
+        <h4 class="modaltitle" id="staticBackdropLabel">Trace Log</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button> 
+      </div>
+      <div class="modalbody">
+        <h4 class="modaltitle" id="staticBackdropLabel"> Admin Log</h4>
+        <table>
+          <thead>
+          <tr>
+            <th>Entry By</th>
+            <th>Event</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Ali</td>
+            <td>View Order Details</td>
+            <td>05:25 AM</td>
+          </tr>
+          <tr>
+            <td>Ali</td>
+            <td>View Order Details</td>
+            <td>05:25 AM</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 class="modaltitle" id="staticBackdropLabel">Auto assign Log</h4>
+      <table>
+        <thead>
+        <tr>
+          <th>Action</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Search in radius 100m</td>
+          <td>05:25 AM</td>
+        </tr>
+        <tr>
+          <td>1 Driver found.</td>
+          <td>05:25 AM</td>
+        </tr>
+        <tr>
+          <td>Notification send to Muhanmmad</td>
+          <td>05:25 AM</td>
+        </tr>
+      </tbody>
+    </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary btn-sm" data="modal">Save Change</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initMap() {
+      var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 33.69436013654506, lng: 73.01065077441409}, // Coordinates for KFC
+          zoom: 15
+      });
+
+      var marker = new google.maps.Marker({
+          position: {lat: 33.69436013654506, lng: 73.01065077441409},
+          map: map,
+          title: 'KFC'
+      });
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>

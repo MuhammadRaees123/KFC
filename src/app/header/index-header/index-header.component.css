@@ -1,0 +1,35 @@
+.headerIcon
+{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    padding: 0px 40px;
+}
+.filterDetails
+{
+    width: 100%;
+    height: auto;
+    margin: 10px 0px;
+    border-radius: 6px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.filterDetails .tabcontent
+{
+      padding: 10px 10px;
+}
+.tabcontent button
+{
+    background: none;
+    width: auto;
+    padding: 5px 20px;
+    border: 1px solid lightgray;
+    border-radius: 6px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+.tabcontent .filter
+{
+    background-color:#716ACA;
+    color: #fff;
+}

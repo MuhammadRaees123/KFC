@@ -1,0 +1,222 @@
+.PageBody
+{
+    height: 100vh;
+    padding: 10px 20px;
+    height: auto;
+    overflow-y: auto;
+}
+/* End SearchBar Part stylling */
+.DetailsTbl
+{
+    height: 100vh;
+    width: 100%;
+    overflow-y: hidden;
+    border-radius: 10px;
+    padding: 10px 5px;
+    margin: 25px 0px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.DetailsTbl h4
+{
+    color: #000000;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+.overflow {
+    height: 90vh;
+    /* overflow-y: auto; */
+    width: 100%;
+}
+.riderDetails
+{
+    width: 250px;
+    height: 250px;
+    background-color: rgb(227, 227, 227);
+    border: 1px solid black;
+    border-radius: 6px;
+    margin: 0px 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.mapScal 
+{
+    display: flex; /* Use flexbox to align items horizontally */
+    flex-wrap: wrap; /* Allow items to wrap to the next line if necessary */
+    justify-content: center;
+}
+
+.mapScal table
+{
+    width: 170px;
+    height: 120px;
+    background-color: antiquewhite;
+    border: 1px solid lightgray;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.mapScal table th
+{
+    color: #000000;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: left;
+    padding-top: 10px;
+    padding-left: 15px;
+}
+.mapScal table .scale td
+{
+    color: cornflowerblue !important;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    font-weight: bolder;
+
+}
+.mapScal table td
+{
+    text-align: center;
+    color: gray;
+}
+.DetailsTbl .overflow{
+    display: flex; /* Use flexbox to align items horizontally */
+    flex-wrap: wrap; /* Allow items to wrap to the next line if necessary */
+    justify-content: space-between;
+}
+.mapTv
+{
+    width: 700px;
+}
+.mapDetails
+{
+    width: 300px;
+    overflow-y: auto;
+}
+@media screen and (max-width: 1250px)
+{
+    .mapTv
+    {
+        width: 650px;
+    }
+    .mapDetails
+    {
+        width: 280px;
+        overflow-y: auto;
+    }
+}
+@media screen and (max-width: 1160px)
+{
+    .mapTv
+    {
+        width: 600px;
+    }
+    .mapDetails
+    {
+        width: 260px;
+        overflow-y: auto;
+    }
+}
+@media screen and (max-width: 1070px)
+{
+    .mapTv
+    {
+        width: 550px;
+    }
+    .mapDetails
+    {
+        width: 250px;
+        overflow-y: auto;
+    }
+}
+@media screen and (max-width: 1000px)
+{
+    .mapTv
+    {
+        width: 500px;
+        
+    }
+    .mapDetails
+    {
+        width: 240px;
+        overflow-y: auto;
+    }
+}
+@media screen and (max-width: 930px)
+{
+    .DetailsTbl .overflow{
+        display: flex; /* Use flexbox to align items horizontally */
+        flex-wrap: wrap; /* Allow items to wrap to the next line if necessary */
+        justify-content: center;
+    }
+    .mapTv
+    {
+        width: 650px;
+        margin-left: 30px;
+
+    }
+    .mapDetails
+    {
+        width: 300px;
+        overflow-y: auto;
+    }
+
+}
+.mapTv,.mapDetails
+{
+    height: 530px;
+    border: 1px solid black;
+    /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+    background-color: #f4f4f4;
+}
+
+/* Check if the styles are being applied */
+.DetailsTbl [tabLink] {
+    display: flex; /* Use flexbox to align items horizontally */
+    flex-wrap: wrap; /* Allow items to wrap to the next line if necessary */
+}
+
+.DetailsTbl [tabLink] a {
+    text-decoration: none;
+    color: #000000;
+    margin: 10px 5px; /* Adjust the margin as needed */
+    padding: 7px 5px; /* Adjust the padding as needed */
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid lightblue;
+}
+.nav.nav-tabs .nav-link.active {
+    background-color: #5867DD;
+    color: #ffffff;
+  }
+
+  /* tab table Stylling */
+  .tabcontent table
+  {
+    width: 100%;
+  }
+  .tabcontent table th
+  {
+    background-color: #5867DD;
+    color: #ffffff;
+  }
+  .tabcontent table th,td
+  {
+    text-align: center;
+    border-bottom: 1px solid lightgray;
+    padding: 5px 0px;
+  }
+
+  /* mapDetails table styling */
+  .mapDetails table
+  {
+    width: 100%;
+  }
+  .mapDetails table th
+  {
+    background-color: #5867DD;
+    color: #ffffff;
+  }
+  .mapDetails table th,td
+  {
+    text-align: center;
+    border-bottom: 1px solid lightgray;
+    padding: 5px 0px;
+  }

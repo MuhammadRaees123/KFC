@@ -1,0 +1,72 @@
+h1, h2
+{
+    margin: 20px 0px;
+    text-align: center;
+}
+h1
+{
+    color: Red;
+}
+h2{
+    color: dodgerblue;
+}
+
+.wor
+{
+    height: 100vh;
+    align-items: center;
+}
+
+.log1
+{
+    background-color: white;
+}
+.log2
+{
+    height: 100vh;
+    width: 90%;
+    background-color: #C3052C;
+}
+.content h1
+{
+    color: #FFFFFF !important;
+    padding-top: 45%;
+}
+
+
+/* Login Input Fields */
+
+.inputField {
+    width: 100%;
+    text-align: center; /* Center align the content */
+}
+
+.inputField input {
+    width: 60%; /* Set the width of the input field */
+    margin: 10px auto; /* Center the input field horizontally with some top and bottom margin */
+    padding: 8px; /* Add padding to the input field */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    border: none;
+    border-bottom: 1px solid gray;
+    background-color: transparent;
+    outline: none;
+    font-family: 'Inter',Arial, Helvetica, sans-serif;
+}
+
+.loginButton
+{
+    width: auto;
+    height: 55px;
+    padding: 10px 40px;
+    color: #FFFFFF;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    background-color: #A71E2D;
+    margin-top: 60px;
+    border: none;
+    border-radius: 30px;
+    box-shadow: #EED8FD 0px 5px 15px;
+}
+.loginButton:hover
+{
+    box-shadow: #ca7dfd 0px 5px 15px;
+}
