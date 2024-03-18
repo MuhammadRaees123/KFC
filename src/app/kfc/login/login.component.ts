@@ -35,12 +35,14 @@ export class LoginComponent {
       this.Login.login(email,password).subscribe(
                 (response) => {
                   debugger;
+                  console.log('Login Success:', response); // Log success response
                   this.router.navigate(['/Index']);
                   // Handle successful login
                   //this.toaster.success("Login Successfully!","sucess");
   
                 },
                 (error) => {
+                  console.error('Login Error:', error); // Log error response
                   // Handle login error
                 }
               );
