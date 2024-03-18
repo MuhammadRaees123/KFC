@@ -38,9 +38,11 @@ private authToken: string | null = null;
     return this.http.post(`${this.apiUrl}/token`, body.toString(),{headers: headers}).pipe(
       map((response: any) => {
         console.log('Login Response:', response); // Log the response
+        this.authToken = response.access_token;
+        this.setToken(this.authToken || ""); 
         if (response && response.token) {
-          this.authToken = response.token;
-          this.setToken(this.authToken || ""); 
+          //this.authToken = response.token;
+          //this.setToken(this.authToken || ""); 
         }
         return response;
       })
