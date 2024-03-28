@@ -62,155 +62,28 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>Burger</td>
-                          <td>101</td>
-                          <td>101</td>
-                          <td>102</td>
-                          <td>112</td>
-                          <td>Burger</td>
-                          <td>101</td>
-                          <td>101</td>
-                          <td>102</td>
-                          <td>112</td> 
-                          <td>Burger</td>
-                          <td>101</td>
-                          <td>101</td>
-                          <td>102</td>
-                          <td>112</td>
-                          <td>Burger</td>
-                          <td>101</td>
-                          <td>101</td>
-                          <td>102</td>
-                          <td>112</td>                
-                      </tr>
-                      <tr>
-                        <td>Burger</td>
-                        <td>101</td>
-                        <td>101</td>
-                        <td>102</td>
-                        <td>112</td>
-                        <td>Burger</td>
-                        <td>101</td>
-                        <td>101</td>
-                        <td>102</td>
-                        <td>112</td> 
-                        <td>Burger</td>
-                        <td>101</td>
-                        <td>101</td>
-                        <td>102</td>
-                        <td>112</td>
-                        <td>Burger</td>
-                        <td>101</td>
-                        <td>101</td>
-                        <td>102</td>
-                        <td>112</td>                
-                    </tr>
-                    <tr>
-                      <td>Burger</td>
-                      <td>101</td>
-                      <td>101</td>
-                      <td>102</td>
-                      <td>112</td>
-                      <td>Burger</td>
-                      <td>101</td>
-                      <td>101</td>
-                      <td>102</td>
-                      <td>112</td> 
-                      <td>Burger</td>
-                      <td>101</td>
-                      <td>101</td>
-                      <td>102</td>
-                      <td>112</td>
-                      <td>Burger</td>
-                      <td>101</td>
-                      <td>101</td>
-                      <td>102</td>
-                      <td>112</td>                
-                  </tr>
-                  <tr>
-                    <td>Burger</td>
-                    <td>101</td>
-                    <td>101</td>
-                    <td>102</td>
-                    <td>112</td>
-                    <td>Burger</td>
-                    <td>101</td>
-                    <td>101</td>
-                    <td>102</td>
-                    <td>112</td> 
-                    <td>Burger</td>
-                    <td>101</td>
-                    <td>101</td>
-                    <td>102</td>
-                    <td>112</td>
-                    <td>Burger</td>
-                    <td>101</td>
-                    <td>101</td>
-                    <td>102</td>
-                    <td>112</td>                
-                </tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr>
-                        <td>Burger</td>
-                        <td>101</td>
-                        <td>101</td>
-                        <td>102</td>
-                        <td>112</td>
-                        <td>Burger</td>
-                        <td>101</td>
-                        <td>101</td>
-                        <td>102</td>
-                        <td>112</td> 
-                        <td>Burger</td>
-                        <td>101</td>
-                        <td>101</td>
-                        <td>102</td>
-                        <td>112</td>
-                        <td>Burger</td>
-                        <td>101</td>
-                        <td>101</td>
-                        <td>102</td>
-                        <td>112</td>                
-                    </tr>
-                    <tr>
-                      <td>Burger</td>
-                      <td>101</td>
-                      <td>101</td>
-                      <td>102</td>
-                      <td>112</td>
-                      <td>Burger</td>
-                      <td>101</td>
-                      <td>101</td>
-                      <td>102</td>
-                      <td>112</td> 
-                      <td>Burger</td>
-                      <td>101</td>
-                      <td>101</td>
-                      <td>102</td>
-                      <td>112</td>
-                      <td>Burger</td>
-                      <td>101</td>
-                      <td>101</td>
-                      <td>102</td>
-                      <td>112</td>                
-                  </tr>
+                        <tr *ngFor="let item of setting">
+                            <td>{{ item.Title }}</td>
+                            <td>{{ item.Title }}</td>
+                            <td>{{ item.TotalOrders }}</td>
+                            <td>{{ item.TotalCanceled }}</td>
+                            <td>{{ item.TotalDelivered }}</td>
+                            <td>{{ item.TotalAmount }}</td>
+                            <td>{{ item.RevenueLost }}</td>
+                            <td>{{ item.AvgCheckAmount }}</td>
+                            <td>{{ item.SingleDispatch }}</td>
+                            <td>{{ item.DoubleDispatch }}</td>
+                            <td>{{ item.ThreeDispatchPlus }}</td>
+                            <td>{{ item.AvgDriveTime }}</td>
+                            <td>{{ item.AvgSosTime }}</td>
+                            <td>{{ item.DeliveredUnder30 }}</td>
+                            <td>{{ item.DeliveredUnder20 }}</td>
+                            <td>{{ item.ManualDispatchCount }}</td>
+                            <td>{{ item.ManualDispatchCount }}</td>
+                            <td>{{ item.ManualDispatchCount }}</td>
+                            <td>{{ item.ManualDispatchCount }}</td>
+                            <td>{{ item.ManualDispatchCount }}</td>
+                        </tr>
                       </tbody>
                     </table>
                   </div>
@@ -236,130 +109,29 @@
                         <td>SOS < 30</td>
                         <td>Manual Dispatch	</td>
                         <td>Rating</td>
-                       
                       </tr>
                     </thead>
+
                     <tbody>
-                      <tr>
-                        <td>{{FirstName}}</td>
-                        <td>{{Branch}}</td>
-                        <td>101</td>
-                        <td>101</td>
-                        <td>112</td>
-                        <td>101</td>
-                        <td>2500</td>
-                        <td>11:00</td>
-                        <td>30:00</td>
-                        <td>11:30</td>
-                        <td>112</td>
-                        <td>101</td>
-                        <td>2500</td>
-                        <td>2500</td>
-                        <td>5*</td>          
-                    </tr>
-                    <tr>
-                      <td>{{FirstName}}</td>
-                      <td>{{Branch}}</td>
-                      <td>101</td>
-                      <td>101</td>
-                      <td>112</td>
-                      <td>101</td>
-                      <td>2500</td>
-                      <td>11:00</td>
-                      <td>30:00</td>
-                      <td>11:30</td>
-                      <td>112</td>
-                      <td>101</td>
-                      <td>2500</td>
-                      <td>2500</td>
-                      <td>5*</td>          
-                  </tr>
-                  <tr>
-                    <td>{{FirstName}}</td>
-                    <td>{{Branch}}</td>
-                    <td>101</td>
-                    <td>101</td>
-                    <td>112</td>
-                    <td>101</td>
-                    <td>2500</td>
-                    <td>11:00</td>
-                    <td>30:00</td>
-                    <td>11:30</td>
-                    <td>112</td>
-                    <td>101</td>
-                    <td>2500</td>
-                    <td>2500</td>
-                    <td>5*</td>          
-                </tr>
-                <tr>
-                  <td>{{FirstName}}</td>
-                  <td>{{Branch}}</td>
-                  <td>101</td>
-                  <td>101</td>
-                  <td>112</td>
-                  <td>101</td>
-                  <td>2500</td>
-                  <td>11:00</td>
-                  <td>30:00</td>
-                  <td>11:30</td>
-                  <td>112</td>
-                  <td>101</td>
-                  <td>2500</td>
-                  <td>2500</td>
-                  <td>5*</td>          
-              </tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr>
-                      <td>{{FirstName}}</td>
-                      <td>{{Branch}}</td>
-                      <td>101</td>
-                      <td>101</td>
-                      <td>112</td>
-                      <td>101</td>
-                      <td>2500</td>
-                      <td>11:00</td>
-                      <td>30:00</td>
-                      <td>11:30</td>
-                      <td>112</td>
-                      <td>101</td>
-                      <td>2500</td>
-                      <td>2500</td>
-                      <td>5*</td>          
-                  </tr>
-                  <tr>
-                    <td>{{FirstName}}</td>
-                    <td>{{Branch}}</td>
-                    <td>101</td>
-                    <td>101</td>
-                    <td>112</td>
-                    <td>101</td>
-                    <td>2500</td>
-                    <td>11:00</td>
-                    <td>30:00</td>
-                    <td>11:30</td>
-                    <td>112</td>
-                    <td>101</td>
-                    <td>2500</td>
-                    <td>2500</td>
-                    <td>5*</td>          
-                </tr>
+                      <tr *ngFor="let item of performance">
+                          <td>{{ item.RiderName }}</td>
+                          <td>{{ item.BranchTitle }}</td>
+                          <td>{{ item.TotalOrders }}</td>
+                          <td>{{ item.DeliveredOrders }}</td>
+                          <td>{{ item.DeliveredOrdersRevenue }}</td>
+                          <td>{{ item.CancelOrders }}</td>
+                          <td>{{ item.CancelOrdersRevenue }}</td>
+                          <td>{{ item.AvgCheckAmount }}</td>
+                          <td>{{ item.InStoreTime }}</td>
+                          <td>{{ item.TotalDriveTime }}</td>
+                          <td>{{ item.AvgDeliveryTime }}</td>
+                          <td>{{ item.SOS20Mins }}</td>
+                          <td>{{ item.SOS30Mins}}</td>
+                          <td>{{ item.ManualDispatchCount }}</td>
+                          <td>{{ item.Rating }}</td>
+                         </tr>
                     </tbody>
+
                   </table>
                 </div>
                 </div>
@@ -372,6 +144,7 @@
                         <td>Branch</td>
                         <td>Order No</td>
                         <td>Customer Name</td>
+                        <td>Address</td>
                         <td>Contact No</td>
                         <td>Recieve Time</td>
                         <td>Dispatch Time</td>
@@ -387,125 +160,23 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>{{FirstName}}</td>
-                        <td>{{Branch}}</td>
-                        <td>101</td>
-                        <td>101</td>
-                        <td>112</td>
-                        <td>101</td>
-                        <td>2500</td>
-                        <td>11:00</td>
-                        <td>30:00</td>
-                        <td>11:30</td>
-                        <td>112</td>
-                        <td>101</td>
-                        <td>2500</td>
-                        <td>2500</td>
-                        <td>5*</td>          
-                    </tr>
-                    <tr>
-                      <td>{{FirstName}}</td>
-                      <td>{{Branch}}</td>
-                      <td>101</td>
-                      <td>101</td>
-                      <td>112</td>
-                      <td>101</td>
-                      <td>2500</td>
-                      <td>11:00</td>
-                      <td>30:00</td>
-                      <td>11:30</td>
-                      <td>112</td>
-                      <td>101</td>
-                      <td>2500</td>
-                      <td>2500</td>
-                      <td>5*</td>          
-                  </tr>
-                  <tr>
-                    <td>{{FirstName}}</td>
-                    <td>{{Branch}}</td>
-                    <td>101</td>
-                    <td>101</td>
-                    <td>112</td>
-                    <td>101</td>
-                    <td>2500</td>
-                    <td>11:00</td>
-                    <td>30:00</td>
-                    <td>11:30</td>
-                    <td>112</td>
-                    <td>101</td>
-                    <td>2500</td>
-                    <td>2500</td>
-                    <td>5*</td>          
-                </tr>
-                <tr>
-                  <td>{{FirstName}}</td>
-                  <td>{{Branch}}</td>
-                  <td>101</td>
-                  <td>101</td>
-                  <td>112</td>
-                  <td>101</td>
-                  <td>2500</td>
-                  <td>11:00</td>
-                  <td>30:00</td>
-                  <td>11:30</td>
-                  <td>112</td>
-                  <td>101</td>
-                  <td>2500</td>
-                  <td>2500</td>
-                  <td>5*</td>          
-              </tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr>
-                      <td>{{FirstName}}</td>
-                      <td>{{Branch}}</td>
-                      <td>101</td>
-                      <td>101</td>
-                      <td>112</td>
-                      <td>101</td>
-                      <td>2500</td>
-                      <td>11:00</td>
-                      <td>30:00</td>
-                      <td>11:30</td>
-                      <td>112</td>
-                      <td>101</td>
-                      <td>2500</td>
-                      <td>2500</td>
-                      <td>5*</td>          
-                  </tr>
-                  <tr>
-                    <td>{{FirstName}}</td>
-                    <td>{{Branch}}</td>
-                    <td>101</td>
-                    <td>101</td>
-                    <td>112</td>
-                    <td>101</td>
-                    <td>2500</td>
-                    <td>11:00</td>
-                    <td>30:00</td>
-                    <td>11:30</td>
-                    <td>112</td>
-                    <td>101</td>
-                    <td>2500</td>
-                    <td>2500</td>
-                    <td>5*</td>          
-                </tr>
+                      <tr *ngFor="let item of orderlocation">
+                          <td>{{ item.Title }}</td>
+                          <td>{{ item.OrderNo }}</td>
+                          <td>{{ item.CustomerName }}</td>
+                          <td>{{ item.CustomerAddress }}</td>
+                          <td>{{ item.CustomerPhoneNumber }}</td>
+                          <td>{{ item.ReceiveTime }}</td>
+                          <td>{{ item.DispatchDateTime }}</td>
+                          <td>{{ item.DeliveryDateTime }}</td>
+                          <td>{{ item.RiderName }}</td>
+                          <td>{{ item.Latitude }}</td>
+                          <td>{{ item.Longitude }}</td>
+                          <td>{{ item.Distance }}</td>
+                          <td>{{ item.CLatitude }}</td>
+                          <td>{{ item.CLongitude }}</td>
+                          <td>{{ item.Distance2 }}</td>
+                        </tr>
                     </tbody>
                   </table>
                 </div>
@@ -540,155 +211,28 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>{{FirstName}}</td>
-                        <td>{{Branch}}</td>
-                        <td>101</td>
-                        <td>101</td>
-                        <td>112</td>
-                        <td>101</td>
-                        <td>2500</td>
-                        <td>11:00</td>
-                        <td>30:00</td>
-                        <td>11:30</td>
-                        <td>112</td>
-                        <td>101</td>
-                        <td>2500</td>
-                        <td>2500</td>
-                        <td>5*</td>  
-                        <td>112</td>
-                        <td>101</td>
-                        <td>2500</td>
-                        <td>2500</td>
-                        <td>5*</td>          
-                    </tr>
-                    <tr>
-                      <td>{{FirstName}}</td>
-                      <td>{{Branch}}</td>
-                      <td>101</td>
-                      <td>101</td>
-                      <td>112</td>
-                      <td>101</td>
-                      <td>2500</td>
-                      <td>11:00</td>
-                      <td>30:00</td>
-                      <td>11:30</td>
-                      <td>112</td>
-                      <td>101</td>
-                      <td>2500</td>
-                      <td>2500</td>
-                      <td>5*</td>  
-                      <td>112</td>
-                      <td>101</td>
-                      <td>2500</td>
-                      <td>2500</td>
-                      <td>5*</td>          
-                  </tr>
-                  <tr>
-                    <td>{{FirstName}}</td>
-                    <td>{{Branch}}</td>
-                    <td>101</td>
-                    <td>101</td>
-                    <td>112</td>
-                    <td>101</td>
-                    <td>2500</td>
-                    <td>11:00</td>
-                    <td>30:00</td>
-                    <td>11:30</td>
-                    <td>112</td>
-                    <td>101</td>
-                    <td>2500</td>
-                    <td>2500</td>
-                    <td>5*</td>  
-                    <td>112</td>
-                    <td>101</td>
-                    <td>2500</td>
-                    <td>2500</td>
-                    <td>5*</td>          
-                </tr>
-                <tr>
-                  <td>{{FirstName}}</td>
-                  <td>{{Branch}}</td>
-                  <td>101</td>
-                  <td>101</td>
-                  <td>112</td>
-                  <td>101</td>
-                  <td>2500</td>
-                  <td>11:00</td>
-                  <td>30:00</td>
-                  <td>11:30</td>
-                  <td>112</td>
-                  <td>101</td>
-                  <td>2500</td>
-                  <td>2500</td>
-                  <td>5*</td>  
-                  <td>112</td>
-                  <td>101</td>
-                  <td>2500</td>
-                  <td>2500</td>
-                  <td>5*</td>          
-              </tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr>
-                      <td>{{FirstName}}</td>
-                      <td>{{Branch}}</td>
-                      <td>101</td>
-                      <td>101</td>
-                      <td>112</td>
-                      <td>101</td>
-                      <td>2500</td>
-                      <td>11:00</td>
-                      <td>30:00</td>
-                      <td>11:30</td>
-                      <td>112</td>
-                      <td>101</td>
-                      <td>2500</td>
-                      <td>2500</td>
-                      <td>5*</td>  
-                      <td>112</td>
-                      <td>101</td>
-                      <td>2500</td>
-                      <td>2500</td>
-                      <td>5*</td>          
-                  </tr>
-                      <tr>
-                        <td>{{FirstName}}</td>
-                        <td>{{Branch}}</td>
-                        <td>101</td>
-                        <td>101</td>
-                        <td>112</td>
-                        <td>101</td>
-                        <td>2500</td>
-                        <td>11:00</td>
-                        <td>30:00</td>
-                        <td>11:30</td>
-                        <td>112</td>
-                        <td>101</td>
-                        <td>2500</td>
-                        <td>2500</td>
-                        <td>5*</td>  
-                        <td>112</td>
-                        <td>101</td>
-                        <td>2500</td>
-                        <td>2500</td>
-                        <td>5*</td>          
-                    </tr>
+                      <!-- <tr *ngFor="let item of OrderDetails">
+                         <td></td>
+                          <td>{{ item.Title }}</td>
+                          <td>{{ item.RiderName }}</td>
+                          <td>{{ item.OrderNo }}</td>
+                          <td>{{ item.CustomerName }}</td>
+                          <td>{{ item.BookedDateTime }}</td>
+                          <td>{{ item.ReceiveTime }}</td>
+                          <td>{{ item.DispatchedDateTime }}</td>
+                          <td>{{ item.ReachedDateTime }}</td>
+                          <td>{{ item.FinalStatusDateTIme }}</td>
+                          <td>{{ item.CustomerAddress }}</td>
+                          <td>{{ item.IST }}</td>
+                          <td>{{ item.ReceivedByDateTime }}</td>
+                          <td>{{ item.Rating }}</td>
+
+                          <td>{{ item.OrderStatus }}</td>
+                          <td>{{ item.DispatchedDateTime }}</td>
+                          <td>{{ item.Latitude }}</td>
+                          <td>{{ item.Longitude }}</td>
+                          <td>{{ item.Distance }}</td>
+                        </tr> -->
                     </tbody>
                   </table>
                 </div>

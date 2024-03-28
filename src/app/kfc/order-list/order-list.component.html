@@ -16,7 +16,7 @@
         <h4>Order List</h4>
 
         <div class="orderFirmate">
-            <p><span>{{Orders }}</span> Orders</p>
+            <p><span>{{list.length}}</span> Orders</p>
             <select class="form-select select-form" style="width: 30%;">
                 <option>Order Id asc</option>
                 <option>Order Id desc</option>
@@ -37,103 +37,62 @@
             </p>
         </div>
         <div class="orderFirmate" >
-            <p><span>{{Orders }}</span> Orders 28-02-24 10:00 AM to 29/02/24 9:59 AM</p>
-        </div>
+          <p><span>{{list.length}}</span> Orders {{CurrntDate}} 10:00 AM to {{NextDate}} 9:59 AM</p>
+      </div>
+      
       
 
         <div class="Detailslist col-md-12">
           <div class="justify">
                 <!-- Start Table Part -->
-                <div class="col-xl-8 col-sm-12 overflow">
-                    <table class="table table-sm table-hover data-table" id="datatableexample">
-                    <thead>
-                      <tr style="background-color: #716ACA !important;">
-                        <td></td>
-                        <td>Order No</td>
-                        <td>Status</td>
-                        <td>Date</td>
-                        <td>Time</td>
-                        <td>Customer</td>
-                        <td>Address</td>
-                        <td>Dispatch By</td>
-                        <td>Driver</td>
-                        <td>Remaining Time</td>
-                        <td></td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td> <input type="checkbox"> </td>
-                        <td>{{OrderNo}}</td>
-                        <td>{{Status}}</td>
-                        <td>{{Date}}</td>
-                        <td>{{Time}}</td>
-                        <td>{{Customer}}</td>   
-                        <td>{{Address}}</td>
-                        <td>{{DispatchBy}}</td>
-                        <td>{{Driver}}</td>
-                        <td>{{RemainingTime}}</td>     
-                        <td> <button type="button" #btnAlert (click)="openModal()">Trace Log</button></td>                 
-                    </tr>
-                    <tr>
-                        <td> <input type="checkbox"> </td>
-                        <td>{{OrderNo}}</td>
-                        <td>{{Status}}</td>
-                        <td>{{Date}}</td>
-                        <td>{{Time}}</td>
-                        <td>{{Customer}}</td>   
-                        <td>{{Address}}</td>
-                        <td>{{DispatchBy}}</td>
-                        <td>{{Driver}}</td>
-                        <td>{{RemainingTime}}</td>  
-                        <td> <button type="button" #btnAlert (click)="openModal()">Trace Log</button></td>                    
-                    </tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr>
-                        <td> <input type="checkbox"> </td>
-                        <td>{{OrderNo}}</td>
-                        <td>{{Status}}</td>
-                        <td>{{Date}}</td>
-                        <td>{{Time}}</td>
-                        <td>{{Customer}}</td>   
-                        <td>{{Address}}</td>
-                        <td>{{DispatchBy}}</td>
-                        <td>{{Driver}}</td>
-                        <td>{{RemainingTime}}</td>          
-                        <td> <button type="button" #btnAlert (click)="openModal()">Trace Log</button></td>                       
-                    </tr>
-                    <tr>
-                        <td> <input type="checkbox"> </td>
-                        <td>{{OrderNo}}</td>
-                        <td>{{Status}}</td>
-                        <td>{{Date}}</td>
-                        <td>{{Time}}</td>
-                        <td>{{Customer}}</td>   
-                        <td>{{Address}}</td>
-                        <td>{{DispatchBy}}</td>
-                        <td>{{Driver}}</td>
-                        <td>{{RemainingTime}}</td>      
-                        <td> <button type="button" #btnAlert (click)="openModal()">Trace Log</button></td>                           
-                    </tr>
-                    </tbody>
-                  </table>
+
+                <!-- order-list.component.html -->
+
+<div *ngIf="list.length > 0" class="col-xl-8 col-sm-12 overflow">
+  <table class="table table-sm table-hover data-table" id="datatableexample">
+      <thead>
+          <tr style="background-color: #716ACA !important;">
+              <td></td>
+              <td>Order No</td>
+              <td>Status</td>
+              <td>Date</td>
+              <td>Time</td>
+              <td>Customer</td>
+              <td>Address</td>
+              <td>Dispatch By</td>
+              <td>Driver</td>
+              <td>Remaining Time</td>
+              <td></td>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let item of list">
+            <td title="Select" width="3%">                                   
+              <label class="m-checkbox m-checkbox--solid">
+                  <input type="checkbox" class="ng-untouched ng-pristine ng-valid">                                            
+                  <span></span>
+              </label>                                    
+          </td> 
+              <td>{{ item.OrderNo }}</td>
+              <td>{{ item.StatusId }}</td>
+              <td>{{ item.BookedTime | date:'shortDate' }}</td>
+              <td>{{ item.BookedTime | date:'shortTime' }}</td>
+              <td>{{ item.FirstName }}</td>
+              <td>{{ item.AddressLine1 }}</td>
+              <td>{{ item.DispatchBy }}</td>
+              <td>{{ item.RiderFirstName }}</td>
+              <td>{{ item.RemainingMinuts }}</td>
+              <td> <button type="button" #btnAlert (click)="openModal()">Trace Log</button></td>                 
+          </tr>
+      </tbody>
+  </table>
+</div>
+
+                <div *ngIf="list.length === 0">
+                  <p>No data available</p>
                 </div>
+                
+   
                   <!-- End Table Part -->
                   <br><br>
                 <div class="col-xl-4 col-sm-12 map">

@@ -29,7 +29,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
+                        <!-- <tr>
                           <td>{{FirstName}}</td>
                           <td>{{MiddleName}}</td>
                           <td>{{LastName}}</td>
@@ -47,119 +47,20 @@
                             </select>
                           </td>
                           <td><button>Update Rider</button></td>            
+                      </tr> -->
+                      <tr *ngFor="let item of setting">
+                      <td>{{ item.FirstName }}</td>
+                      <td>{{ item.MiddleName }}</td>
+                      <td>{{ item.LastName }}</td>
+                      <td>{{ item.CellNumber }}</td>
+                      <td>{{ item.BranchName }}</td>
+                      <td>
+                      <select name="" id="">
+                        <option value="">{{ item.RiderStatus }}</option>
+                      </select>
+                    </td>
+                      <td><button>Update Rider</button></td>
                       </tr>
-                      <tr>
-                        <td>{{FirstName}}</td>
-                        <td>{{MiddleName}}</td>
-                        <td>{{LastName}}</td>
-                        <td>{{ContectNumber}}</td>
-                        <td>{{Branch}}</td>   
-                        <td>
-                          <select>
-                              <option value="">OffLine</option>
-                              <option value="">Break</option>
-                              <option value="">In Progress</option>
-                              <option value="">Assigned</option>
-                              <option value="">Free</option>
-                              <option value="">Returning</option>
-                              <option value="LogOut">LogOut</option>
-                          </select>
-                        </td>
-                        <td><button>Update Rider</button></td>            
-                    </tr>
-                    <tr>
-                        <td>{{FirstName}}</td>
-                        <td>{{MiddleName}}</td>
-                        <td>{{LastName}}</td>
-                        <td>{{ContectNumber}}</td>
-                        <td>{{Branch}}</td>   
-                        <td>
-                          <select>
-                              <option value="">OffLine</option>
-                              <option value="">Break</option>
-                              <option value="">In Progress</option>
-                              <option value="">Assigned</option>
-                              <option value="">Free</option>
-                              <option value="">Returning</option>
-                              <option value="LogOut">LogOut</option>
-                          </select>
-                        </td>
-                        <td><button>Update Rider</button></td>            
-                    </tr>
-                    <tr>
-                        <td>{{FirstName}}</td>
-                        <td>{{MiddleName}}</td>
-                        <td>{{LastName}}</td>
-                        <td>{{ContectNumber}}</td>
-                        <td>{{Branch}}</td>   
-                        <td>
-                          <select>
-                              <option value="">OffLine</option>
-                              <option value="">Break</option>
-                              <option value="">In Progress</option>
-                              <option value="">Assigned</option>
-                              <option value="">Free</option>
-                              <option value="">Returning</option>
-                              <option value="LogOut">LogOut</option>
-                          </select>
-                        </td>
-                        <td><button>Update Rider</button></td>            
-                    </tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr>
-                        <td>{{FirstName}}</td>
-                        <td>{{MiddleName}}</td>
-                        <td>{{LastName}}</td>
-                        <td>{{ContectNumber}}</td>
-                        <td>{{Branch}}</td>   
-                        <td>
-                          <select>
-                              <option value="">OffLine</option>
-                              <option value="">Break</option>
-                              <option value="">In Progress</option>
-                              <option value="">Assigned</option>
-                              <option value="">Free</option>
-                              <option value="">Returning</option>
-                              <option value="LogOut">LogOut</option>
-                          </select>
-                        </td>
-                        <td><button>Update Rider</button></td>            
-                    </tr>
-                    <tr>
-                        <td>{{FirstName}}</td>
-                        <td>{{MiddleName}}</td>
-                        <td>{{LastName}}</td>
-                        <td>{{ContectNumber}}</td>
-                        <td>{{Branch}}</td>   
-                        <td>
-                          <select>
-                              <option value="">OffLine</option>
-                              <option value="">Break</option>
-                              <option value="">In Progress</option>
-                              <option value="">Assigned</option>
-                              <option value="">Free</option>
-                              <option value="">Returning</option>
-                              <option value="LogOut">LogOut</option>
-                          </select>
-                        </td>
-                        <td><button>Update Rider</button></td>            
-                    </tr>
                       </tbody>
                     </table>
                   </div>

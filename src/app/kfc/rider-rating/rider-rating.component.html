@@ -10,67 +10,49 @@
          <app-rider-rating-header></app-rider-rating-header>
 
         <!-- Start Branch Riders Part -->
-         <div class="DetailsTbl col-md-12">
-          <h4>Branch Riders</h4>
-          <div class="overflow">
-            <div class="riderDetails">
-                <div class="row">
-                    <div class="imag" style="margin-left: -10px;"><img src="../assets/Images/Kfc_logo.png" alt="rider Potfolio" style="width: 150px; height:100px;"></div>
-                    <div class="contant">
-                        <h6>Rana</h6>
-                        <p>Mall Road</p>
-                        <h6># of Orders 20</h6>
-                        <p>Rating <span>0</span></p>
+        <!-- <div class="DetailsTbl col-md-12">
+            <h4>Branch Riders</h4>
+            <div class="overflow">
+                <div class="riderDetails">
+                    <div class="row" *ngFor="let item of Rating">
+                        <div class="imag" style="margin-left: -10px;"><img [src]="item.ProfileImage" alt="rider Potfolio" style="width: 150px; height:100px;"></div>
+                        <div class="contant">
+                            <h6>{{item.RiderName}}</h6>
+                            <p>{{item.BranchTitle}}</p>
+                            <h6># of Orders {{item.NoOfOrders}}</h6>
+                            <p>Rating <span>{{item.Rating}}</span></p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="riderDetails">
-                <div class="row">
-                    <div class="imag" style="margin-left: -10px;"><img src="../assets/Images/Kfc_logo.png" alt="rider Potfolio" style="width: 150px; height:100px;"></div>
-                    <div class="contant">
-                        <h6>Rana</h6>
-                        <p>Mall Road</p>
-                        <h6># of Orders 20</h6>
-                        <p>Rating <span>0</span></p>
-                    </div>
-                </div>
-            </div>
-            <div class="riderDetails">
-                <div class="row">
-                    <div class="imag" style="margin-left: -10px;"><img src="../assets/Images/Kfc_logo.png" alt="rider Potfolio" style="width: 150px; height:100px;"></div>
-                    <div class="contant">
-                        <h6>Rana</h6>
-                        <p>Mall Road</p>
-                        <h6># of Orders 20</h6>
-                        <p>Rating <span>0</span></p>
-                    </div>
-                </div>
-            </div>
-            <div class="riderDetails">
-                <div class="row">
-                    <div class="imag" style="margin-left: -10px;"><img src="../assets/Images/Kfc_logo.png" alt="rider Potfolio" style="width: 150px; height:100px;"></div>
-                    <div class="contant">
-                        <h6>Rana</h6>
-                        <p>Mall Road</p>
-                        <h6># of Orders 20</h6>
-                        <p>Rating <span>0</span></p>
-                    </div>
-                </div>
-            </div>
-            <div class="riderDetails">
-                <div class="row">
-                    <div class="imag" style="margin-left: -10px;"><img src="../assets/Images/Kfc_logo.png" alt="rider Potfolio" style="width: 150px; height:100px;"></div>
-                    <div class="contant">
-                        <h6>Rana</h6>
-                        <p>Mall Road</p>
-                        <h6># of Orders 20</h6>
-                        <p>Rating <span>0</span></p>
-                    </div>
-                </div>
-            </div>
+        </div> -->
 
-          </div>
-         </div>
+<!-- rider-rating.component.html -->
+
+<div class="DetailsTbl col-md-12">
+    <h4>Branch Riders</h4>
+    <div class="overflow">
+        <div *ngIf="Rating.length > 0">
+            <table>
+                <tbody>
+                    <tr *ngFor="let item of Rating">
+                        <td>{{item.RiderName}}</td>
+                        <td>{{item.BranchTitle}}</td>
+                        <td># of Orders {{item.NoOfOrders}}</td>
+                        <td>Rating <span>{{item.Rating}}</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf="Rating.length === 0">
+            <p>No data available</p>
+        </div>
+    </div>
+</div>
+
+
+        
+          
         <!-- End Branch Riders Part -->
 
 

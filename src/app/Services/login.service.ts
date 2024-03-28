@@ -1,21 +1,21 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
+import { ApiUrlService } from './api-url.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-
   // private apiUrl = 'https://icoremis.techinnsoft.com';
   // private apiUrl = 'http://172.16.35.5:9977/api/token';
-   private apiUrl = 'http://localhost:41420';
+  // private apiUrl = 'http://localhost:41420';
   
 // 2
 private authToken: string | null = null;
 // 3
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private apiUrlService: ApiUrlService) { }
   // 4
 
   login(email: any, password: any ): Observable<any> {
@@ -35,7 +35,7 @@ private authToken: string | null = null;
     body.set('password', password);
     body.set('grant_type', 'password');
 ///api/tokens
-    return this.http.post(`${this.apiUrl}/token`, body.toString(),{headers: headers}).pipe(
+    return this.http.post(`${this.apiUrlService.getApiUrl()}/token`, body.toString(),{headers: headers}).pipe(
       map((response: any) => {
         console.log('Login Response:', response); // Log the response
          
@@ -52,7 +52,7 @@ private authToken: string | null = null;
 
   logout(): Observable<any> {
     this.setToken("");
-    return this.http.post(`${this.apiUrl}/logout`, {});
+    return this.http.post(`${this.apiUrlService.getApiUrl()}/logout`, {});
   }
 
   // 6

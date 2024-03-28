@@ -27,6 +27,16 @@
                         </tr>
                       </thead>
                       <tbody>
+                        <tr *ngFor="let item of orders">
+                          <td>{{ item.RiderFirstName}}</td>
+                            <td>{{ item.BranchName}}</td>
+                            <td>{{ item.DeliveryOrderID}}</td>
+                            <td>{{item.Amount}}</td>
+                            <td> <button>Details</button></td>
+                            <td> <button type="button" #btnAlert (click)="openModal()">Trace Log</button></td>                 
+                        </tr>
+                    </tbody>
+                      <!-- <tbody>
                         <tr>
                           <td>{{RiderName}}</td>
                           <td>{{Branch}}</td>
@@ -34,49 +44,8 @@
                           <td>{{TotalAmount}}</td>
                           <td> <button>Details</button></td>   
                           <td> <button type="button" #btnAlert (click)="openModal()">Acceptance Log</button></td>           
-                      </tr>
-                      <tr>
-                        <td>{{RiderName}}</td>
-                        <td>{{Branch}}</td>
-                        <td>{{TotalOrders}}</td>
-                        <td>{{TotalAmount}}</td>
-                        <td> <button>Details</button></td>   
-                        <td> <button type="button" #btnAlert (click)="openModal()">Acceptance Log</button></td>                            
-                    </tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr></tr>
-                      <tr>
-                        <td>{{RiderName}}</td>
-                        <td>{{Branch}}</td>
-                        <td>{{TotalOrders}}</td>
-                        <td>{{TotalAmount}}</td>
-                        <td> <button>Details</button></td>   
-                        <td> <button type="button" #btnAlert (click)="openModal()">Acceptance Log</button></td>              
-                    </tr>
-                    <tr>
-                      <td>{{RiderName}}</td>
-                      <td>{{Branch}}</td>
-                      <td>{{TotalOrders}}</td>
-                      <td>{{TotalAmount}}</td>
-                      <td> <button>Details</button></td>   
-                      <td> <button type="button" #btnAlert (click)="openModal()">Acceptance Log</button></td>             
-                  </tr>
-                      </tbody>
+                        </tr>
+                      </tbody> -->
                     </table>
                   </div>
                     <!-- End Table Part -->
