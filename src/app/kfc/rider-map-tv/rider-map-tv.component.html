@@ -6,7 +6,43 @@
       </div>
       <div class="col-md-10 PageBody">
          <!-- Start Body Part -->
-         <app-map-tvheader></app-map-tvheader>
+         <div class="headerIcon">
+            <div class="filter">
+                <div tabLink>
+                    <a class="tablink nav-link" (click)="OpenPage('filter', $event)" [ngClass]="{'active': CurrentTab === 'filter'}"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 100 512 312"><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg></a>
+                </div>
+                <p>{{filter}}</p>
+            </div>
+            <div class="userIcon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 100 448 312"><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
+                <p>{{user}}</p>
+            </div>
+        </div>
+        
+        <div class="filterDetails">
+            <div id="filter" class="filtertabcontent" [hidden]="CurrentTab !== 'filter'">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="branch">Branch:</label>
+                            <select class="form-control" [(ngModel)]="Branchid">
+                                <option [value]="0" selected>All Branches</option>
+                                <option *ngFor="let branch of branchList" [value]="branch.BranchID">{{ branch.Title }}</option>
+                            </select>
+                        </div>
+                        
+                    </div>
+                </div>
+        
+                <br>
+                <div class="col-md-12">
+                    <div class=" col-md-1 float-end">
+                        <button class="filter" (click)="loadList()" (click)="loadOrerList()">Filter</button>
+                    </div>
+                </div><br><br>
+            </div>
+        </div>        
+
          <!-- Start Map scale Value Part -->
          <div class="mapScal">
 
@@ -14,9 +50,9 @@
             <table>
                 <thead><tr><th colspan="2">Transactions</th></tr></thead>
                 <tbody>
-                    <tr class="scale">
-                        <td>11</td>
-                        <td>0</td>
+                    <tr class="scale" >
+                        <td>{{ OrderMap?.TotalTransactions ?? 0}}</td>
+                        <td>{{ OrderMap?.CancelTransactions ?? 0}}</td>
                     </tr>
                     <tr>
                         <td>Total</td>
@@ -29,8 +65,8 @@
                 <thead><tr><th colspan="2">Sales</th></tr></thead>
                 <tbody>
                     <tr class="scale">
-                        <td>50850</td>
-                        <td>4060</td>
+                        <td>{{ OrderMap?.TotalSales ?? 0}}</td>
+                        <td>{{ OrderMap?.CancelSales ?? 0}}</td>
                     </tr>
                     <tr>
                         <td>Total</td>
@@ -43,9 +79,9 @@
                             <thead><tr><th colspan="2">In store time</th></tr></thead>
                             <tbody>
                                 <tr class="scale">
-                                    <td>4</td>
-                                    <td>4</td>
-                                    <td>4</td>
+                                    <td>{{ OrderMap?.InStoreTimeAvg ?? 0}}</td>
+                                    <td>{{ OrderMap?.InStoreTimeLess10 ?? 0}}</td> 
+                                    <td>{{ OrderMap?.InStoreTimeGreater10 ?? 0}}</td>                                   
                                 </tr>
                                 <tr>
                                     <td>AVG</td>
@@ -59,9 +95,9 @@
                 <thead><tr><th colspan="2">Drive Time</th></tr></thead>
                 <tbody>
                     <tr class="scale">
-                        <td>4</td>
-                        <td>4</td>
-                        <td>4</td>
+                        <td>{{ OrderMap?.DriveTimeAvg ?? 0}}</td>
+                        <td>{{ OrderMap?.DriveTimeLess10 ?? 0}}</td> 
+                        <td>{{ OrderMap?.DriveTimeGreater10 ?? 0}}</td>                                   
                     </tr>
                     <tr>
                         <td>AVG</td>
@@ -75,9 +111,9 @@
                             <thead><tr><th colspan="2">SOS</th></tr></thead>
                             <tbody>
                                 <tr class="scale">
-                                    <td>30</td>
-                                    <td>7</td>
-                                    <td>4</td>
+                                    <td>{{ OrderMap?.SOSAvg ?? 0}}</td>
+                                    <td>{{ OrderMap?.SOSLess30 ?? 0}}</td> 
+                                    <td>{{ OrderMap?.SOSGreater30 ?? 0}}</td>                                   
                                 </tr>
                                 <tr>
                                     <td>AVG</td>
@@ -91,9 +127,9 @@
                 <thead><tr><th colspan="2" style="padding-left: 0px !important;font-size: 14px;">Multiple Dispatched</th></tr></thead>
                 <tbody>
                     <tr class="scale">
-                        <td>4</td>
-                        <td>2</td>
-                        <td>1</td>
+                        <td>{{ OrderMap?.MultipleDispatch1 ?? 0}}</td>
+                        <td>{{ OrderMap?.MultipleDispatch2 ?? 0}}</td> 
+                        <td>{{ OrderMap?.MultipleDispatch3 ?? 0}}</td>                                   
                     </tr>
                     <tr>
                         <td>1X</td>
@@ -115,17 +151,17 @@
                 <div tabLink>
                     <ul class="nav nav-tabs">
                       <li class="nav-item">
-                        <a class="tablink nav-link" (click)="openPage('Lead', $event)" [ngClass]="{'active': currentTab === 'Lead'}"><b>Assigned</b></a>
+                        <a class="tablink nav-link" (click)="openPage('Lead', $event)" [ngClass]="{'active': currentTab === 'Lead'}">Assigned {{assignedOrders.length}}</a>
                       </li>
                       <li class="nav-item">
-                        <a class="tablink nav-link" (click)="openPage('Login', $event)" [ngClass]="{'active': currentTab === 'Login'}"><b>Unassigned</b></a>
+                        <a class="tablink nav-link" (click)="openPage('Login', $event)" [ngClass]="{'active': currentTab === 'Login'}">Unassigned {{unassignedOrders.length}}</a>
                       </li>
                       <li class="nav-item">
-                        <a class="tablink nav-link" (click)="openPage('Location', $event)" [ngClass]="{'active': currentTab === 'Location'}"><b>delayed</b></a>
+                        <a class="tablink nav-link" (click)="openPage('Location', $event)" [ngClass]="{'active': currentTab === 'Location'}">Delayed {{delayedOrders.length}}</a>
                       </li>
         
                       <li class="nav-item">
-                        <a class="tablink nav-link" (click)="openPage('Details', $event)" [ngClass]="{'active': currentTab === 'Details'}"><b>In Progress</b></a>
+                        <a class="tablink nav-link" (click)="openPage('Details', $event)" [ngClass]="{'active': currentTab === 'Details'}">In Progress {{dispatchedOrders.length}}</a>
                       </li>
                     </ul>
                   </div>
@@ -135,28 +171,19 @@
                         <thead>
                             <tr>
                                 <th>Order Number</th>
-                                <th>driver</th>
+                                <th>Driver</th>
                                 <th>Amount</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>43360457</td>
-                                <td>Khuram</td>
-                                <td>700</td>
-                            </tr>
-                            <tr>
-                                <td>43360454</td>
-                                <td>Rana</td>
-                                <td>2000</td>
-                            </tr>
-                            <tr>
-                                <td>43360455</td>
-                                <td>Bilal</td>
-                                <td>2300</td>
+                            <tr *ngFor="let item of assignedOrders">
+                                <td>{{ item.OrderNo }}</td>
+                                <td>{{ item.RiderFirstName }}</td>
+                                <td>{{ item.Amount }}</td>
                             </tr>
                         </tbody>
                     </table>
+                    
                   </div>
 
                   <div id="Login" class="tabcontent" [hidden]="currentTab !== 'Login'">
@@ -164,35 +191,15 @@
                         <thead>
                             <tr>
                                 <th>Order Number</th>
-                                <th>driver</th>
+                                <th>Driver</th>
                                 <th>Amount</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>336045</td>
-                                <td>Iqbal</td>
-                                <td>3400</td>
-                            </tr>
-                            <tr>
-                                <td>3360</td>
-                                <td>Mihsin</td>
-                                <td>400</td>
-                            </tr>
-                            <tr>
-                                <td>33604</td>
-                                <td>Adil</td>
-                                <td>9800</td>
-                            </tr>
-                            <tr>
-                                <td>336045</td>
-                                <td>sajid</td>
-                                <td>400</td>
-                            </tr>
-                            <tr>
-                                <td>3045</td>
-                                <td>Amna</td>
-                                <td>9800</td>
+                            <tr *ngFor="let item of unassignedOrders">
+                                <td>{{ item.OrderNo }}</td>
+                                <td>{{ item.RiderFirstName }}</td>
+                                <td>{{ item.Amount }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -203,20 +210,15 @@
                         <thead>
                             <tr>
                                 <th>Order Number</th>
-                                <th>driver</th>
+                                <th>Driver</th>
                                 <th>Amount</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>43360</td>
-                                <td>Fiaz</td>
-                                <td>750</td>
-                            </tr>
-                            <tr>
-                                <td>43361</td>
-                                <td>Zohaib</td>
-                                <td>1200</td>
+                            <tr *ngFor="let item of delayedOrders">
+                                <td>{{ item.OrderNo }}</td>
+                                <td>{{ item.RiderFirstName }}</td>
+                                <td>{{ item.Amount }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -227,45 +229,15 @@
                         <thead>
                             <tr>
                                 <th>Order Number</th>
-                                <th>driver</th>
+                                <th>Driver</th>
                                 <th>Amount</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>43360451</td>
-                                <td>Khuram</td>
-                                <td>700</td>
-                            </tr>
-                            <tr>
-                                <td>43360452</td>
-                                <td>Rana</td>
-                                <td>2000</td>
-                            </tr>
-                            <tr>
-                                <td>43360453</td>
-                                <td>Bilal</td>
-                                <td>2300</td>
-                            </tr>
-                            <tr>
-                                <td>43360453</td>
-                                <td>Bilal</td>
-                                <td>2300</td>
-                            </tr>
-                            <tr>
-                                <td>43360453</td>
-                                <td>Bilal</td>
-                                <td>2300</td>
-                            </tr>
-                            <tr>
-                                <td>43360453</td>
-                                <td>Bilal</td>
-                                <td>2300</td>
-                            </tr>
-                            <tr>
-                                <td>43360453</td>
-                                <td>Bilal</td>
-                                <td>2300</td>
+                            <tr *ngFor="let item of dispatchedOrders">
+                                <td>{{ item.OrderNo }}</td>
+                                <td>{{ item.RiderFirstName }}</td>
+                                <td>{{ item.Amount }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -274,62 +246,48 @@
                   <table class="table-hover">
                     <thead>
                         <tr>
-                            <th>Order Number</th>
-                            <th>driver</th>
-                            <th>Amount</th>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Cell No</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>43360451</td>
-                            <td>Khuram</td>
-                            <td>700</td>
+                        <!-- // Free Rider data received -->
+                        <tr *ngFor="let item of FreeRiderStatus">
+                            <td>{{item.FirstName}}</td>
+                            <td>{{item.Status}}</td>
+                            <td>{{item.CellNumber}}</td>
                         </tr>
-                        <tr>
-                            <td>43360452</td>
-                            <td>Rana</td>
-                            <td>2000</td>
+                        <!-- // Returning Rider data received -->
+                        <tr *ngFor="let item of ReturningRiderStatus">
+                            <td>{{item.FirstName}}</td>
+                            <td>{{item.Status}}</td>
+                            <td>{{item.CellNumber}}</td>
+                        </tr> 
+                        <!-- // InProgress Rider data received -->
+                        <tr *ngFor="let item of InprogressRiderStatus">
+                            <td>{{item.FirstName}}</td>
+                            <td>{{item.Status}}</td>
+                            <td>{{item.CellNumber}}</td>
                         </tr>
-                        <tr>
-                            <td>43360453</td>
-                            <td>Bilal</td>
-                            <td>2300</td>
+                        <!-- // Branch Break Rider data received -->
+                        <tr *ngFor="let item of BreakBranchRiderStatus">
+                            <td>{{item.FirstName}}</td>
+                            <td>{{item.Status}}</td>
+                            <td>{{item.CellNumber}}</td>
                         </tr>
-                        <tr>
-                            <td>43360453</td>
-                            <td>Bilal</td>
-                            <td>2300</td>
+                        <!-- // Delay Rider data received -->
+                        <tr *ngFor="let item of DelayedRiderStatus">
+                            <td>{{item.FirstName}}</td>
+                            <td>{{item.Status}}</td>
+                            <td>{{item.CellNumber}}</td>
                         </tr>
-                        <tr>
-                            <td>43360453</td>
-                            <td>Bilal</td>
-                            <td>2300</td>
-                        </tr>
-                        <tr>
-                            <td>43360453</td>
-                            <td>Bilal</td>
-                            <td>2300</td>
-                        </tr>
-                        <tr>
-                            <td>43360453</td>
-                            <td>Bilal</td>
-                            <td>2300</td>
-                        </tr>
-                        <tr>
-                            <td>43360453</td>
-                            <td>Bilal</td>
-                            <td>2300</td>
-                        </tr>
-                        <tr>
-                            <td>43360453</td>
-                            <td>Bilal</td>
-                            <td>2300</td>
-                        </tr>
-                        <tr>
-                            <td>43360453</td>
-                            <td>Bilal</td>
-                            <td>2300</td>
-                        </tr>
+                        <!-- // Offline Rider data received -->
+                        <!-- <tr *ngFor="let item of OfflineRiderStatus">
+                            <td>{{item.FirstName}}</td>
+                            <td>{{item.Status}}</td>
+                            <td>{{item.CellNumber}}</td>
+                        </tr> -->
                     </tbody>
                 </table>
 

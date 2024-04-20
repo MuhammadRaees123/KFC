@@ -9,7 +9,100 @@
     <div class="col-10 PageBody">
        <!-- Start Body Part -->
        <div class="header">
-        <app-index-header></app-index-header>
+        <div>
+          <div class="headerIcon">
+              <div class="filter">
+                  <div tabLink>
+                      <a class="tablink nav-link" (click)="OpenPage('filter', $event)" [ngClass]="{'active': CurrentTab === 'filter'}"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 100 512 312"><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg></a>
+                  </div>
+                  <p>{{filter}}</p>
+              </div>
+              <div class="userIcon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 100 448 312"><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
+                  <p>{{user}}</p>
+              </div>
+          </div>
+          
+          <div class="filterDetails">
+              <div id="filter" class="tabcontent" [hidden]="CurrentTab !== 'filter'">
+                  <div class="col-md-12">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <label for="branch">Branch:</label>
+                          <select class="form-control" [(ngModel)]="Branchid">
+                            <option [value]="0" selected>All Branches</option>
+                              <option *ngFor="let branch of branchList" [value]="branch.BranchID">{{ branch.Title }}</option>
+                          </select>
+                      </div>
+                          <div class="col-md-3">
+                              <label for="">Name : </label>
+                              <input type="text" class="form-control">
+                          </div>
+                          <div class="col-md-3">
+                              <label for="">Contact No:</label>
+                              <input type="number" class="form-control">
+                          </div>
+                          <div class="col-md-3">
+                              <label for="">Order No:</label>
+                              <input type="number" class="form-control">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-12">
+                      <div class="row">
+                          <div class="col-md-3">
+                              <label for="branch">Status:</label>
+                              <select id="branch" class="form-control"  [(ngModel)]="value">
+                                  <option value='1'>Assigned</option>
+                                  <option value='2'>Cancel</option>
+                                  <option value='3'>Done</option>
+                                  <option value='4'>In Process</option>
+                                  <option value='5'>Unassigned</option>
+                              </select>
+                          </div>
+                          <div class="col-md-3">
+                              <label for="branch">Driver:</label>
+                              <select id="branch" class="form-control" [(ngModel)]="BranchRideriD">
+                                <option [value]="0" selected>All Riders</option>
+                                  <option *ngFor="let rider of branchRider" [value]="rider.BranchRiderID">{{rider.FirstName}} {{rider.LastName}}</option>
+                              </select>
+                          </div>
+                          <div class="col-md-3">
+                            <label for="">From Date : </label>
+                            <input type="date" class="form-control" [(ngModel)]="SrtartDat">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="">To Date :</label>
+                            <input type="date" class="form-control" [(ngModel)]="EndDate">
+                        </div>
+                      </div>
+                  </div>
+                  <div class="col-md-12">
+                      <div class="row">
+                        <div class="col-md-6"></div>
+                          <div class="col-md-3">
+                              <label for="time"> </label>
+                              <input type="time" class="form-control" [(ngModel)]="SrtartTime">
+                          </div>
+                          <div class="col-md-3">
+                              <label for="time"> </label>
+                              <input type="time" class="form-control" [(ngModel)]="EndTime">
+                          </div>
+                      </div>
+                  </div>
+                  <br>
+                  <div class="col-md-12">
+                      <div class="col-md-1 float-end">
+                          <button class="rest">Reset</button>
+                      </div>
+                      <div class=" col-md-1 float-end">
+                        <button class="filter" (click)="loadList()" (click)="fetchBranchRider()" (click)="SingleOrerloadList()">Filter</button>
+                    </div>
+                  </div><br><br>
+              </div>
+          </div>
+      </div>
+          
        </div>
        
        <div class="DetailsTbl">
@@ -37,8 +130,10 @@
             </p>
         </div>
         <div class="orderFirmate" >
-          <p><span>{{list.length}}</span> Orders {{CurrntDate}} 10:00 AM to {{NextDate}} 9:59 AM</p>
-      </div>
+          <p><span>{{list.length}}</span> Orders {{SrtartDat}} 10:00 AM to {{EndDate}} 9:59 AM</p>
+          <br>
+          <p>Delivery Order ID NO: {{selectedBranchRiderId}}</p>
+        </div>
       
       
 
@@ -48,7 +143,7 @@
 
                 <!-- order-list.component.html -->
 
-<div *ngIf="list.length > 0" class="col-xl-8 col-sm-12 overflow">
+<div class="col-xl-8 col-sm-12 overflow">
   <table class="table table-sm table-hover data-table" id="datatableexample">
       <thead>
           <tr style="background-color: #716ACA !important;">
@@ -65,14 +160,17 @@
               <td></td>
           </tr>
       </thead>
-      <tbody>
+      <tbody *ngIf="list.length > 0">
           <tr *ngFor="let item of list">
-            <td title="Select" width="3%">                                   
+            <!-- <td title="Select" width="3%" >                                   
               <label class="m-checkbox m-checkbox--solid">
-                  <input type="checkbox" class="ng-untouched ng-pristine ng-valid">                                            
-                  <span></span>
-              </label>                                    
-          </td> 
+                <input type="checkbox" class="ng-untouched ng-pristine ng-valid" [(ngModel)]="isCheckboxChecked(item.DeliveryOrderID)" 
+                  (ngModelChange)="updateSelectedDeliveryOrderID(item.DeliveryOrderID)">                                            
+         <span></span>
+     </label>                                                 
+          </td>  -->
+              <td> <button (click)="SingleOrerloadList(item.DeliveryOrderID)">Details</button></td>
+              <!-- <td>{{ item.DeliveryOrderID }}</td> -->
               <td>{{ item.OrderNo }}</td>
               <td>{{ item.StatusId }}</td>
               <td>{{ item.BookedTime | date:'shortDate' }}</td>
@@ -84,13 +182,19 @@
               <td>{{ item.RemainingMinuts }}</td>
               <td> <button type="button" #btnAlert (click)="openModal()">Trace Log</button></td>                 
           </tr>
+
+      </tbody>
+      <tbody *ngIf="list.length === 0">
+        <tr >
+          <th colspan="10" style="text-align: center;">No data Available.</th>
+        </tr>
       </tbody>
   </table>
 </div>
 
-                <div *ngIf="list.length === 0">
+                <!-- <div *ngIf="list.length === 0">
                   <p>No data available</p>
-                </div>
+                </div> -->
                 
    
                   <!-- End Table Part -->
@@ -122,46 +226,74 @@
                     </div>
 
                     <div id="Login" class="tabcontent" [hidden]="currentTab !== 'Login'">
-                      <div class="mapDetails">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3404.005245148182!2d73.0106508!3d33.6943601!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfbe14da7f2dd1%3A0xcbeecb4d8d4414b2!2sKFC!5e0!3m2!1sen!2suk!4v1646005222159!5m2!1sen!2suk" width="100%" height="300px" style="border:0;" loading="lazy"></iframe>
-                      </div>
+                      <table id="datatableexample">
+                        <thead>
+                            <tr>
+                                <td>Create At</td>
+                                <td>Driver Assign</td>
+                                <td>Delivered At</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let oitem of OrderDetail">
+                            <td>{{ oitem.BookedTime }}</td>
+                            <td>{{ oitem.BookedTime }}</td>
+                            <td>{{ oitem.BookedTime }}</td>
+                          </tr>
+                        </tbody>
+                        
+                    </table>
+                    <h3>Admin Log</h3>
+                    <table id="datatableexample">
+                      <thead>
+                          <tr>
+                              <td>Enter By</td>
+                              <td>Event</td>
+                              <td>Time</td>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let aitem of adminlog">
+                           <td>{{aitem.UserName}}</td>
+                          <td>{{aitem.EventLog}}</td>
+                          <td>{{formatTime(aitem.CreatedDate)}}</td>
+                      </tr>
+                      </tbody>
+                  </table>
+                  <h3>Auto Assign Log</h3>
+                  <table id="datatableexample">
+                    <thead>
+                        <tr>
+                            <td>Action</td>
+                            <td>Date</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let asitem of assignlog">
+                         <td>{{asitem.ACTION}}</td>
+                         <td>{{ formatTime(asitem.CD) }}</td>
+                    </tr>
+                    </tbody>
+                </table>
                     </div>
 
                     <div id="Location" class="tabcontent" [hidden]="currentTab !== 'Location'">
                       <table id="datatableexample">
                           <thead>
                               <tr>
-                                  <td>Order Number</td>
-                                  <td>driver</td>
+                                  <td>Name</td>
                                   <td>Amount</td>
+                                  <td>Count</td>
+                                  <td>Bar Code</td>
                               </tr>
                           </thead>
                           <tbody>
-                              <tr>
-                                  <td>336045</td>
-                                  <td>Iqbal</td>
-                                  <td>3400</td>
-                              </tr>
-                              <tr>
-                                  <td>3360</td>
-                                  <td>Mihsin</td>
-                                  <td>400</td>
-                              </tr>
-                              <tr>
-                                  <td>33604</td>
-                                  <td>Adil</td>
-                                  <td>9800</td>
-                              </tr>
-                              <tr>
-                                  <td>336045</td>
-                                  <td>sajid</td>
-                                  <td>400</td>
-                              </tr>
-                              <tr>
-                                  <td>3045</td>
-                                  <td>Amna</td>
-                                  <td>9800</td>
-                              </tr>
+                            <tr *ngFor="let Sitem of SingleOrder">
+                               <td>{{Sitem.Description}}</td>
+                              <td>{{Sitem.MenuPrice}}</td>
+                              <td>{{Sitem.Quantity}}</td>
+                              <td>{{Sitem.pos_itemCode}}</td>  
+                          </tr>
                           </tbody>
                       </table>
                     </div>

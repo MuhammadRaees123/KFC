@@ -6,6 +6,7 @@ import { FusionChartsModule } from 'angular-fusioncharts';
 import * as FusionCharts from 'fusioncharts';
 import * as Charts from 'fusioncharts/fusioncharts.charts';
 import { AgmCoreModule } from '@agm/core';
+import { FormsModule } from '@angular/forms';
 
 // Initialize FusionCharts
 FusionChartsModule.fcRoot(FusionCharts, Charts);
@@ -16,6 +17,7 @@ FusionChartsModule.fcRoot(FusionCharts, Charts);
     CommonModule,
     BrowserModule,
     FusionChartsModule,
+    FormsModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
     })

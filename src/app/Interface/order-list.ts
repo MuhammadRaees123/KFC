@@ -25,6 +25,12 @@ export interface Accounts {
     Amount: number | null;
 }
 
+export interface AccountDetails{
+    OrderNo: number | null;
+    FirstName: string | null;
+    Amount: string | null;
+}
+
 export interface RiderSetting {
     FirstName: string | null;
     MiddleName: string | null;
@@ -162,4 +168,48 @@ export interface Ratinglist
     BranchTitle:string | null;
     ProfileImage:string | null;
 
+}
+
+export interface Ridermap{
+    
+    CreatedToFirstAssignAvg: string |null;
+    CreatedToFirstAssignLess10  : string |null;
+    CreatedToFirstAssignGreater10: string |null;  
+    FinalToPickedAvg: string |null;  
+    FinalToPickedLess10: string |null;  
+    FinalToPickedGreater10: string |null;  
+    InStoreTimeAvg: string |null;  
+    InStoreTimeLess10: string |null;  
+    InStoreTimeGreater10: string |null;  
+    DriveTimeAvg: string |null;  
+    DriveTimeLess10: string |null;  
+    DriveTimeGreater10: string |null;  
+    SOSAvg: string |null;  
+    SOSLess30: string |null;  
+    SOSGreater30: string |null;  
+    MultipleDispatch1: string |null;  
+    MultipleDispatch2: string |null;  
+    MultipleDispatch3: string |null;  
+    TotalTransactions: string |null;  
+    CancelTransactions: string |null;  
+    TotalSales: string |null;  
+    CancelSales: string |null; 
+
+}
+
+export interface AssignRidermap{
+    OrderNo: string | null;
+    RiderFirstName: string | null;
+    RiderLastName: string | null;
+    Amount: string | null;
+
+    FirstName: string | null;
+    Status: string | null;
+    CellNumber: string | null;
+}
+
+export interface ListofBranch{
+    BranchID: number | null;
+    BranchName: string | null;
+    Title: string | null;
 }

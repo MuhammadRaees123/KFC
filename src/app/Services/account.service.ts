@@ -33,6 +33,7 @@ import { Observable } from 'rxjs';
 export class AccountService {
 
   private apiUrl = 'http://localhost:41420/api/OrderDetails/GetRiderAccounts';
+  private apiUrlDetails = 'http://localhost:41420/api/OrderDetails/GetRiderOrderDetails';
 
   constructor(private http: HttpClient, private loginService: LoginService) { }
 
@@ -43,6 +44,16 @@ export class AccountService {
     });
 
     return this.http.post(this.apiUrl, body, { headers });
+  }
+
+  // Accounting Details Data Fetching Services Method 
+  GetOrderAccountDetails(body: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.loginService.getToken()}`
+    });
+
+    return this.http.post(this.apiUrlDetails, body, { headers });
   }
 }
 

@@ -1,10 +1,14 @@
-import { Component, ElementRef, Renderer2 } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { SidebaarComponent } from '../sidebaar/sidebaar.component';
 import { AccountingHeaderComponent } from '../../header/accounting-header/accounting-header.component';
-import { Accounts } from '../../Interface/order-list';
+import { AccountDetails, Accounts, ListofBranch } from '../../Interface/order-list';
 import { AccountService } from '../../Services/account.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { FilterService } from '../../Services/filter.service';
+
+
+
 
 @Component({
   selector: 'app-accounting',
@@ -13,14 +17,35 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './accounting.component.html',
   styleUrl: './accounting.component.css'
 })
-export class AccountingComponent {
+export class AccountingComponent implements OnInit {
 
-  RiderName= 'Rana Billal';
-  Branch='Mall Road';
-  TotalOrders = '12';
-  TotalAmount = '3500';
 
-  constructor(private renderer: Renderer2, private el: ElementRef, private accountServices: AccountService) {}
+
+ // Start Header Part
+
+  filter='Filter';
+  user= 'User';
+
+// In your component class
+
+  currentTab: string = ''; // Default to empty string
+  openPage(pageName: string, event: MouseEvent) {
+      if (this.currentTab === pageName) {
+          // Toggle visibility if clicking the same tab again
+          this.currentTab = '';
+      } else {
+          this.currentTab = pageName;
+      }
+      this.activateTab(event.target as HTMLElement);
+  }
+  activateTab(elmnt: HTMLElement) {
+      const tablinks = document.querySelectorAll('.tablink.nav-link');
+      tablinks.forEach(tab => tab.classList.remove('active'));
+      elmnt.classList.add('active');
+  }
+
+  // Ends Headers Part 
+  constructor(private renderer: Renderer2, private el: ElementRef, private accountServices: AccountService, private BranchDetails: FilterService ) {}
 
   openModal() {
     const modal = this.el.nativeElement.querySelector('#staticBackdrop');
@@ -28,7 +53,6 @@ export class AccountingComponent {
     this.renderer.setStyle(modal, 'display', 'block');
     this.renderer.setStyle(document.body, 'overflow', 'hidden');
   }
-
   closeModal() {
     const modal = this.el.nativeElement.querySelector('#staticBackdrop');
     this.renderer.removeClass(modal, 'show');
@@ -39,20 +63,25 @@ export class AccountingComponent {
   // Fetching Data From Api of Order Details
 
 public orders: Accounts[] = [];
+public ordersDetails: AccountDetails[] = [];
+//public branchList: ListofBranch[] = [];
+public branchList: any[] = [];
 
-// ngOnInit() {
-//   this.loadList();
-// }
+//Branchid:any;
+public Branchid: number = 0; // Set default value to 0
+//SrtartDat:any;
+SrtartDat: string = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
+EndDate?: string;
+//BranchRiderId: any;
+BranchRiderId: any;
+selectedBranchRiderId: any;
 
+// Order accounts Fetching Methods 
 loadList() {
   const body = {
-    BranchId: 158,
-    //Criteria: 0,
-    EndTime: '2024-03-26',
-    ToDateInString: '03/26/2024',
-    //RegionId: 0,
-    StartTime: '2024-03-01',
-    FromDateInString: '03/01/2024',
+    BranchId: this.Branchid,
+    ToDateInString: this.EndDate,
+    FromDateInString: this.SrtartDat,
     UserName: 'farhanh'
   };
 
@@ -73,6 +102,60 @@ loadList() {
   // Call loadList on component initialization
   ngOnInit() {
     this.loadList();
+    this.DetailsloadList();
+    this.fetchBranchList();  // ************************ \\
+
+    // Method of Tomorrow date display by default
+    // Calculate tomorrow's date
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    // Set EndDate to tomorrow's date in the format YYYY-MM-DD
+    this.EndDate = tomorrow.toISOString().split('T')[0]; 
   }
+
+  // Order accounts Fetching Methods 
+DetailsloadList(branchRiderId?: any) {
+  this.selectedBranchRiderId = branchRiderId || this.BranchRiderId;
+  const body = {
+    BranchId: this.Branchid,
+    Criteria: 0,
+    DriverId:this.selectedBranchRiderId,
+    ToDateInString: this.EndDate,
+    RegionId: 0,
+    FromDateInString: this.SrtartDat,
+    UserName: 'farhanh'
+  };
+
+  this.accountServices.GetOrderAccountDetails(body).subscribe(
+    response => {
+      console.log('Response:', response);
+      if (response && response.length > 0) {
+        console.log('Data received:', response);
+        this.ordersDetails = response;
+      }
+    },
+    error => {
+      console.error('Error fetching data:', error);
+    }
+  );
+}
+
+// Fetching Branch List 
+fetchBranchList() {
+  this.BranchDetails.GetBranchlist().subscribe( // ************************ \\
+    (response) => {
+      console.log('Response received of Branches:', response);
+   if (response != null && response != undefined) {
+        console.log('Branches Data received:', response);
+               // Ensure that response is always an array
+               this.branchList = response;
+      }
+      console.log('Branch Data Assign to branchList Variable',this.branchList); // Logging array of branches
+    },
+    (error) => {
+      console.error('Error fetching data:', error);
+    }
+  );
+}
 
 }

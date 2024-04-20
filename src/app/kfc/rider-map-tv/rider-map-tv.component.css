@@ -5,6 +5,46 @@
     height: auto;
     overflow-y: auto;
 }
+
+/* Start Header and Filter Stylling */
+.headerIcon
+{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    padding: 0px 30px;
+}
+.filterDetails
+{
+    width: 100%;
+    height: auto;
+    margin: 10px 0px;
+    /* padding: 10px 10px; */
+    border-radius: 6px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.filterDetails .filtertabcontent
+{
+      padding: 10px 10px;
+}
+.filtertabcontent button
+{
+    background: none;
+    width: auto;
+    padding: 5px 20px;
+    border: 1px solid lightgray;
+    border-radius: 6px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+.filtertabcontent .filter
+{
+    background-color:#716ACA;
+    color: #fff;
+}
+/* End Header and Filter stylling */
+
 /* End SearchBar Part stylling */
 .DetailsTbl
 {
@@ -176,11 +216,13 @@
 .DetailsTbl [tabLink] a {
     text-decoration: none;
     color: #000000;
-    margin: 10px 5px; /* Adjust the margin as needed */
-    padding: 7px 5px; /* Adjust the padding as needed */
+    margin: 10px 3px; /* Adjust the margin as needed */
+    padding: 7px 3px; /* Adjust the padding as needed */
     border-radius: 4px;
     cursor: pointer;
     border: 1px solid lightblue;
+    font-size: 13px;
+    font-weight: bold;
 }
 .nav.nav-tabs .nav-link.active {
     background-color: #5867DD;
@@ -188,7 +230,7 @@
   }
 
   /* tab table Stylling */
-  .tabcontent table
+  .tabcontent table,   .tabcontent table thead
   {
     width: 100%;
   }
@@ -205,6 +247,7 @@
   }
 
   /* mapDetails table styling */
+
   .mapDetails table
   {
     width: 100%;
@@ -220,3 +263,8 @@
     border-bottom: 1px solid lightgray;
     padding: 5px 0px;
   }
+
+.tabcontent
+{
+    padding: 0px 0px !important;
+}

@@ -5,6 +5,7 @@ import { RidersettengService } from '../../Services/ridersetteng.service';
 import { RiderSetting } from '../../Interface/order-list';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { FilterService } from '../../Services/filter.service';
 
 @Component({
   selector: 'app-rider-setting',
@@ -15,29 +16,60 @@ import { FormsModule } from '@angular/forms';
 })
 export class RiderSettingComponent {
 
-  FirstName= 'Rana';
-  LastName= 'Billal';
-  MiddleName = 'Khatak';
-  ContectNumber = '03127654321';
-  Branch= 'MallRoad';
+  filter='Filter';
+  user= 'User';
 
-  constructor( private ridersetting: RidersettengService) { }
+// In your component class
 
+  currentTab: string = ''; // Default to empty string
+
+  openPage(pageName: string, event: MouseEvent) {
+      if (this.currentTab === pageName) {
+          // Toggle visibility if clicking the same tab again
+          this.currentTab = '';
+      } else {
+          this.currentTab = pageName;
+      }
+      this.activateTab(event.target as HTMLElement);
+  }
+
+  activateTab(elmnt: HTMLElement) {
+      const tablinks = document.querySelectorAll('.tablink.nav-link');
+      tablinks.forEach(tab => tab.classList.remove('active'));
+      elmnt.classList.add('active');
+  }
+
+  // FirstName= 'Rana';
+  // LastName= 'Billal';
+  // MiddleName = 'Khatak';
+  // ContectNumber = '03127654321';
+  // Branch= 'MallRoad';
+
+  constructor( private ridersetting: RidersettengService,  private BranchDetails: FilterService) { 
+
+  }
     // Fetching Data From Api of Order Details
-
 public setting: RiderSetting[] = [];
+public branchList: any[] = [];
+public statusList: any[] = [];
 
 ngOnInit() {
   this.loadList();
+  this.fetchBranchList();  // ************************ \\
+  this.StatusChange();
+}
+
+public Branchid: number = 144; // Set default value to 0
+public ID: any;
+
+applyFilter() {
+  this.loadList(); // Call loadList function when the Filter button is clicked
 }
 
 loadList() {
   const body = {
-    BranchId: 158,
+    BranchId: this.Branchid,
     DriverId: 0,
-    EndTime: '2024-03-23',
-    EndTimeInString: '9:59:00 AM',
-    EndTimeToString: '03/23/2024',
     IS_ALL: false,
     IS_ARRIVED: true,
     IS_DELIVERED: true,
@@ -45,10 +77,7 @@ loadList() {
     IS_NEWORDER: true,
     IS_RECEIVED: true,
     IS_REJECTED: false,
-    StartTime: '2024-03-22',
-    StartTimeInString: '10:00:00 AM',
-    StartTimeString: '03/22/2024',
-    StatusId: 0,
+    StatusId: this.ID,
     UserName: 'farhanh',
   };
 
@@ -65,6 +94,43 @@ loadList() {
     }
   );
 }
+status='';
+
+  // Fetching Branch List 
+  fetchBranchList() {
+    this.BranchDetails.GetBranchlist().subscribe( // ************************ \\
+      (response) => {
+        console.log('Response received of Branches:', response);
+     if (response != null && response != undefined) {
+          console.log('Branches Data received:', response);
+                 // Ensure that response is always an array
+                 this.branchList = response;
+        }
+        console.log('Branch Data Assign to branchList Variable',this.branchList); // Logging array of branches
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
+  }
+
+    // Fetching Status List 
+    StatusChange() {
+      this.BranchDetails.GetStatusChange().subscribe( // ************************ \\
+        (response) => {
+          console.log('Response received of Status:', response['RiderStatus']);
+       if (response['RiderStatus'] != null && response['RiderStatus'] != undefined) {
+            console.log('Status Data received:', response['RiderStatus']);
+                   // Ensure that response is always an array
+                   this.statusList = response['RiderStatus'];
+          }
+          console.log('Status Data Assign to statusList Variable',this.statusList); // Logging array of branches
+        },
+        (error) => {
+          console.error('Error fetching data:', error);
+        }
+      );
+    }
 
   
 }

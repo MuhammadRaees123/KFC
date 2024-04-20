@@ -7,115 +7,139 @@
       </div>
       <div class="col-md-10 PageBody">
          <!-- Start Body Part -->
-         <app-rider-rating-header></app-rider-rating-header>
-
-        <!-- Start Branch Riders Part -->
-        <!-- <div class="DetailsTbl col-md-12">
-            <h4>Branch Riders</h4>
-            <div class="overflow">
-                <div class="riderDetails">
-                    <div class="row" *ngFor="let item of Rating">
-                        <div class="imag" style="margin-left: -10px;"><img [src]="item.ProfileImage" alt="rider Potfolio" style="width: 150px; height:100px;"></div>
-                        <div class="contant">
-                            <h6>{{item.RiderName}}</h6>
-                            <p>{{item.BranchTitle}}</p>
-                            <h6># of Orders {{item.NoOfOrders}}</h6>
-                            <p>Rating <span>{{item.Rating}}</span></p>
+         <div class="headerIcon">
+            <div class="filter">
+                <div tabLink>
+                    <a class="tablink nav-link" (click)="openPage('filter', $event)" [ngClass]="{'active': currentTab === 'filter'}"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 100 512 312"><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg></a>
+                </div>
+                <p>{{filter}}</p>
+            </div>
+            <div class="userIcon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 100 448 312"><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
+                <p>{{user}}</p>
+            </div>
+        </div>
+        
+        <div class="filterDetails">
+            <div id="filter" class="tabcontent" [hidden]="currentTab !== 'filter'">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="branch">Criteria:</label>
+                            <select id="branch" class="form-control" [(ngModel)]="criteria">
+                                <option [value]="0" selected>Open Criteria</option>
+                                <option >This Hour</option>
+                                <option >Last Hour</option>
+                                <option >This Day</option>
+                                <option >Yesterday</option>
+                                <option >This Week</option>
+                                <option >Last Weeh</option>
+                                <option >This Month</option>
+                                <option >Last Month</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="">From Date : </label>
+                            <input type="date" class="form-control" [(ngModel)]="SrtartDat">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="">To Date :</label>
+                            <input type="date" class="form-control" [(ngModel)]="EndDate">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="branch">Region:</label>
+                            <select id="branch" class="form-control" [(ngModel)]="region">
+                                <option [value]="0" selected>All Regions</option>
+                                <option [value]="1">South</option>
+                                <option [value]="2">Narth</option>
+                                <option [value]="3">Centeral</option>
+                            </select>
                         </div>
                     </div>
                 </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="branch">Area Coach:</label>
+                            <select id="branch" class="form-control"[(ngModel)]="id">
+                                <option [value]="0" selected>All Area</option>
+                                <option *ngFor="let areaCoach of AreaCoachdata" [value]="areaCoach.id">{{areaCoach.FirstName}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="branch">Branch:</label>
+                            <select id="branch" class="form-control" [(ngModel)]="BranchID">
+                                <option [value]="0" selected>All Branches</option>
+                                <option *ngFor="let BranchareaCoach of BranchAreaCoachdata" [value]="BranchareaCoach.BranchID">{{BranchareaCoach.Title}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+        
+                <br>
+                <div class="col-md-12">
+                    <!-- <div class="row">
+                        <div class="col-md-1">{{criteria}}</div>
+                        <div class="col-md-1">{{SrtartDat}}</div>
+                    <div class="col-md-1">{{EndDate}}</div>
+                    <div class="col-md-1">{{region}}</div>
+                    <div class="col-md-1">{{id}}</div>
+                    <div class="col-md-1">{{BranchID}}</div>
+                    </div> -->
+                    
+                    
+                    
+                    <div class="col-md-1 float-end">
+                        <button class="rest">Reset</button>
+                    </div>
+                    <div class=" col-md-1 float-end">
+                        <button class="filter" (click)="loadList()" (click)="AreaCoachList()" (click)="BranchAreaCoachList()">Filter</button>
+                    </div>
+                </div><br><br>
             </div>
-        </div> -->
+        </div>
+        
 
-<!-- rider-rating.component.html -->
-
+<!-- Start Branch Riders Part -->
 <div class="DetailsTbl col-md-12">
     <h4>Branch Riders</h4>
-    <div class="overflow">
-        <div *ngIf="Rating.length > 0">
-            <table>
-                <tbody>
-                    <tr *ngFor="let item of Rating">
-                        <td>{{item.RiderName}}</td>
-                        <td>{{item.BranchTitle}}</td>
-                        <td># of Orders {{item.NoOfOrders}}</td>
-                        <td>Rating <span>{{item.Rating}}</span></td>
-                    </tr>
-                </tbody>
-            </table>
+    <div class="overflow" *ngIf="regionRiders.length > 0">  
+        <div class="riderDetails" *ngFor="let item of branchRiders">
+            <div class="row">
+                <div class="imag"><img src="data:image/png;base64,{{item.ProfileImage}}" style="width: 100px; height:100px; margin-left: 15px; margin-top: 10px; border-radius: 50%;"></div>
+                <div class="contant">
+                    <h6>{{item.RiderName}}</h6>
+                    <p>{{item.BranchTitle}}</p>
+                    <h6># of Orders {{item.NoOfOrders}}</h6>
+                    <p>Rating <span>{{item.Rating}}</span></p>
+                </div>
+            </div>
         </div>
-        <div *ngIf="Rating.length === 0">
-            <p>No data available</p>
-        </div>
-    </div>
+      </div>
+      <div *ngIf="regionRiders.length === 0">
+          <p style="text-align: center; margin: auto;">No Rider data available</p>
+      </div>
 </div>
-
-
-        
-          
-        <!-- End Branch Riders Part -->
-
+<!-- End Branch Riders Part -->
 
          <!-- Start Top Region Riders Part -->
          <div class="DetailsTbl col-md-12">
             <h4>Top Region Riders</h4>
-            <div class="overflow">
-              <div class="riderDetails">
+            <div class="overflow" *ngIf="regionRiders.length > 0">  
+              <div class="riderDetails" *ngFor="let item of regionRiders">
                   <div class="row">
-                      <div class="imag" style="margin-left: -10px;"><img src="../assets/Images/Kfc_logo.png" alt="rider Potfolio" style="width: 150px; height:100px;"></div>
+                      <div class="imag"><img src="data:image/png;base64,{{item.ProfileImage}}" style="width: 100px; height:100px; margin-left: 15px; margin-top: 10px; border-radius: 50%;"></div>
                       <div class="contant">
-                          <h6>Rana</h6>
-                          <p>Mall Road</p>
-                          <h6># of Orders 20</h6>
-                          <p>Rating <span>0</span></p>
+                          <h6>{{item.RiderName}}</h6>
+                          <p>{{item.BranchTitle}}</p>
+                          <h6># of Orders {{item.NoOfOrders}}</h6>
+                          <p>Rating <span>{{item.Rating}}</span></p>
                       </div>
                   </div>
               </div>
-              <div class="riderDetails">
-                  <div class="row">
-                      <div class="imag" style="margin-left: -10px;"><img src="../assets/Images/Kfc_logo.png" alt="rider Potfolio" style="width: 150px; height:100px;"></div>
-                      <div class="contant">
-                          <h6>Rana</h6>
-                          <p>Mall Road</p>
-                          <h6># of Orders 20</h6>
-                          <p>Rating <span>0</span></p>
-                      </div>
-                  </div>
-              </div>
-              <div class="riderDetails">
-                  <div class="row">
-                      <div class="imag" style="margin-left: -10px;"><img src="../assets/Images/Kfc_logo.png" alt="rider Potfolio" style="width: 150px; height:100px;"></div>
-                      <div class="contant">
-                          <h6>Rana</h6>
-                          <p>Mall Road</p>
-                          <h6># of Orders 20</h6>
-                          <p>Rating <span>0</span></p>
-                      </div>
-                  </div>
-              </div>
-              <div class="riderDetails">
-                  <div class="row">
-                      <div class="imag" style="margin-left: -10px;"><img src="../assets/Images/Kfc_logo.png" alt="rider Potfolio" style="width: 150px; height:100px;"></div>
-                      <div class="contant">
-                          <h6>Rana</h6>
-                          <p>Mall Road</p>
-                          <h6># of Orders 20</h6>
-                          <p>Rating <span>0</span></p>
-                      </div>
-                  </div>
-              </div>
-              <div class="riderDetails">
-                  <div class="row">
-                      <div class="imag" style="margin-left: -10px;"><img src="../assets/Images/Kfc_logo.png" alt="rider Potfolio" style="width: 150px; height:100px;"></div>
-                      <div class="contant">
-                          <h6>Rana</h6>
-                          <p>Mall Road</p>
-                          <h6># of Orders 20</h6>
-                          <p>Rating <span>0</span></p>
-                      </div>
-                  </div>
-              </div>
-  
+            </div>
+            <div *ngIf="regionRiders.length === 0">
+                <p style="text-align: center;">No Rider data available</p>
             </div>
            </div>
          <!-- End Top Region Riders Part -->
@@ -123,108 +147,22 @@
                   <!-- Start Top Nation Riders Part -->
                   <div class="DetailsTbl col-md-12">
                     <h4>Top Nation Riders</h4>
-                    <div class="overflow">
-                      <div class="riderDetails">
-                          <div class="row">
-                              <div class="imag" style="margin-left: -10px;"><img src="../assets/Images/Kfc_logo.png" alt="rider Potfolio" style="width: 150px; height:100px;"></div>
-                              <div class="contant">
-                                  <h6>Rana</h6>
-                                  <p>Mall Road</p>
-                                  <h6># of Orders 20</h6>
-                                  <p>Rating <span>0</span></p>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="riderDetails">
-                          <div class="row">
-                              <div class="imag" style="margin-left: -10px;"><img src="../assets/Images/Kfc_logo.png" alt="rider Potfolio" style="width: 150px; height:100px;"></div>
-                              <div class="contant">
-                                  <h6>Rana</h6>
-                                  <p>Mall Road</p>
-                                  <h6># of Orders 20</h6>
-                                  <p>Rating <span>0</span></p>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="riderDetails">
-                          <div class="row">
-                              <div class="imag" style="margin-left: -10px;"><img src="../assets/Images/Kfc_logo.png" alt="rider Potfolio" style="width: 150px; height:100px;"></div>
-                              <div class="contant">
-                                  <h6>Rana</h6>
-                                  <p>Mall Road</p>
-                                  <h6># of Orders 20</h6>
-                                  <p>Rating <span>0</span></p>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="riderDetails">
-                          <div class="row">
-                              <div class="imag" style="margin-left: -10px;"><img src="../assets/Images/Kfc_logo.png" alt="rider Potfolio" style="width: 150px; height:100px;"></div>
-                              <div class="contant">
-                                  <h6>Rana</h6>
-                                  <p>Mall Road</p>
-                                  <h6># of Orders 20</h6>
-                                  <p>Rating <span>0</span></p>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="riderDetails">
-                          <div class="row">
-                              <div class="imag" style="margin-left: -10px;"><img src="../assets/Images/Kfc_logo.png" alt="rider Potfolio" style="width: 150px; height:100px;"></div>
-                              <div class="contant">
-                                  <h6>Rana</h6>
-                                  <p>Mall Road</p>
-                                  <h6># of Orders 20</h6>
-                                  <p>Rating <span>0</span></p>
-                              </div>
-                          </div>
-                      </div>
-                      <!-- <div class="riderDetails">
-                        <div class="row">
-                            <div class="imag" style="margin-left: -10px;"><img src="../assets/Images/Kfc_logo.png" alt="rider Potfolio" style="width: 150px; height:100px;"></div>
-                            <div class="contant">
-                                <h6>Rana</h6>
-                                <p>Mall Road</p>
-                                <h6># of Orders 20</h6>
-                                <p>Rating <span>0</span></p>
+                    <div class="overflow" *ngIf="regionRiders.length > 0">  
+                        <div class="riderDetails" *ngFor="let item of nationRiders">
+                            <div class="row">
+                                <div class="imag"><img src="data:image/png;base64,{{item.ProfileImage}}" alt="{{item.RiderName ? item.RiderName[0] : ''}}"  style="width: 100px; height:100px; margin-left: 15px; margin-top: 10px; border-radius: 50%;"></div>
+                                <div class="contant">
+                                    <h6>{{item.RiderName}}</h6>
+                                    <p>{{item.BranchTitle}}</p>
+                                    <h6># of Orders {{item.NoOfOrders}}</h6>
+                                    <p>Rating <span>{{item.Rating}}</span></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="riderDetails">
-                        <div class="row">
-                            <div class="imag" style="margin-left: -10px;"><img src="../assets/Images/Kfc_logo.png" alt="rider Potfolio" style="width: 150px; height:100px;"></div>
-                            <div class="contant">
-                                <h6>Rana</h6>
-                                <p>Mall Road</p>
-                                <h6># of Orders 20</h6>
-                                <p>Rating <span>0</span></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="riderDetails">
-                        <div class="row">
-                            <div class="imag" style="margin-left: -10px;"><img src="../assets/Images/Kfc_logo.png" alt="rider Potfolio" style="width: 150px; height:100px;"></div>
-                            <div class="contant">
-                                <h6>Rana</h6>
-                                <p>Mall Road</p>
-                                <h6># of Orders 20</h6>
-                                <p>Rating <span>0</span></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="riderDetails">
-                        <div class="row">
-                            <div class="imag" style="margin-left: -10px;"><img src="../assets/Images/Kfc_logo.png" alt="rider Potfolio" style="width: 150px; height:100px;"></div>
-                            <div class="contant">
-                                <h6>Rana</h6>
-                                <p>Mall Road</p>
-                                <h6># of Orders 20</h6>
-                                <p>Rating <span>0</span></p>
-                            </div>
-                        </div>
-                    </div> -->
-          
-                    </div>
+                      </div>
+                      <div *ngIf="regionRiders.length === 0">
+                          <p style="text-align: center;">No Rider data available</p>
+                      </div>
                    </div>
                  <!-- End Top Nation Riders Part -->
 

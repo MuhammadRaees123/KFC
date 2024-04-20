@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SidebaarComponent } from '../sidebaar/sidebaar.component';
 import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
@@ -17,6 +17,8 @@ import { HighchartStoremeterComponent } from '../highchart-storemeter/highchart-
 import { HighchartDrivemeterComponent } from '../highchart-drivemeter/highchart-drivemeter.component';
 import { HighchartDelivertimeComponent } from '../highchart-delivertime/highchart-delivertime.component';
 import { HighchartTimedeliverComponent } from '../highchart-timedeliver/highchart-timedeliver.component';
+import { GraphdetailsService } from '../../Services/graphdetails.service';
+
 
 @Component({
   selector: 'app-statistics',
@@ -29,13 +31,14 @@ import { HighchartTimedeliverComponent } from '../highchart-timedeliver/highchar
   templateUrl: './statistics.component.html',
   styleUrl: './statistics.component.css'
 })
-export class StatisticsComponent {
+export class StatisticsComponent implements OnInit  {
 
   // * * * * * * * *  Start Order Details High Charts  * * * * * * * * //
+  public GraphDetails: any;
+  constructor(private graphdetailsservices:GraphdetailsService) {}
 
-  constructor() { }
-
-  ngOnInit(): void {
+  ngOnInit() {
+    this.DetailsloadList();
     HC_exporting(Highcharts);
     HC_exportData(Highcharts);
     HC_accessibility(Highcharts);
@@ -89,6 +92,39 @@ export class StatisticsComponent {
       ]
     }as Highcharts.Options);
 
+
   }
+
+    //fetching graph data from API
+    DetailsloadList() {
+    const body = {
+      BranchId: 0,
+      AreaCoachId: 0,
+      ConsiderArea: 1,
+      Criteria: 4,
+      //EndTime: '2024-4-15',
+      EndTimeInString: '9:59:00 AM',
+      ToDateInString: '4/15/2024',
+      RegionId: 0,
+      //StartTime: '2024-4-14',
+      StartTimeInString: '10:00 AM',
+      FromDateInString: '4/14/2024',
+      UserName: 'farhanh'
+    };
+    
+      this.graphdetailsservices.GetGraphDetails(body).subscribe(
+        response => {
+          console.log('Response:', response);
+          //if (response && response.length > 0) {
+            console.log('Data received:', response);
+            this.GraphDetails = response;
+          //}
+        },
+        error => {
+          console.error('Error fetching data:', error);
+        }
+      );
+    }
+    
 
 }

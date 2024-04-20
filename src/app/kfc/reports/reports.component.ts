@@ -5,69 +5,98 @@ import { ReportHeaderComponent } from '../../header/report-header/report-header.
 import { ReportService } from '../../Services/report.service';
 import { FormsModule } from '@angular/forms';
 import { Reportlist } from '../../Interface/order-list';
+import { FilterService } from '../../Services/filter.service';
 
 @Component({
   selector: 'app-reports',
   standalone: true,
-  imports: [SidebaarComponent,ReportHeaderComponent, CommonModule, FormsModule],
+  imports: [SidebaarComponent, CommonModule, FormsModule],
   templateUrl: './reports.component.html',
   styleUrl: './reports.component.css'
 })
 export class ReportsComponent {
 
-  constructor( private reportservice: ReportService) { }
+  constructor( private reportservice: ReportService, private filterServices: FilterService) { }
 
-  FirstName= 'Rana';
-  LastName= 'Billal';
-  MiddleName = 'Khatak';
-  ContectNumber = '03127654321';
-  Branch= 'MallRoad';
+  // Start Header and Filter Hiden and sho method
+  filter='Filter';
+  user= 'User';
 
+// In your component class
 
-  
+  CurrentTab: string = ''; // Default to empty string
+
+  OpenPage(pageName: string, event: MouseEvent) {
+      if (this.CurrentTab === pageName) {
+          // Toggle visibility if clicking the same tab again
+          this.CurrentTab = '';
+      } else {
+          this.CurrentTab = pageName;
+      }
+      this.activateTab(event.target as HTMLElement);
+  }
+
+  ActivateTab(elmnt: HTMLElement) {
+      const tablinks = document.querySelectorAll('.tablink.nav-link');
+      tablinks.forEach(tab => tab.classList.remove('active'));
+      elmnt.classList.add('active');
+  }
+  // End Header and Filter Hiden and sho method
+
+   // Start Tab Hiden and show method
   currentTab: string = 'Lead'; // Default to Personal Details tab
-
   openPage(pageName: string, event: MouseEvent) {
     this.currentTab = pageName;
     this.activateTab(event.target as HTMLElement);
   }
-
   activateTab(elmnt: HTMLElement) {
     const tablinks = document.querySelectorAll('.tablink.nav-link');
     tablinks.forEach(tab => tab.classList.remove('active'));
     elmnt.classList.add('active');
   }
+// End Tab Hiden and show method
 
      // Fetching Data From Api of Order Details
-
 public setting: Reportlist[] = [];
 public performance: Reportlist[] = [];
 public orderlocation: Reportlist[] = [];
 public OrderDetails: Reportlist[] = [];
+public AreaCoachdata: any;
+public BranchAreaCoachdata: any;
 
 ngOnInit() {
   this.loadList();
   this.RiderloadList();
+  this.AreaCoachList();
+  this.BranchAreaCoachList();
+
+  // Method of Tomorrow date display by default
+    // Calculate tomorrow's date
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    // Set EndDate to tomorrow's date in the format YYYY-MM-DD
+    this.EndDate = tomorrow.toISOString().split('T')[0]; 
 }
+
+public criteria: number = 0; // Set default value to 0
+SrtartDat:string = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
+EndDate:any;
+public region: any;
+public id: any;
+public BranchID: any;
 
 loadList() {
   const body = {
-    AreaCoachId: 44,
-    BranchId: 0,
-    ConsiderArea: 1,
-    Criteria: 0,
-    DriverId: 0,
-    EndTime: '2024-03-27',
+    AreaCoachId: this.id,
+    BranchId: this.BranchID,
+    //ConsiderArea: 1,
+    Criteria: this.criteria,
+    //DriverId: 0,
     EndTimeInString: '9:59:00 AM',
-    EndTimeToString: '3/27/2024',
-    FromDate: '2024-03-01',
-    FromDateInString: '03/01/2024',
-    RegionId: 3,
-    StartTime: '2024-03-01',
-    StartTimeInString: '9:59:00 AM',
-    StartTimeString: '3/01/2024',
-    ToDate: '2024-03-27',
-    ToDateInString: '03/27/2024',
+    ToDateInString: this.EndDate,
+    StartTimeInString: '10:00:00 AM',
+    FromDateInString: this.SrtartDat,
+    RegionId: this.region,
     UserName: 'farhanh',
   };
 
@@ -114,26 +143,18 @@ loadList() {
 }
 
 // Rider Performance 
-
-
 RiderloadList() {
   const body = {
-    AreaCoachId: 44,
-    BranchId: 0,
+    AreaCoachId: this.id,
+    BranchId: this.BranchID,
     ConsiderArea: 1,
-    Criteria: 0,
+    Criteria: this.criteria,
     DriverId: 0,
-    EndTime: '2024-03-27',
     EndTimeInString: '9:59:00 AM',
-    EndTimeToString: '3/27/2024',
-    FromDate: '2024-03-01',
-    FromDateInString: '03/01/2024',
-    RegionId: 3,
-    StartTime: '2024-03-01',
+    ToDateInString: this.EndDate,
+    RegionId: this.region,
     StartTimeInString: '9:59:00 AM',
-    StartTimeString: '3/01/2024',
-    ToDate: '2024-03-27',
-    ToDateInString: '03/27/2024',
+    FromDateInString: this.SrtartDat,
     UserName: 'farhanh',
   };
 
@@ -151,5 +172,47 @@ RiderloadList() {
   );
 }
   
+  // Area Coach Fetching Methods 
+  AreaCoachList() {
+    const body = {
+      Criteria: this.criteria,
+      RegionId: this.region,
+    };
+  
+    this.filterServices.GetAreaCoach(body).subscribe(
+      response => {
+        
+          console.log('Data received:', response);
+          this.AreaCoachdata = response;
+        
+          console.log('Data received:', this.AreaCoachdata);
+      },
+      error => {
+        console.error('Error fetching data:', error);
+      }
+    );
+  }
+
+      // Area Coach Branch Fetching Methods 
+      BranchAreaCoachList() {
+        const body = {
+          id: this.id,
+          RegionId: this.region,
+        };
+      
+        this.filterServices.GetAreaCoachBranches(body).subscribe(
+          response => {
+              console.log('Data received:', response);
+              this.BranchAreaCoachdata = response;
+            
+              console.log('Data received:', this.BranchAreaCoachdata);
+              console.log('Branch data received', this.BranchID);
+              console.log('Region data received', this.region);
+          },
+          error => {
+            console.error('Error fetching data:', error);
+          }
+        );
+      }
 
 }
