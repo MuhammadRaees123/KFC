@@ -18,8 +18,7 @@
                   <p>{{filter}}</p>
               </div>
               <div class="userIcon">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 100 448 312"><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
-                  <p>{{user}}</p>
+                  <app-user></app-user>
               </div>
           </div>
           
@@ -29,7 +28,7 @@
                       <div class="row">
                         <div class="col-md-3">
                           <label for="branch">Branch:</label>
-                          <select class="form-control" [(ngModel)]="Branchid">
+                          <select class="form-select" [(ngModel)]="Branchid" (change)="fetchBranchRider(Branchid)">
                             <option [value]="0" selected>All Branches</option>
                               <option *ngFor="let branch of branchList" [value]="branch.BranchID">{{ branch.Title }}</option>
                           </select>
@@ -52,7 +51,7 @@
                       <div class="row">
                           <div class="col-md-3">
                               <label for="branch">Status:</label>
-                              <select id="branch" class="form-control"  [(ngModel)]="value">
+                              <select id="branch" class="form-select"  [(ngModel)]="value">
                                   <option value='1'>Assigned</option>
                                   <option value='2'>Cancel</option>
                                   <option value='3'>Done</option>
@@ -62,9 +61,9 @@
                           </div>
                           <div class="col-md-3">
                               <label for="branch">Driver:</label>
-                              <select id="branch" class="form-control" [(ngModel)]="BranchRideriD">
-                                <option [value]="0" selected>All Riders</option>
-                                  <option *ngFor="let rider of branchRider" [value]="rider.BranchRiderID">{{rider.FirstName}} {{rider.LastName}}</option>
+                              <select id="branch" class="form-select" [(ngModel)]="BranchRideriD">
+                                <option [value]="0" >All Riders</option>
+                                <option *ngFor="let rider of branchRider; let first = first" [value]="rider.BranchRiderID" [selected]="first">{{rider.FirstName}} {{rider.LastName}}</option>
                               </select>
                           </div>
                           <div class="col-md-3">
@@ -93,57 +92,54 @@
                   <br>
                   <div class="col-md-12">
                       <div class="col-md-1 float-end">
-                          <button class="rest">Reset</button>
+                          <button class="rest" (click)="resetForm()" >Reset</button>
                       </div>
                       <div class=" col-md-1 float-end">
-                        <button class="filter" (click)="loadList()" (click)="fetchBranchRider()" (click)="SingleOrerloadList()">Filter</button>
+                        <button class="filter" (click)="loadList(); fetchBranchRider(Branchid)">Filter</button>
+                        <!-- <button class="filter" (click)="loadList()" (click)="fetchBranchRider()" >Filter</button> //This method use in Filter button if need => (click)="SingleOrerloadList()" -->
                     </div>
                   </div><br><br>
               </div>
           </div>
       </div>
-          
        </div>
-       
        <div class="DetailsTbl">
         <h4>Order List</h4>
-
         <div class="orderFirmate">
-            <p><span>{{list.length}}</span> Orders</p>
-            <select class="form-select select-form" style="width: 30%;">
-                <option>Order Id asc</option>
-                <option>Order Id desc</option>
-                <option>Driver asc</option>
-                <option>Driver desc</option>
-                <option>Creation Date asc</option>
-                <option>Creation Date desc</option>
-            </select>
-            <p>
-                Page size: <select>
-                    <option>5</option>
-                    <option>10</option>
-                    <option>15</option>
-                    <option>20</option>
-                    <option>40</option>
-                    <option>100</option>
-                </select>
-            </p>
+          <div><p><span>{{list.length}}</span> Orders</p></div>
+            
+          <div> <select class="form-select select-form" [(ngModel)]="selectedSortOption" (change)="sortData()">
+            <option value="Order_asc">Order Id asc</option>
+            <option value="Order_desc">Order Id desc</option>
+            <option value="Rider_asc">Driver asc</option>
+            <option value="Rider_desc">Driver desc</option>
+            <option value="Date_asc">Creation Date asc</option>
+            <option value="Date_desc" selected>Creation Date desc</option>
+        </select></div>
+           <div style="width: 20%;">
+          <div class="row">
+            <label style="width: 40%;">
+            Page size:
+          </label>
+        <select [(ngModel)]="pageSize" class="form-select" style="width: 50%;">
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+              <option value="20">20</option>
+              <option value="40">40</option>
+              <option value="100">100</option>
+        </select>
+       </div>
+      </div>
+                     
         </div>
         <div class="orderFirmate" >
           <p><span>{{list.length}}</span> Orders {{SrtartDat}} 10:00 AM to {{EndDate}} 9:59 AM</p>
           <br>
-          <p>Delivery Order ID NO: {{selectedBranchRiderId}}</p>
         </div>
-      
-      
-
         <div class="Detailslist col-md-12">
           <div class="justify">
-                <!-- Start Table Part -->
-
-                <!-- order-list.component.html -->
-
-<div class="col-xl-8 col-sm-12 overflow">
+<div class="overflow orderlisttbl" [ngClass]="{'col-xl-12 col-sm-12': OrderDetail.OrderStatus === null && !showDetails, 'col-xl-8 col-sm-12': OrderDetail.OrderStatus != null && showDetails}">
   <table class="table table-sm table-hover data-table" id="datatableexample">
       <thead>
           <tr style="background-color: #716ACA !important;">
@@ -161,18 +157,11 @@
           </tr>
       </thead>
       <tbody *ngIf="list.length > 0">
-          <tr *ngFor="let item of list">
-            <!-- <td title="Select" width="3%" >                                   
-              <label class="m-checkbox m-checkbox--solid">
-                <input type="checkbox" class="ng-untouched ng-pristine ng-valid" [(ngModel)]="isCheckboxChecked(item.DeliveryOrderID)" 
-                  (ngModelChange)="updateSelectedDeliveryOrderID(item.DeliveryOrderID)">                                            
-         <span></span>
-     </label>                                                 
-          </td>  -->
-              <td> <button (click)="SingleOrerloadList(item.DeliveryOrderID)">Details</button></td>
-              <!-- <td>{{ item.DeliveryOrderID }}</td> -->
+          <!-- <tr *ngFor="let item of list"> -->
+            <tr *ngFor="let item of list | slice:0:pageSize">
+              <td> <button (click)="SingleOrerloadList(item.DeliveryOrderID); toggleDetails()">Details</button></td>
               <td>{{ item.OrderNo }}</td>
-              <td>{{ item.StatusId }}</td>
+              <td>{{ item.OrderStatus}}</td>
               <td>{{ item.BookedTime | date:'shortDate' }}</td>
               <td>{{ item.BookedTime | date:'shortTime' }}</td>
               <td>{{ item.FirstName }}</td>
@@ -191,16 +180,16 @@
       </tbody>
   </table>
 </div>
-
-                <!-- <div *ngIf="list.length === 0">
-                  <p>No data available</p>
-                </div> -->
-                
-   
                   <!-- End Table Part -->
                   <br><br>
-                <div class="col-xl-4 col-sm-12 map">
+                <div class="col-xl-4 col-sm-12 map overflow" [hidden]="!showDetails">
                   <div class="mapDetails">
+                    <div class="col-md-12 detailheading" >
+                      <p></p>
+                      <button (click)="showDetails = !showDetails">
+                        <span style="color: #716ACA; font-weight: bold;">O</span>ut<span style="color: brown; font-weight: bold;"> ~></span>
+                      </button> 
+                    </div>
                   <div tabLink>
                     <ul class="nav nav-tabs">
                       <li class="nav-item">
@@ -214,18 +203,86 @@
                       </li>
                     </ul>
                   </div>
-                    <!-- Embed Google Maps iframe with the given location URL -->
-                    <div id="Lead" class="tabcontent" [hidden]="currentTab !== 'Lead'">
+                    <!-- Embed Google Maps iframe with the given location URL filterDetails -->
+                    <div id="Lead" class="tabcontent detailcontant" [hidden]="currentTab !== 'Lead'">
                       <div class="mapDetails">
-                        <!-- app.component.html -->
-                          <!-- <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
-                            <agm-marker [latitude]="lat" [longitude]="lng" [label]="'KFC'"></agm-marker>
-                          </agm-map> -->
                           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3404.005245148182!2d73.0106508!3d33.6943601!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfbe14da7f2dd1%3A0xcbeecb4d8d4414b2!2sKFC!5e0!3m2!1sen!2suk!4v1646005222159!5m2!1sen!2suk" width="100%" height="300px" style="border:0;" loading="lazy"></iframe>
+                          <div class="col-md-12 customrdetail" [hidden]="OrderDetail.OrderStatus === null">
+                          <br>
+                            <div class="col-md-6">
+                            <label for="">Status</label>
+                            <select name="" id="" class="form-control">
+                              <option>{{OrderDetail.OrderStatus}}</option>
+                            </select>
+                          </div>
+                          
+                          <div class="col-md-12">
+                            <div class="row">
+                              <div class="col-md-6">
+                              <label for="">Order</label>
+                              <select name="" id="" class="form-control">
+                                <option>{{OrderDetail.OrderNo}}</option>
+                              </select>
+                            </div>
+                            <div class="col-md-6">
+                              <label for="">Driver</label>
+                              <select name="" id="" class="form-control">
+                                <option>{{OrderDetail.RiderFirstName}} {{OrderDetail.RiderLastName}}</option>
+                              </select>
+                            </div>
+                          </div>
+                          </div>
+                         
+                          <div class="col-md-12">
+                            <div class="row">
+                              <div class="col-md-6">
+                              <label for="">Payment Type</label>
+                              <select name="" id="" class="form-control">
+                                <option>{{OrderDetail.Payment}}</option>
+                              </select>
+                            </div>
+                            <div class="col-md-6">
+                              <label for="">Amount</label>
+                              <select name="" id="" class="form-control">
+                                <option>{{OrderDetail.Amount}}</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <br>
+                          <div class="col-md-12">
+                            <div class="row">
+                              <div class="col-md-4">
+                                <p>{{ formatTime(OrderDetail.BookedTime) }}</p>
+                            </div>
+                              <div class="col-md-4">
+                                <label for="">{{OrderDetail.BranchName}}</label>
+                                <p>{{OrderDetail.BranchCity}}</p>
+                              </div>
+                              <div class="col-md-4">
+                                <p style="color: red;">0 h: {{OrderDetail.EstimatedTime}} min</p>
+                              </div>
+                            </div>
+                          </div>
+                          <hr>
+                          <div class="col-md-12">
+                            <div class="row">
+                              <div class="col-md-4">
+                                <p>{{ formatTime(OrderDetail.ExptectedDeliveryTime) }}</p>
+                            </div>
+                              <div class="col-md-8">
+                                <label for=""><b>{{OrderDetail.FirstName}} {{OrderDetail.LastName}}</b></label>
+                                <p>{{OrderDetail.AddressLine1}} {{OrderDetail.AddressLine2}}</p>
+                              </div>
+                            </div>
+                          </div>
+                          <br>
+                        </div>
                       </div>
                     </div>
 
                     <div id="Login" class="tabcontent" [hidden]="currentTab !== 'Login'">
+                      <div [hidden]="OrderDetail.OrderStatus === null">
                       <table id="datatableexample">
                         <thead>
                             <tr>
@@ -235,10 +292,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let oitem of OrderDetail">
-                            <td>{{ oitem.BookedTime }}</td>
-                            <td>{{ oitem.BookedTime }}</td>
-                            <td>{{ oitem.BookedTime }}</td>
+                          <tr>
+                            <td>{{ OrderDetail.BookedTime }}</td>
+                            <td>{{ OrderDetail.BookedTime }}</td>
+                            <td>{{ OrderDetail.BookedTime }}</td>
                           </tr>
                         </tbody>
                         
@@ -275,9 +332,11 @@
                     </tr>
                     </tbody>
                 </table>
+              </div>
                     </div>
 
                     <div id="Location" class="tabcontent" [hidden]="currentTab !== 'Location'">
+                      <div [hidden]="OrderDetail.OrderStatus === null">
                       <table id="datatableexample">
                           <thead>
                               <tr>
@@ -297,6 +356,7 @@
                           </tbody>
                       </table>
                     </div>
+                    </div>
 
                 </div>
                 </div>
@@ -307,9 +367,6 @@
   </div>
   </div>
 </div>
-
-
-
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="height: 100vh;">
     <div class="modal-content" style="border: 2px solid lightblue">
@@ -387,3 +444,33 @@
   }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+
+
+<script>
+  function formatTime(dateTimeString) {
+    // Check if dateTimeString is null or empty
+    if (!dateTimeString) {
+      return "null"; // Return "null" if dateTimeString is null or empty
+    }
+
+    // Parse the date string
+    const dateTime = new Date(dateTimeString);
+    
+    // Extract hours, minutes, and AM/PM
+    let hours = dateTime.getHours();
+    const minutes = dateTime.getMinutes();
+    const period = hours >= 12 ? 'PM' : 'AM';
+  
+    // Convert hours to 12-hour format
+    hours = hours % 12;
+    hours = hours ? hours : 12; // Handle midnight (0 hours)
+  
+    // Pad minutes with leading zero if needed
+    const paddedMinutes = minutes < 10 ? '0' + minutes : minutes;
+  
+    // Construct formatted time string
+    const formattedTime = `${hours}:${paddedMinutes} ${period}`;
+  
+    return formattedTime;
+  }
+</script>

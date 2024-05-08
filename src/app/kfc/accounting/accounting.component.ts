@@ -6,6 +6,7 @@ import { AccountService } from '../../Services/account.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FilterService } from '../../Services/filter.service';
+import { UserComponent } from '../user/user.component';
 
 
 
@@ -13,13 +14,19 @@ import { FilterService } from '../../Services/filter.service';
 @Component({
   selector: 'app-accounting',
   standalone: true,
-  imports: [SidebaarComponent,AccountingHeaderComponent, CommonModule, FormsModule],
+  imports: [SidebaarComponent,AccountingHeaderComponent, CommonModule, FormsModule, UserComponent],
   templateUrl: './accounting.component.html',
   styleUrl: './accounting.component.css'
 })
 export class AccountingComponent implements OnInit {
 
-
+  showDetails: boolean = false;
+  //detailsClicked: boolean = false;
+  toggleDetails() {
+    if (!this.showDetails) {
+        this.showDetails = true;
+    }
+}
 
  // Start Header Part
 
@@ -66,6 +73,7 @@ public orders: Accounts[] = [];
 public ordersDetails: AccountDetails[] = [];
 //public branchList: ListofBranch[] = [];
 public branchList: any[] = [];
+public NoData: any;
 
 //Branchid:any;
 public Branchid: number = 0; // Set default value to 0
@@ -76,7 +84,7 @@ EndDate?: string;
 BranchRiderId: any;
 selectedBranchRiderId: any;
 
-// Order accounts Fetching Methods 
+// Order accounts Fetching Methods / BranchRiderId
 loadList() {
   const body = {
     BranchId: this.Branchid,

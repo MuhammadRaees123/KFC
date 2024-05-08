@@ -25,10 +25,8 @@ export class HighchartOrderdetailsComponent {
   }
 
   updateChartWithData() {
-    //alert(this.GraphDetails)
      if (!this.GraphDetails) return; // Make sure GraphDetails has been populated
      const totalOrders = this.GraphDetails.ALL_ORDERS;
-     // Highcharts.chart('container', {} as Highcharts.Options);
     Highcharts.chart('ordercontainer', {
       chart: {
         type: 'column'
@@ -37,17 +35,12 @@ export class HighchartOrderdetailsComponent {
         text: 'Order Details',
         align: 'center'
       },
-      // subtitle: {
-      //   text:
-      //     'Source: <a target="_blank" ' +
-      //     'href="https://www.indexmundi.com/agriculture/?commodity=corn">indexmundi</a>',
-      //   align: 'left'
-      // },
+      
       xAxis: {
         categories: ['All', 'Canceled', 'Dispatched', 'Under Process', 'Delivered'],
         crosshair: true,
         accessibility: {
-          description: 'Countries'
+          description: 'Order Details'
         }
       },
       yAxis: {
@@ -62,30 +55,62 @@ export class HighchartOrderdetailsComponent {
       plotOptions: {
         column: {
           pointPadding: 0.2,
-          borderWidth: 0
+          borderWidth: 0,
+          colorByPoint: true, // Set color by point
         }
       },
       series: [
         {
           name: 'Order Count',
+          type: 'column', // Specify type for column chart
+          color: '#964B00', // column color
           data: [
-            //406292, 260000, 107000, 68300, 27500
-            parseInt(this.GraphDetails?.ALL_ORDERS?? 0),
-            parseInt(this.GraphDetails?.TOTAL_CANCELED?? 0),
-            parseInt(this.GraphDetails?.TotalDispatched?? 0),
-            parseInt(this.GraphDetails?.TOTAL_INPROCESS?? 0),
-            parseInt(this.GraphDetails?.TOTAL_DELIVERED?? 0)
+            {
+              y: parseInt(this.GraphDetails?.ALL_ORDERS?? 0),
+              color: '#4CB5AE' // column color
+            },
+            {
+              y: parseInt(this.GraphDetails?.TOTAL_CANCELED?? 0),
+              color: '#4CB5AE' // column color
+            },
+            {
+              y: parseInt(this.GraphDetails?.TotalDispatched?? 0),
+              color: '#4CB5AE' // column color
+            },
+            {
+              y: parseInt(this.GraphDetails?.TOTAL_INPROCESS?? 0),
+              color: '#4CB5AE' // column color
+            },
+            {
+              y: parseInt(this.GraphDetails?.TOTAL_DELIVERED?? 0),
+              color: '#4CB5AE' // column color
+            }
           ]
         },
         {
           name: 'Percentage',
+          type: 'column', // Specify type for column chart
           data: [
-            //51086, 136000, 5500, 141000, 107180
-            (this.GraphDetails.ALL_ORDERS / totalOrders) * 100,
-            (this.GraphDetails.TOTAL_CANCELED / totalOrders) * 100,
-            (this.GraphDetails.TotalDispatched / totalOrders) * 100,
-            (this.GraphDetails.TOTAL_INPROCESS / totalOrders) * 100,
-            (this.GraphDetails.TOTAL_DELIVERED / totalOrders) * 100
+            {
+              y: (this.GraphDetails.ALL_ORDERS / totalOrders) * 100,
+              color: '#79D769' // Column color
+            },
+            {
+              y: (this.GraphDetails.TOTAL_CANCELED / totalOrders) * 100,
+              color: '#79D769' // Column color
+            },
+            {
+              y: (this.GraphDetails.TotalDispatched / totalOrders) * 100,
+              color: '#79D769' // Column color
+            },
+            {
+              y: (this.GraphDetails.TOTAL_INPROCESS / totalOrders) * 100,
+              color: '#79D769' // Column color
+            },
+            {
+              y: (this.GraphDetails.TOTAL_DELIVERED / totalOrders) * 100,
+              color: '#79D769' // Column color
+            },
           ]
         }
       ]

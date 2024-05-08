@@ -25,11 +25,8 @@ export class HighchartDrivetimeComponent {
   }
 
   updateChartWithData() {
-    //alert(this.GraphDetails)
      if (!this.GraphDetails) return; // Make sure GraphDetails has been populated
-
      const totalOrders = this.GraphDetails.ALL_ORDERS;
-    // Highcharts.chart('container', {} as Highcharts.Options);
     Highcharts.chart('drivecontainer', {
       chart: {
         type: 'column'
@@ -38,17 +35,12 @@ export class HighchartDrivetimeComponent {
         text: '',
         align: 'center'
       },
-      // subtitle: {
-      //   text:
-      //     'Source: <a target="_blank" ' +
-      //     'href="https://www.indexmundi.com/agriculture/?commodity=corn">indexmundi</a>',
-      //   align: 'left'
-      // },
+      
       xAxis: {
         categories: ['<8', '8-12', '13-20', '20+'],
         crosshair: true,
         accessibility: {
-          description: 'Countries'
+          description: 'Drive Time'
         }
       },
       yAxis: {
@@ -63,24 +55,34 @@ export class HighchartDrivetimeComponent {
       plotOptions: {
         column: {
           pointPadding: 0.2,
-          borderWidth: 0
+          borderWidth: 0,
+          colorByPoint: true, // Set color by point
         }
       },
       series: [
         {
           name: 'Order Count',
+          type: 'column', // Specify type for column chart
+          color: '#964B00', // Brown color
           data: [
-            // 68300, 107000, 260000, 406292
-            parseInt(this.GraphDetails?.DRIVE_TIME_LESS_5?? 0),
-            parseInt(this.GraphDetails?.DRIVE_TIME_5_10?? 0),
-            parseInt(this.GraphDetails?.DRIVE_TIME_10_20?? 0),
-            parseInt(this.GraphDetails?.DRIVE_TIME_20_30?? 0)
+            {
+              y: parseInt(this.GraphDetails?.DRIVE_TIME_LESS_5?? 0),
+              color: '#4CB5AE' // Brown color
+            },
+            {
+              y: parseInt(this.GraphDetails?.DRIVE_TIME_5_10?? 0),
+              color: '#4CB5AE' // Brown color
+            },
+            {
+              y: parseInt(this.GraphDetails?.DRIVE_TIME_10_20?? 0),
+              color: '#4CB5AE' // Brown color
+            },
+            {
+              y: parseInt(this.GraphDetails?.DRIVE_TIME_20_30?? 0),
+              color: '#4CB5AE' // Brown color
+            },
            ]
         },
-        // {
-        //   name: 'Percentage',
-        //   data: [51086, 136000, 5500, 141000, 107180]
-        // }
       ]
     }as Highcharts.Options);
   }

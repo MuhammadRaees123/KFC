@@ -268,3 +268,54 @@
 {
     padding: 0px 0px !important;
 }
+.miniRider
+{
+    height: 10vh;
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px 5px;
+    margin: 25px 0px;
+    /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+    display: flex;
+    /* //justify-content: space-evenly; */
+    position: fixed;
+    bottom: 0;
+}
+.miniRider .imagsum
+{
+    background-color: #ffffff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    padding: 3px 0px;
+    z-index: 120;
+    margin-top: 15px !important;
+    position: relative; /* Add this line */
+    text-align: center;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    margin: 0px 10px;
+}
+.miniRider .imagicon
+{
+    background-color: #ffffff;
+    border-radius: 50%;
+    width: 90px;
+    height: 90px;
+    padding: 3px 0px;
+    margin-top: -30px;
+    z-index: 120;
+    position: relative; /* Add this line */
+    text-align: center;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    margin: 0px 20px;
+}
+.miniRider .imagicon img, .imagicon img
+{
+    margin-top: -30px;
+    margin-left: -5;
+}
+.miniRider .imagicon p, .imagicon p
+{
+    font-size:smaller;
+    font-weight:bold;
+}

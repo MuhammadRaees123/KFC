@@ -15,8 +15,7 @@
                 <p>{{filter}}</p>
             </div>
             <div class="userIcon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 100 448 312"><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
-                <p>{{user}}</p>
+                <app-user></app-user>
             </div>
         </div>
         
@@ -26,16 +25,16 @@
                     <div class="row">
                         <div class="col-md-3">
                             <label for="branch">Criteria:</label>
-                            <select id="branch" class="form-control" [(ngModel)]="criteria">
+                            <select id="branch" class="form-select" [(ngModel)]="criteria">
                                 <option [value]="0" selected>Open Criteria</option>
-                                <option >This Hour</option>
-                                <option >Last Hour</option>
-                                <option >This Day</option>
-                                <option >Yesterday</option>
-                                <option >This Week</option>
-                                <option >Last Weeh</option>
-                                <option >This Month</option>
-                                <option >Last Month</option>
+                                <option [value]="1">This Hour</option>
+                                <option [value]="2">Last Hour</option>
+                                <option [value]="3">This Day</option>
+                                <option [value]="4">Yesterday</option>
+                                <option [value]="5">This Week</option>
+                                <option [value]="6">Last Weeh</option>
+                                <option [value]="7">This Month</option>
+                                <option [value]="8">Last Month</option>
                             </select>
                         </div>
                         <div class="col-md-3">
@@ -48,7 +47,7 @@
                         </div>
                         <div class="col-md-3">
                             <label for="branch">Region:</label>
-                            <select id="branch" class="form-control" [(ngModel)]="region">
+                            <select id="branch" class="form-select" [(ngModel)]="region" (change)="AreaCoachList(region)">
                                 <option [value]="0" selected>All Regions</option>
                                 <option [value]="1">South</option>
                                 <option [value]="2">Narth</option>
@@ -61,14 +60,14 @@
                     <div class="row">
                         <div class="col-md-3">
                             <label for="branch">Area Coach:</label>
-                            <select id="branch" class="form-control"[(ngModel)]="id">
+                            <select id="branch" class="form-select"[(ngModel)]="id" (change)="BranchAreaCoachList(region)">
                                 <option [value]="0" selected>All Area</option>
                                 <option *ngFor="let areaCoach of AreaCoachdata" [value]="areaCoach.id">{{areaCoach.FirstName}}</option>
                             </select>
                         </div>
                         <div class="col-md-3">
                             <label for="branch">Branch:</label>
-                            <select id="branch" class="form-control" [(ngModel)]="BranchID">
+                            <select id="branch" class="form-select" [(ngModel)]="BranchID">
                                 <option [value]="0" selected>All Branches</option>
                                 <option *ngFor="let BranchareaCoach of BranchAreaCoachdata" [value]="BranchareaCoach.BranchID">{{BranchareaCoach.Title}}</option>
                             </select>
@@ -77,23 +76,12 @@
                 </div>
         
                 <br>
-                <div class="col-md-12">
-                    <!-- <div class="row">
-                        <div class="col-md-1">{{criteria}}</div>
-                        <div class="col-md-1">{{SrtartDat}}</div>
-                    <div class="col-md-1">{{EndDate}}</div>
-                    <div class="col-md-1">{{region}}</div>
-                    <div class="col-md-1">{{id}}</div>
-                    <div class="col-md-1">{{BranchID}}</div>
-                    </div> -->
-                    
-                    
-                    
+                <div class="col-md-12">                
                     <div class="col-md-1 float-end">
-                        <button class="rest">Reset</button>
+                        <button class="rest" (click)="resetForm()">Reset</button>
                     </div>
                     <div class=" col-md-1 float-end">
-                        <button class="filter" (click)="loadList()" (click)="AreaCoachList()" (click)="BranchAreaCoachList()">Filter</button>
+                        <button class="filter" (click)="loadList()" (click)="AreaCoachList(region)" (click)="BranchAreaCoachList(region)">Filter</button>
                     </div>
                 </div><br><br>
             </div>

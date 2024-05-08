@@ -10,6 +10,7 @@ export class RidermaptvService {
   private apiUrl = 'http://localhost:41420/api/OrderDetails/GetMapSumamryModel';
   private apiUrlOrder = 'http://localhost:41420/api/OrderDetails/GetBranchOrderList';
   private apiUrlRider = 'http://localhost:41420/api/OrderDetails/GetBranchRiderList';
+  private apiUrlBranchinfo = 'http://localhost:41420/api/OrderDetails/GetBranchInfo';
 
   constructor(private http: HttpClient, private Loginservice: LoginService) { }
 
@@ -41,6 +42,17 @@ export class RidermaptvService {
     });
 
     return this.http.post(this.apiUrlRider, body, { headers });
+  }
+
+  // Branch Info Details
+
+  GetBranchInfo(body: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json', // Changed content type
+      'Authorization': `Bearer ${this.Loginservice.getToken()}`
+    });
+
+    return this.http.post(this.apiUrlBranchinfo, body, { headers });
   }
   
 }

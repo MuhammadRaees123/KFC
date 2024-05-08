@@ -19,8 +19,7 @@
               <p>{{filter}}</p>
           </div>
           <div class="userIcon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 100 448 312"><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
-              <p>{{user}}</p>
+            <app-user></app-user>
           </div>
       </div>
       
@@ -30,14 +29,14 @@
                   <div class="row">
                       <div class="col-md-3">
                           <label for="branch">Branch:</label>
-                          <select class="form-control" [(ngModel)]="Branchid">
+                          <select class="form-select" [(ngModel)]="Branchid">
                             <option [value]="0" selected>All Branches</option>
                               <option *ngFor="let branch of branchList" [value]="branch.BranchID">{{ branch.Title }}</option>
                           </select>
                       </div>
                       <div class="col-md-3">
                           <label for="branch">Status:</label>
-                          <select class="form-control" [(ngModel)]="ID">
+                          <select class="form-select" [(ngModel)]="ID">
                               <option *ngFor="let status of statusList" [value]="status.ID">{{ status.RIDERSTATUS }}</option>
                           </select>
                       </div>
@@ -48,7 +47,7 @@
               <div class="col-md-12">
                
                   <div class="col-md-1 float-end">
-                      <button class="rest">Reset</button>
+                      <button class="rest" (click)="resetForm()">Reset</button>
                   </div>
                   <div class=" col-md-1 float-end">
                     <button class="filter" (click)="applyFilter()">Filter</button>
@@ -82,25 +81,24 @@
                       <td>{{ item.LastName }}</td>
                       <td>{{ item.CellNumber }}</td>
                       <td>{{ item.BranchName }}</td>
+                      
                       <td>
-                        <select name="" id=""><option *ngFor="let status of statusList">{{ status.RIDERSTATUS }}</option></select>
-                        
-                        <!-- <select name="" id="">
-                          <option value="">
-                            {{ 
-                              item.RiderStatus === 1 ? 'Offline' : 
-                              item.RiderStatus === 2 ? 'Break' :
-                              item.RiderStatus === 3 ? 'In Progress' :
-                              item.RiderStatus === 4 ? 'Assigned' :
-                              item.RiderStatus === 5 ? 'Free' :
-                              item.RiderStatus === 6 ? 'Returning':
-                              'Null'
-                            }}
-                          </option>
-                          <option value="">{{item.RiderStatus}}</option>
-                        </select> -->
+                        <!-- [(ngModel)]="Id" -->
+                      <select name="" id="" (change)="updateOtherProperties(item)"  [(ngModel)]="item.RiderStatus">
+                        <option *ngFor="let status of statusList" [ngValue]="status.ID" [selected]="status.ID === item.RiderStatus" >
+                          {{ 
+                            status.ID === 1 ? 'Offline' : 
+                            status.ID === 2 ? 'Break' :
+                            status.ID === 3 ? 'In Progress' :
+                            status.ID === 4 ? 'Assigned' :
+                            status.ID === 5 ? 'Free' :
+                            status.ID === 6 ? 'Returning':
+                            'Null'
+                          }}
+                        </option>
+                      </select>
                     </td>
-                      <td><button>Update Rider</button></td>
+                    <td><button (click)="updateloadList(item)">Update Rider</button></td>
                       </tr>
                       </tbody>
                     </table>

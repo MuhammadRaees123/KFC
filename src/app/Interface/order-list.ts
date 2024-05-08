@@ -12,6 +12,8 @@ export interface OrderList {
     ContactNumber: string | null;
     StartTimeString: string | null;
     EndTimeToString: string | null;
+    DeliveryOrderID?: number | null;
+    OrderStatus: string | null;
 
     //report Properties
 
@@ -23,6 +25,7 @@ export interface Accounts {
     BranchName: string |null; // Branch Name
     DeliveryOrderID: String | null; 
     Amount: number | null;
+    BranchRiderId: number | null;
 }
 
 export interface AccountDetails{
@@ -40,6 +43,7 @@ export interface RiderSetting {
     Status: number | null;
     // FirstName: string | null;
     RiderStatus: number | null;
+    selectedStatusId?: number;
 }
 
 export interface Reportlist

@@ -3,6 +3,13 @@ import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
 import HC_exportData from 'highcharts/modules/export-data';
 import HC_accessibility from 'highcharts/modules/accessibility';
+import { GraphdetailsService } from '../../Services/graphdetails.service';
+
+interface OrderChannel {
+  Payment: number;
+  Source: string;
+  OrderCount: number;
+}
 
 @Component({
   selector: 'app-highchart-source',
@@ -12,62 +19,83 @@ import HC_accessibility from 'highcharts/modules/accessibility';
   styleUrl: './highchart-source.component.css'
 })
 export class HighchartSourceComponent {
-  constructor() { }
+  
 
-  ngOnInit(): void {
-    HC_exporting(Highcharts);
-    HC_exportData(Highcharts);
-    HC_accessibility(Highcharts);
+  constructor(private graphdetailsservices:GraphdetailsService) { }
+  public GraphDetails: any;
+  public HighchartDetails: any;
 
-    // Highcharts.chart('container', {} as Highcharts.Options);
-    Highcharts.chart('sourcecontainer', {
-      chart: {
-        type: 'pie'
-      },
-      title: {
-        text: 'Source',
-        align: 'center'
-      },
-      // subtitle: {
-      //   text:
-      //     'Source: <a target="_blank" ' +
-      //     'href="https://www.indexmundi.com/agriculture/?commodity=corn">indexmundi</a>',
-      //   align: 'left'
-      // },
-      xAxis: {
-        categories: ['All', 'Canceled', 'Dispatched', 'Under Process', 'Delivered'],
-        crosshair: true,
-        accessibility: {
-          description: 'Countries'
-        }
-      },
-      yAxis: {
-        min: 0,
-        title: {
-          text: 'Values'
-        }
-      },
-      tooltip: {
-        valueSuffix: ' (1000 MT)'
-      },
-      plotOptions: {
-        column: {
-          pointPadding: 0.2,
-          borderWidth: 0
-        }
-      },
-      series: [
-        {
-          name: 'Order Count',
-          data: [406292, 260000, 107000, 68300, 27500]
-        },
-        {
-          name: 'Percentage',
-          data: [51086, 136000, 5500, 141000, 107180]
-        }
-      ]
-    }as Highcharts.Options);
+ngOnInit(): void {
+  this.DetailsloadList();
+  HC_exporting(Highcharts);
+  HC_exportData(Highcharts);
+  HC_accessibility(Highcharts);
+}
 
-  }
+// Define an interface to describe the structure of objects in GraphDetails
 
+
+updateChartWithData() {
+  const chartData = this.GraphDetails.map((item: OrderChannel) => {
+    const percentage = ((item.OrderCount / this.HighchartDetails.ALL_ORDERS) * 100).toFixed(2);
+    return {
+      name: `${item.Source} <br> Orders Count:${item.OrderCount} <br> Percentage:${percentage}%`,
+      y: item.OrderCount
+    };
+  });
+
+  Highcharts.chart('sourcecontainer', {
+    chart: {
+      type: 'pie'
+    },
+    title: {
+      text: 'Source',
+      align: 'center'
+    },
+    tooltip: {
+      pointFormat: '{series.name}: {point.y}'
+    },
+    series: [
+      {
+        name: 'Order Status',
+        data: chartData
+      }
+    ]
+  } as Highcharts.Options);
+}
+
+
+//fetching graph data from API
+DetailsloadList() {
+  const body = {
+    BranchId: 0,
+    AreaCoachId: 0,
+    ConsiderArea: 1,
+    Criteria: 4,
+    //EndTime: '2024-4-15',
+    EndTimeInString: '9:59:00 AM',
+    ToDateInString: '4/15/2024',
+    RegionId: 0,
+    //StartTime: '2024-4-14',
+    StartTimeInString: '10:00 AM',
+    FromDateInString: '4/14/2024',
+    UserName: 'farhanh'
+  };
+
+  this.graphdetailsservices.GetGraphDetails(body).subscribe(
+    response => {
+      console.log('Response:', response);
+      this.HighchartDetails = response;
+      // if (response && response.length > 0) {
+        console.log('Source pai Data Recevied:', response['OrderChanels']);
+        this.GraphDetails = response['OrderChanels'];
+        console.log('Source pai Data Recevied', this.GraphDetails)
+        this.updateChartWithData(); // Update chart after data is received
+      // }
+    },
+    error => {
+      console.error('Error fetching data:', error);
+    }
+  );
+}
 }

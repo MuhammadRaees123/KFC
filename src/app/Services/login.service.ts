@@ -34,6 +34,7 @@ private authToken: string | null = null;
     body.set('username', email);
     body.set('password', password);
     body.set('grant_type', 'password');
+    localStorage.setItem('userName', email);
 ///api/tokens
     return this.http.post(`${this.apiUrlService.getApiUrl()}/token`, body.toString(),{headers: headers}).pipe(
       map((response: any) => {
@@ -45,7 +46,8 @@ private authToken: string | null = null;
         }
         return response;
       })
-    );;
+    );
+    
   }
 
   // 5

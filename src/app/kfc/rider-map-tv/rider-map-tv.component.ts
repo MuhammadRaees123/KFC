@@ -6,20 +6,41 @@ import { RidermaptvService } from '../../Services/ridermaptv.service';
 import { AssignRidermap, Ridermap } from '../../Interface/order-list';
 import { FilterService } from '../../Services/filter.service';
 import { FormsModule } from '@angular/forms';
+import { UserComponent } from '../user/user.component';
+import { interval } from 'rxjs';
+import { takeWhile } from 'rxjs/operators';
+import { GooglemapComponent } from '../googlemap/googlemap.component';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { NgbPaginationNext } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-rider-map-tv',
   standalone: true,
-  imports: [SidebaarComponent,MapTVHeaderComponent, CommonModule, FormsModule],
+  imports: [SidebaarComponent,MapTVHeaderComponent, CommonModule, FormsModule, UserComponent, GooglemapComponent, GoogleMapsModule],
   templateUrl: './rider-map-tv.component.html',
   styleUrl: './rider-map-tv.component.css'
 })
 export class RiderMapTVComponent {
 
-  constructor(private RiderMapservices: RidermaptvService, private BranchDetails: FilterService) {}
-    
-  currentTab: string = 'Lead'; // Default to Personal Details tab
+  //  Method For Auto Refresh
+  alive = true; // Variable to control the interval
+  startAutoRefresh() {
+    interval(10000) // Interval of 30 seconds
+      .pipe(
+        takeWhile(() => this.alive) // Take while the component is alive
+      )
+      .subscribe(() => {
+        this.loadList(); // Call your function here
+        this.loadOrerList();
+      });
+  }
 
+  ngOnDestroy() {
+    this.alive = false; // Set alive to false when component is destroyed
+  } 
+
+  constructor(private RiderMapservices: RidermaptvService, private BranchDetails: FilterService) {} 
+  currentTab: string = 'Lead'; // Default to Personal Details tab
   openPage(pageName: string, event: MouseEvent) {
     this.currentTab = pageName;
     this.activateTab(event.target as HTMLElement);
@@ -74,11 +95,16 @@ public BreakBranchRiderStatus: any;
 public DelayedRiderStatus: any;
 public OfflineRiderStatus: any;
 public branchList: any[] = [];
+public BranchInfo: any;
+public Lattitude: any;
+public Longitude: any;
 
 
 ngOnInit() {
+  this.startAutoRefresh();
   this.loadList();
   this.loadOrerList();
+  this.BranchinfoList(this.Branchid);
   this.fetchBranchList();  // ************************ \\
 }
  // Get Delivery Order Calculation
@@ -189,10 +215,14 @@ loadOrerList() {
         this.DelayedRiderStatus = response['DelayedBranchRiderList'];
       }
 
-      // Delayed Rider data received
+      // Delayed Rider data received // 
       if(response['OfflineBranchRiderList']){
         console.log('Break Branch Rider Data received:', response['OfflineBranchRiderList']); // Log the received data
         this.OfflineRiderStatus = response['OfflineBranchRiderList'];
+      }
+      if(response['AssignedBranchRiderList']){
+        console.log('Break Branch Rider Data received:', response['AssignedBranchRiderList']); // Log the received data
+        this.AssignRiderStatus = response['AssignedBranchRiderList'];
       }
     }
     },
@@ -221,4 +251,56 @@ fetchBranchList() {
     }
   );
 }
+
+BranchinfoList(BranchID: number) {
+  const body = {
+    BranchId: BranchID,
+  };
+
+  this.RiderMapservices.GetBranchInfo(body).subscribe(
+    response => {
+      console.log('Response:', response); // Log the response to check if data is received
+        console.log('Data received:', response); // Log the received data
+        this.BranchInfo = response;
+        this.BranchLatLong(this.BranchInfo.Lat, this.BranchInfo.Lon)
+
+        
+        console.log('List Data received:', this.OrderMap); // List received data
+        
+    },
+    (error) => {
+      console.error('Error fetching data:', error);
+    }
+  );
 }
+
+
+BranchLatLong(Lat: any, Lon: any)
+{
+console.log(Lat, Lon);
+this.Lattitude = Lat;
+this.Longitude = Lon;
+
+}
+
+// public KFCBranch: any = this.Lattitude;
+
+//  GoogleMap Screen
+display: any;
+center: google.maps.LatLngLiteral = {
+  lat: 31.467035,
+  lng: 74.307381
+};
+zoom = 20;
+moveMap(event: google.maps.MapMouseEvent) {
+    if (event.latLng != null) this.center = (event.latLng.toJSON());
+}
+move(event: google.maps.MapMouseEvent) {
+    if (event.latLng != null) this.display = event.latLng.toJSON();
+}
+}
+
+
+//*************************************************************************************** */
+
+

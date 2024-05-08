@@ -25,7 +25,6 @@ export class HighchartStoretimeComponent {
   }
 
   updateChartWithData() {
-    //alert(this.GraphDetails)
      if (!this.GraphDetails) return; // Make sure GraphDetails has been populated
     Highcharts.chart('storetimecontainer', {
       chart: {
@@ -35,12 +34,7 @@ export class HighchartStoretimeComponent {
         text: '',
         align: 'left'
       },
-      // subtitle: {
-      //   text:
-      //     'Source: <a target="_blank" ' +
-      //     'href="https://www.indexmundi.com/agriculture/?commodity=corn">indexmundi</a>',
-      //   align: 'left'
-      // },
+      
       xAxis: {
         categories: ['< 8', '8-12', '13-20', '20+'],
         crosshair: true,
@@ -60,18 +54,32 @@ export class HighchartStoretimeComponent {
       plotOptions: {
         column: {
           pointPadding: 0.2,
-          borderWidth: 0
+          borderWidth: 0,
+          colorByPoint: true, // Set color by point
         }
       },
       series: [
         {
           name: 'Order Count',
+          type: 'column',
+          color: '#964B00', // Brown color
           data: [
-            //506292, 260000, 107000, 68300
-            parseInt(this.GraphDetails?.IN_STORE_LESS_7?? 0),
-            parseInt(this.GraphDetails?.INSTORE_TIME_5_10?? 0),
-            parseInt(this.GraphDetails?.INSTORE_TIME_10_20?? 0),
-            parseInt(this.GraphDetails?.INSTORE_TIME_20_30?? 0),
+            {
+              y: parseInt(this.GraphDetails?.IN_STORE_LESS_7?? 0),
+              color: '#4CB5AE' // Brown color
+            },
+            {
+              y: parseInt(this.GraphDetails?.INSTORE_TIME_5_10?? 0),
+              color: '#4CB5AE' // Brown color
+            },
+            {
+              y: parseInt(this.GraphDetails?.INSTORE_TIME_10_20?? 0),
+              color: '#4CB5AE' // Brown color
+            },
+            {
+              y: parseInt(this.GraphDetails?.INSTORE_TIME_20_30?? 0),
+              color: '#4CB5AE' // Brown color
+            },
           ]
         }
 

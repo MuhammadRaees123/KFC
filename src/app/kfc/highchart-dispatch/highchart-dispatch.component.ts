@@ -16,17 +16,14 @@ export class HighchartDispatchComponent implements OnInit {
 
   constructor(private highchartsService: HighchartsService,  private graphdetailsservices:GraphdetailsService) { }
   public GraphDetails: any;
-
-
+  
   ngOnInit(): void {
     this.DetailsloadList();
     this.highchartsService.init();
    }
   
    updateChartWithData() {
-    //alert(this.GraphDetails)
      if (!this.GraphDetails) return; // Make sure GraphDetails has been populated
-  
      const totalOrders = this.GraphDetails.ALL_ORDERS;
     const options: Highcharts.Options = {
       chart: {
@@ -40,7 +37,7 @@ export class HighchartDispatchComponent implements OnInit {
         categories: ['Single Dispatch', 'Double Dispatch', 'Triple Dispatch', '3+ Dispatch', 'Manual Dispatch'],
         crosshair: true,
         accessibility: {
-          description: 'Countries'
+          description: 'Dispatch'
         }
       },
       yAxis: {
@@ -55,33 +52,63 @@ export class HighchartDispatchComponent implements OnInit {
       plotOptions: {
         column: {
           pointPadding: 0.2,
-          borderWidth: 0
+          borderWidth: 0,
+          colorByPoint: true, // Set color by point
         }
       },
       series: [
         {
           name: 'Order Count',
           type: 'column', // Specify type for column chart
+          color: '#964B00', // Brown color
           data:[ 
-            //51086, 46000, 5500, 33000, 27180
-            parseInt(this.GraphDetails?.Single_Dispatch?? 0),
-            parseInt(this.GraphDetails?.Double_Dispatch?? 0),
-            parseInt(this.GraphDetails?.Triple_Dispatch?? 0),
-            parseInt(this.GraphDetails?.Triple_Plus_Dispatch?? 0),
-            parseInt(this.GraphDetails?.ManualDispatch?? 0)
+            {
+              y: parseInt(this.GraphDetails?.Single_Dispatch?? 0)/100,
+              color: '#4CB5AE' // Brown color
+            },
+            {
+              y: parseInt(this.GraphDetails?.Double_Dispatch?? 0)/100,
+              color: '#4CB5AE' // Brown color
+            },
+            {
+              y: parseInt(this.GraphDetails?.Triple_Dispatch?? 0)/100,
+              color: '#4CB5AE' // Brown color
+            },
+            {
+              y: parseInt(this.GraphDetails?.Triple_Plus_Dispatch?? 0)/100,
+              color: '#4CB5AE' // Brown color
+            },
+            {
+              y: parseInt(this.GraphDetails?.ManualDispatch?? 0)/100,
+              color: '#4CB5AE' // Brown color
+            }
           ]
-
         },
+
         {
           name: 'Percentage',
           type: 'column', // Specify type for column chart
           data: [
-            //40086, 44000, 5500, 31000, 17180,
-            (this.GraphDetails.Single_Dispatch / totalOrders) * 100,
-            (this.GraphDetails.Double_Dispatch / totalOrders) * 100,
-            (this.GraphDetails.Triple_Dispatch / totalOrders) * 100,
-            (this.GraphDetails.Triple_Plus_Dispatch / totalOrders) * 100,
-            (this.GraphDetails.ManualDispatch / totalOrders) * 100
+            {
+              y: (this.GraphDetails.Single_Dispatch / totalOrders) * 100,
+              color: '#79D769' // Yellow color
+            },
+            {
+              y: (this.GraphDetails.Double_Dispatch / totalOrders) * 100,
+              color: '#79D769' // Yellow color
+            },
+            {
+              y: (this.GraphDetails.Triple_Dispatch / totalOrders) * 100,
+              color: '#79D769' // Yellow color
+            },
+            {
+              y: (this.GraphDetails.Triple_Plus_Dispatch / totalOrders) * 100,
+              color: '#79D769' // Yellow color
+            },
+            {
+              y: (this.GraphDetails.ManualDispatch / totalOrders) * 100,
+              color: '#79D769' // Yellow color
+            }
           ]
         }
       ]

@@ -14,8 +14,7 @@
                 <p>{{filter}}</p>
             </div>
             <div class="userIcon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 100 448 312"><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
-                <p>{{user}}</p>
+                <app-user></app-user>
             </div>
         </div>
         
@@ -25,9 +24,9 @@
                     <div class="row">
                         <div class="col-md-4">
                             <label for="branch">Branch:</label>
-                            <select class="form-control" [(ngModel)]="Branchid">
+                            <select class="form-select" [(ngModel)]="Branchid">
                                 <option [value]="0" selected>All Branches</option>
-                                <option *ngFor="let branch of branchList" [value]="branch.BranchID">{{ branch.Title }}</option>
+                                <option *ngFor="let branch of branchList" [value]="branch.BranchID" (change)="BranchinfoList(Branchid)">{{ branch.Title }}</option>
                             </select>
                         </div>
                         
@@ -37,7 +36,7 @@
                 <br>
                 <div class="col-md-12">
                     <div class=" col-md-1 float-end">
-                        <button class="filter" (click)="loadList()" (click)="loadOrerList()">Filter</button>
+                        <button class="filter" (click)="loadList()" (click)="loadOrerList()" (click)="BranchinfoList(Branchid)">Filter</button>
                     </div>
                 </div><br><br>
             </div>
@@ -65,8 +64,8 @@
                 <thead><tr><th colspan="2">Sales</th></tr></thead>
                 <tbody>
                     <tr class="scale">
-                        <td>{{ OrderMap?.TotalSales ?? 0}}</td>
-                        <td>{{ OrderMap?.CancelSales ?? 0}}</td>
+                        <td>{{ OrderMap?.TotalSales?? 0| number}}</td>
+                        <td>{{ OrderMap?.CancelSales?? 0 | number}}</td>
                     </tr>
                     <tr>
                         <td>Total</td>
@@ -146,7 +145,62 @@
           <div class="overflow">
             <div class="mapTv">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3404.005245148182!2d73.0106508!3d33.6943601!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfbe14da7f2dd1%3A0xcbeecb4d8d4414b2!2sKFC!5e0!3m2!1sen!2suk!4v1646005222159!5m2!1sen!2suk" width="100%" height="530" style="border:0;" loading="lazy"></iframe>
-            </div>
+                <!-- <div id="map" style="width: 100%; height: 700px; position: relative;" class="leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0">
+                    <div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(-48px, 0px, 0px);">
+                        <div class="leaflet-pane leaflet-tile-pane">
+                            <div class="leaflet-layer " style="z-index: 1; opacity: 1;">
+                                <div class="leaflet-tile-container leaflet-zoom-animated" style="z-index: 18; transform: translate3d(330px, 35px, 0px) scale(1);">
+                                    <img alt="" role="presentation" src="https://c.tile.openstreetmap.org/13/5762/3267.png" class="leaflet-tile leaflet-tile-loaded" style="width: 512px; height: 512px; transform: translate3d(-32px, 62px, 0px); opacity: 1;">
+                                    <img alt="" role="presentation" src="https://b.tile.openstreetmap.org/13/5762/3266.png" class="leaflet-tile leaflet-tile-loaded" style="width: 512px; height: 512px; transform: translate3d(-32px, -450px, 0px); opacity: 1;">
+                                    <img alt="" role="presentation" src="https://b.tile.openstreetmap.org/13/5761/3267.png" class="leaflet-tile leaflet-tile-loaded" style="width: 512px; height: 512px; transform: translate3d(-544px, 62px, 0px); opacity: 1;">
+                                    <img alt="" role="presentation" src="https://a.tile.openstreetmap.org/13/5763/3267.png" class="leaflet-tile leaflet-tile-loaded" style="width: 512px; height: 512px; transform: translate3d(480px, 62px, 0px); opacity: 1;">
+                                    <img alt="" role="presentation" src="https://a.tile.openstreetmap.org/13/5762/3268.png" class="leaflet-tile leaflet-tile-loaded" style="width: 512px; height: 512px; transform: translate3d(-32px, 574px, 0px); opacity: 1;">
+                                    <img alt="" role="presentation" src="https://a.tile.openstreetmap.org/13/5761/3266.png" class="leaflet-tile leaflet-tile-loaded" style="width: 512px; height: 512px; transform: translate3d(-544px, -450px, 0px); opacity: 1;">
+                                    <img alt="" role="presentation" src="https://c.tile.openstreetmap.org/13/5763/3266.png" class="leaflet-tile leaflet-tile-loaded" style="width: 512px; height: 512px; transform: translate3d(480px, -450px, 0px); opacity: 1;">
+                                    <img alt="" role="presentation" src="https://c.tile.openstreetmap.org/13/5761/3268.png" class="leaflet-tile leaflet-tile-loaded" style="width: 512px; height: 512px; transform: translate3d(-544px, 574px, 0px); opacity: 1;">
+                                    <img alt="" role="presentation" src="https://b.tile.openstreetmap.org/13/5763/3268.png" class="leaflet-tile leaflet-tile-loaded" style="width: 512px; height: 512px; transform: translate3d(480px, 574px, 0px); opacity: 1;">
+                                </div>
+                                <div class="leaflet-tile-container leaflet-zoom-animated" style="z-index: 17; transform: translate3d(0px, 1px, 0px) scale(2);">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="leaflet-pane leaflet-shadow-pane"></div>
+                        <div class="leaflet-pane leaflet-overlay-pane"></div>
+                        <div class="leaflet-pane leaflet-marker-pane">
+                            <img src="./assets/demo/default/media/img/logo/kfc_icon.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="" tabindex="0" style="transform: translate3d(550px, 210px, 0px); z-index: 210;">
+                            <img src="./assets/demo/default/media/img/logo/icon-02.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="" tabindex="0" style="transform: translate3d(550px, 208px, 0px); z-index: 208;">
+                            <img src="./assets/demo/default/media/img/logo/icon-02.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="" tabindex="0" style="transform: translate3d(486px, 364px, 0px); z-index: 364;">
+                            <img src="./assets/demo/default/media/img/logo/icon-02.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="" tabindex="0" style="transform: translate3d(547px, 206px, 0px); z-index: 206;">
+                            <img src="./assets/demo/default/media/img/logo/icon-07.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="" tabindex="0" style="transform: translate3d(550px, 209px, 0px); z-index: 209;">
+                            <img src="./assets/demo/default/media/img/logo/icon-07.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="" tabindex="0" style="transform: translate3d(550px, 209px, 0px); z-index: 209;">
+                            <img src="./assets/demo/default/media/img/logo/icon-07.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="" tabindex="0" style="transform: translate3d(550px, 209px, 0px); z-index: 209;">
+                            <img src="./assets/demo/default/media/img/logo/icon-07.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="" tabindex="0" style="transform: translate3d(550px, 209px, 0px); z-index: 209;">
+                        </div>
+                        <div class="leaflet-pane leaflet-tooltip-pane"></div>
+                        <div class="leaflet-pane leaflet-popup-pane">
+                            <div class="leaflet-popup  leaflet-zoom-animated" style="opacity: 1; transform: translate3d(550px, 209px, 0px); bottom: -7px; left: -58px;">
+                                <div class="leaflet-popup-content-wrapper">
+                                    <div class="leaflet-popup-content" style="width: 76px;">
+                                        <b>Haseeb Shah</b><br>03241702320
+                                    </div>
+                                </div>
+                                <div class="leaflet-popup-tip-container">
+                                    <div class="leaflet-popup-tip"></div>
+                                </div><a class="leaflet-popup-close-button" href="#close">×</a>
+                            </div>
+                            </div>
+                            <div class="leaflet-proxy leaflet-zoom-animated" style="transform: translate3d(2.95029e+06px, 1.67296e+06px, 0px) scale(8192);">
+                            </div>
+                        </div>
+                        <div class="leaflet-control-container">
+                            <div class="leaflet-top leaflet-left">
+                                <div class="leaflet-control-zoom leaflet-bar leaflet-control">
+                                    <a class="leaflet-control-zoom-in" href="#" title="Zoom in" role="button" aria-label="Zoom in">+</a>
+                                    <a class="leaflet-control-zoom-out" href="#" title="Zoom out" role="button" aria-label="Zoom out">−</a>
+                                </div>
+                            </div>-->
+                            <!-- <div class="leaflet-top leaflet-right"></div><div class="leaflet-bottom leaflet-left"></div><div class="leaflet-bottom leaflet-right"><div class="leaflet-control-attribution leaflet-control"><a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a></div></div></div></div> -->
+            </div> 
             <div class="mapDetails">
                 <div tabLink>
                     <ul class="nav nav-tabs">
@@ -295,6 +349,67 @@
           </div>
          </div>
          <!-- Start Map Riders Part -->
+         <div class="DetailsTbl col-md-12">
+            <!-- google-maps-demo.component.html -->
+            <!-- <google-map height="400px"
+                width="750px"
+                [center]="center"
+                [zoom]="zoom"
+                (mapClick)="moveMap($event)"
+                (mapMousemove)="move($event)">
+            </google-map> -->
+            <app-googlemap></app-googlemap>
+         </div>
+
+         <div class="miniRider">
+            <div class="imagsum">
+                <p style="font-weight:bold; font-size:10px;">
+                    {{ (ReturningRiderStatus?.length ?? 0) +
+                       (FreeRiderStatus?.length ?? 0) +
+                       (InprogressRiderStatus?.length ?? 0) +
+                       (BreakBranchRiderStatus?.length ?? 0) +
+                       (AssignRiderStatus?.length ?? 0) +
+                       (DelayedRiderStatus?.length ?? 0) }}
+                </p>
+                <img src="../assets/Images/4.png" alt="Mini Rider" style="width: 10px; height:10px; margin-top: -50px;">
+                <p style="margin-top: -30px; font-weight: bold; font-size: 10px;">Riders</p>
+            </div>
+            <div class="imagicon">
+                <p>{{ReturningRiderStatus?.length ?? 0}}</p>
+                <img src="../assets/Images/4.png" alt="Mini Rider" style="width: 25px; height:25px;">
+                <p style="margin-top: -12px;">Returning</p>
+            </div>
+            <div class="imagicon">
+                <p>{{FreeRiderStatus?.length ?? 0}}</p>
+                <img src="../assets/Images/2.png" alt="Mini Rider" style="width: 25px; height:25px;">
+                <p style="margin-top: -12px;">Free</p>      
+            </div>
+            <div class="imagicon">
+                <p>{{InprogressRiderStatus?.length ?? 0}}</p>
+                <img src="../assets/Images/7.png" alt="Mini Rider" style="width: 25px; height:25px;">
+                <p style="margin-top: -12px;">In Progress</p>
+            </div>
+            <div class="imagicon">
+                <p>{{BreakBranchRiderStatus?.length ?? 0}}</p>
+                <img src="../assets/Images/5.png" alt="Mini Rider" style="width: 25px; height:25px;">
+                <p style="margin-top: -12px;">Break</p>
+            </div>
+            <div class="imagicon">
+                <p>{{AssignRiderStatus?.length ?? 0}}</p>
+                <img src="../assets/Images/3.png" alt="Mini Rider" style="width: 25px; height:25px;">
+                <p style="margin-top: -12px;">Assign</p>
+            </div><div class="imagicon">
+                <p>{{DelayedRiderStatus?.length ?? 0}}</p>
+                <img src="../assets/Images/1.png" alt="Mini Rider" style="width: 25px; height:25px;">
+                <p style="margin-top: -12px;">Delay</p>
+            </div><div class="imagicon">
+                <p>{{OfflineRiderStatus?.length ?? 0}}</p>
+                <img src="../assets/Images/6.png" alt="Mini Rider" style="width: 25px; height:25px;">
+                <p style="margin-top: -12px;">Offline</p>
+            </div>
+
+        </div>
+          
       </div>
     </div>
 </div>

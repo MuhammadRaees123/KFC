@@ -4,23 +4,108 @@
 <div class="col-md-12">
     <div class="row">
       <div class="col-md-2">
-         
           <app-sidebaar></app-sidebaar>
-      
       </div>
       <div class="col-md-10 PageBody">
          <!-- Start Body Part -->
-         <app-statistics-header></app-statistics-header>
+         <!-- // ********************************** */
+          //      Start Header and Filters of  Highcharts
+          //*********************************** */ -->
+          <div class="headerIcon">
+            <div class="filter">
+                <div tabLink>
+                    <a class="tablink nav-link" (click)="openPage('filter', $event)" [ngClass]="{'active': currentTab === 'filter'}"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 100 512 312"><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg></a>
+                </div>
+                <p>{{filter}}</p>
+            </div>
+            <div class="userIcon">
+              <app-user></app-user>
+            </div>
+        </div>
+        <div class="filterDetails">
+            <div id="filter" class="tabcontent" [hidden]="currentTab !== 'filter'">
+        
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="branch">Criteria:</label>
+                            <select id="branch" class="form-select" [(ngModel)]="criteria">
+                                <option [value]="0">Open Criteria</option>
+                                <option [value]="1">This Hour</option>
+                                <option [value]="2">Last Hour</option>
+                                <option [value]="3">This Day</option>
+                                <option [value]="4">Yesterday</option>
+                                <option [value]="5">This Week</option>
+                                <option [value]="6">Last Week</option>
+                                <option [value]="7">This Month</option>
+                                <option [value]="8">Last Month</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="branch">Region:</label>
+                            <select id="branch" class="form-select" [(ngModel)]="region" (change)="AreaCoachList(region)">
+                              <option [value]="0" selected>All Regions</option>
+                              <option [value]="1">South</option>
+                              <option [value]="2">Narth</option>
+                              <option [value]="3">Centeral</option>
+                          </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="branch">Area Coach:</label>
+                            <select id="branch" class="form-select"[(ngModel)]="id" (change)="BranchAreaCoachList(region)">
+                              <option [value]="0" selected>All Area</option>
+                              <option *ngFor="let areaCoach of AreaCoachdata" [value]="areaCoach.id">{{areaCoach.FirstName}}</option>
+                          </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="branch">Branch:</label>
+                            <select id="branch" class="form-select" [(ngModel)]="BranchID">
+                              <option [value]="0" selected>All Branches</option>
+                              <option *ngFor="let BranchareaCoach of BranchAreaCoachdata" [value]="BranchareaCoach.BranchID">{{BranchareaCoach.Title}}</option>
+                          </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12" *ngIf="criteria === 0 || !criteria">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label for="">From Date : </label>
+                      <input type="date" class="form-control" [(ngModel)]="SrtartDat">
+                  </div>
+                  <div class="col-md-3">
+                      <label for="">To Date :</label>
+                      <input type="date" class="form-control" [(ngModel)]="EndDate">
+                  </div>
+                  </div>
+                </div>
+        
+                <br>
+                <div class="col-md-12">
+                    <div class="col-md-1 float-end">
+                        <button class="rest" (click)="resetForm()">Reset</button>
+                    </div>
+                    <div class=" col-md-1 float-end">
+                        <button class="filter" (click)="DetailsloadList()" (click)="AreaCoachList(region)"  (click)="BranchAreaCoachList(region)" (click)="guadgeloadList()">Filter</button>
+                    </div>
+                </div><br><br>
+            </div>
+        </div>
+        
+         <!-- // ********************************** */
+          //      End Header and Filters of  Highcharts
+          //*********************************** */ -->
         <!-- Start Avg Time Breakdown Section -->
          <div class="DetailsTbl">
           <div class="col-xl-6 col-sm-12 timegrapg">
             <h5>Avg Time Breakdown</h5><hr>
-            <app-highchart-avgtime></app-highchart-avgtime>
+            <!-- <app-highchart-avgtime></app-highchart-avgtime> -->
+            <div id="container" style="min-width: 310px; height: 300px; margin: 0 auto"></div>
           </div>
 
           <div class="col-xl-6 col-sm-12 timegrapg">
             <h5>Dispatch</h5><hr>
-            <app-highchart-dispatch></app-highchart-dispatch>
+            <!-- <app-highchart-dispatch></app-highchart-dispatch> -->
+            <div id="dispatchcontainer" style="min-width: 310px; height: 330px; margin: 0 auto"></div>
           </div>
          </div>
         <!-- End Average Graph Section -->
@@ -31,26 +116,30 @@
 
           <div class="col-xl-3 col-sm-6 metergraph">
             <h5>In Store < 7</h5>
-            <p>In Store = 8 Orders</p>
-            <app-highchart-storemeter></app-highchart-storemeter>
+            <p>In Store = {{ GuadgeGraphDetails?.IN_STORE_LESS_7?? 0}} Orders</p>
+            <!-- <app-highchart-storemeter></app-highchart-storemeter> -->
+            <div id="storemetercontainer" style="min-width: 200px; height: 250px; margin: 0 auto"></div>
           </div>
 
           <div class="col-xl-3 col-sm-6 metergraph">
             <h5>Drive Time < 15</h5>
-            <p>Drive = 14 Orders</p>
-            <app-highchart-drivemeter></app-highchart-drivemeter>
+            <p>Drive = {{ GuadgeGraphDeliverTime?.DRIVE_TIME_LESS_10?? 0}} Orders</p>
+            <!-- <app-highchart-drivemeter></app-highchart-drivemeter> -->
+            <div id="drivemetercontainer" style="min-width: 200px; height: 250px; margin: 0 auto"></div>
           </div>
 
           <div class="col-xl-3 col-sm-6 metergraph">
             <h5>Deliver Time < 20</h5>
-            <p>SOS = 1 Orders</p>
-            <app-highchart-delivertime></app-highchart-delivertime>
+            <p>SOS = {{ GuadgeGraphDetailsinstoretime?.DELIVER_LESS_20?? 0}} Orders</p>
+            <!-- <app-highchart-delivertime></app-highchart-delivertime> -->
+            <div id="delivertimecontainer" style="min-width: 200px; height: 250px; margin: 0 auto"></div>
           </div>
 
           <div class="col-xl-3 col-sm-6 metergraph">
             <h5>Deliver Time < 30</h5>
-            <p>SOS = 11 Orders</p>
-            <app-highchart-timedeliver></app-highchart-timedeliver>
+            <p>SOS = {{ GuadgehDeliverTime?.DELIVER_LESS_30?? 0}} Orders</p>
+            <!-- <app-highchart-timedeliver></app-highchart-timedeliver> -->
+            <div id="delivercontainer" style="min-width: 200px; height: 250px; margin: 0 auto"></div>
           </div>
        
          </div>
@@ -60,11 +149,13 @@
          <div class="DetailsTbl">
           <div class="col-xl-6 col-sm-12 timegrapg">
             <h5>In Store Time(Average Time: 9.18)</h5><hr>
-            <app-highchart-storetime></app-highchart-storetime>
+            <!-- <app-highchart-storetime></app-highchart-storetime> -->
+            <div id="storetimecontainer" style="min-width: 310px; height: 330px; margin: 0 auto"></div>
           </div>
           <div class="col-xl-6 col-sm-12 timegrapg">
             <h5>Order Details</h5><hr>
-            <app-highchart-orderdetails></app-highchart-orderdetails>
+            <!-- <app-highchart-orderdetails></app-highchart-orderdetails> -->
+            <div id="ordercontainer" style="min-width: 310px; height: 330px; margin: 0 auto"></div>
           </div>
          </div>
         <!-- End Avg Graph Section -->
@@ -73,11 +164,13 @@
                 <div class="DetailsTbl">
                   <div class="col-xl-6 col-sm-12 timegrapg">
                     <h5>Drive Time</h5><hr>
-                    <app-highchart-drivetime></app-highchart-drivetime>
+                    <!-- <app-highchart-drivetime></app-highchart-drivetime> -->
+                    <div id="drivecontainer" style="min-width: 310px; height: 330px; margin: 0 auto"></div>
                   </div>
                   <div class="col-xl-6 col-sm-12 timegrapg">
                     <h5>Revenue</h5><hr>
-                    <app-highchart-revenue></app-highchart-revenue>
+                    <!-- <app-highchart-revenue></app-highchart-revenue> -->
+                    <div id="revenuecontainer" style="min-width: 310px; height: 300px; margin: 0 auto"></div>
                   </div>
                  </div>
                 <!-- End Avg Graph Section -->
@@ -86,11 +179,13 @@
          <div class="DetailsTbl">
           <div class="col-xl-6 col-sm-12 timegrapg">
             <h5>Speed of Service (Average Time :24)</h5><hr>
-            <app-highchart-speedservices></app-highchart-speedservices>
+            <!-- <app-highchart-speedservices></app-highchart-speedservices> -->
+            <div id="speedcontainer" style="min-width: 310px; height: 330px; margin: 0 auto"></div>
           </div>
           <div class="col-xl-6 col-sm-12 timegrapg">
             <h5>Source</h5><hr>
-            <app-highchart-source></app-highchart-source>
+            <!-- <app-highchart-source></app-highchart-source> -->
+            <div id="sourcecontainer" style="min-width: 310px; height: 300px; margin: 0 auto"></div>
           </div>
          </div>
         <!-- End Avg Graph Section -->

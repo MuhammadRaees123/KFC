@@ -22,7 +22,12 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/leaflet/dist/images",
+                "output": "assets/"
+            }
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
@@ -92,11 +97,13 @@
             "styles": [
               "styles.css",
               "../node_modules/font-awesome/css/font-awesome.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/leaflet/dist/leaflet.css" 
           ],
           "scripts": [
             "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-            "node_modules/@agm/core/directives/googlemaps/googlemaps.js"
+            "node_modules/@agm/core/directives/googlemaps/googlemaps.js",
+            "https://maps.googleapis.com/maps/api/js?key=YOUR_KEY"
           ]
           }
         }

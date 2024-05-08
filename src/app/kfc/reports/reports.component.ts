@@ -6,11 +6,12 @@ import { ReportService } from '../../Services/report.service';
 import { FormsModule } from '@angular/forms';
 import { Reportlist } from '../../Interface/order-list';
 import { FilterService } from '../../Services/filter.service';
+import { UserComponent } from '../user/user.component';
 
 @Component({
   selector: 'app-reports',
   standalone: true,
-  imports: [SidebaarComponent, CommonModule, FormsModule],
+  imports: [SidebaarComponent, CommonModule, FormsModule, UserComponent],
   templateUrl: './reports.component.html',
   styleUrl: './reports.component.css'
 })
@@ -67,8 +68,8 @@ public BranchAreaCoachdata: any;
 ngOnInit() {
   this.loadList();
   this.RiderloadList();
-  this.AreaCoachList();
-  this.BranchAreaCoachList();
+  this.AreaCoachList(this.region);
+  this.BranchAreaCoachList(this.region);
 
   // Method of Tomorrow date display by default
     // Calculate tomorrow's date
@@ -84,6 +85,21 @@ EndDate:any;
 public region: any;
 public id: any;
 public BranchID: any;
+
+  //  Reset Values Method
+  resetForm() {
+    this.criteria = 0;
+    this.region = 0;
+    this.id = 0;
+    this.SrtartDat = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD;
+  
+    // Reset EndDate to tomorrow's date
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    this.EndDate = tomorrow.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+    
+    this.BranchID = 0;
+  }
 
 loadList() {
   const body = {
@@ -173,10 +189,10 @@ RiderloadList() {
 }
   
   // Area Coach Fetching Methods 
-  AreaCoachList() {
+  AreaCoachList(Region: number) {
     const body = {
       Criteria: this.criteria,
-      RegionId: this.region,
+      RegionId: Region,
     };
   
     this.filterServices.GetAreaCoach(body).subscribe(
@@ -194,10 +210,10 @@ RiderloadList() {
   }
 
       // Area Coach Branch Fetching Methods 
-      BranchAreaCoachList() {
+      BranchAreaCoachList(Region: number) {
         const body = {
           id: this.id,
-          RegionId: this.region,
+          RegionId: Region,
         };
       
         this.filterServices.GetAreaCoachBranches(body).subscribe(

@@ -17,11 +17,9 @@ export class HighchartAVGTimeComponent implements AfterViewInit {
   ngOnInit(): void {
     this.DetailsloadList();
    }
-
   ngAfterViewInit(): void {
     this.createChart();
   }
-
   createChart(): void {
     Highcharts.chart('container', {
       chart: {
@@ -41,10 +39,6 @@ export class HighchartAVGTimeComponent implements AfterViewInit {
       },
       yAxis: {
         min: 0,
-        // title: {
-        //   text: 'Population (millions)',
-        //   align: 'high'
-        // },
         labels: {
           overflow: 'justify'
         },
@@ -62,31 +56,19 @@ export class HighchartAVGTimeComponent implements AfterViewInit {
           groupPadding: 0.3
         }
       },
-      legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'top',
-        x: -40,
-        y: 80,
-        floating: true,
-        borderWidth: 1,
-        backgroundColor:
-          Highcharts.defaultOptions.legend?.backgroundColor || '#FFFFFF',
-        shadow: true
-      },
       credits: {
         enabled: false
       },
       series: [ 
       {
         data: [
-          //1288, 1007, 4561, 746, 4561
           parseInt(this.GraphDetails?.AVG_IN_STORE?? 0),
           parseInt(this.GraphDetails?.AVG_DRIVE?? 0),
           parseInt(this.GraphDetails?.AVG_DELIVER?? 0),
           parseInt(this.GraphDetails?.DoorTime?? 0),
           parseInt(this.GraphDetails?.ReturnTime?? 0)
-        ]
+        ],
+        color: '#CBC87B' // Setting the color here
       }]
     }as Highcharts.Options);
   }

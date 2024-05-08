@@ -7,6 +7,8 @@ import * as FusionCharts from 'fusioncharts';
 import * as Charts from 'fusioncharts/fusioncharts.charts';
 import { AgmCoreModule } from '@agm/core';
 import { FormsModule } from '@angular/forms';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+
 
 // Initialize FusionCharts
 FusionChartsModule.fcRoot(FusionCharts, Charts);
@@ -18,9 +20,11 @@ FusionChartsModule.fcRoot(FusionCharts, Charts);
     BrowserModule,
     FusionChartsModule,
     FormsModule,
+    // GoogleMapsModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
     })
+    
   ]
 })
 export class KFCModule { }

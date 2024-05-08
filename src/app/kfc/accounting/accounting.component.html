@@ -16,18 +16,16 @@
               <p>{{filter}}</p>
           </div>
           <div class="userIcon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 100 448 312"><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
-              <p>{{user}}</p>
+            <app-user></app-user>
           </div>
       </div>
-      
       <div class="filterDetails">
         <div id="filter" class="tabcontent" [hidden]="currentTab !== 'filter'">
             <div class="col-md-12">
                 <div class="row">
                   <div class="col-md-4">
                     <label for="branch">Branch:</label>
-                    <select class="form-control" [(ngModel)]="Branchid">
+                    <select class="form-select" [(ngModel)]="Branchid">
                       <option [value]="0" selected>All Branches</option>
                         <option *ngFor="let branch of branchList" [value]="branch.BranchID">{{ branch.Title }}</option>
                     </select>
@@ -52,43 +50,56 @@
         </div>
     </div>
     
-      <br>
-        <div class="row">
-
-         <div class="DetailsTbl col-md-8">
-          <h4>Accounts</h4>
-          <p>{{ selectedBranchRiderId }}</p>
-  
-                  <!-- Start Table Part -->
-                  <div class="overflow">
-                      <table class="table table-sm table-hover data-table" id="datatableexample">
-                      <thead>
+        <div class="row accounttbls">
+          <!-- <div  class="DetailsTbl" [ngClass]="{'col-md-12': ordersDetails.length === 0, 'custom-width': ordersDetails.length > 0}"> -->
+            <div class="DetailsTbl" [ngClass]="{'col-md-12': ordersDetails.length === 0 && !showDetails, 'custom-width': ordersDetails.length > 0 && showDetails}">
+ 
+            <h4>Accounts</h4>
+            <!-- Start Table Part -->
+            <div class="overflow">
+                <table class="table table-sm table-hover data-table" id="datatableexample">
+                    <thead>
                         <tr style="background-color: #716ACA !important;">
-                          <td>Rider Name</td>
-                          <td>Branch</td>
-                          <td>Total Orders</td>
-                          <td>Total Amount</td>
-                          <td></td>
-                          <td></td>
+                            <td>Rider Name</td>
+                            <td>Branch</td>
+                            <td>Total Orders</td>
+                            <td>Total Amount</td>
+                            <td></td>
+                            <td></td>
                         </tr>
-                      </thead>
-                      <tbody>
+                    </thead>
+                    <tbody *ngIf="orders.length > 0">
                         <tr *ngFor="let item of orders" >
-                          <td>{{ item.RiderFirstName}}</td>
+                            <td>{{ item.RiderFirstName}}</td>
                             <td>{{ item.BranchName}}</td>
                             <td>{{ item.DeliveryOrderID}}</td>
                             <td>{{item.Amount}}</td>
-                            <td> <button  (click)="DetailsloadList(item.BranchRiderId)">Details</button></td>
+                            <td> 
+                              <button (click)="DetailsloadList(item.BranchRiderId); toggleDetails()">Details</button>
+                          </td>
+                            <!-- <td> <button  (click)="DetailsloadList(item.BranchRiderId); toggleDetails()">Details</button></td> -->
                             <td> <button type="button" #btnAlert (click)="openModal()">Trace Log</button></td>                 
                         </tr>
                     </tbody>
-                    </table>
-                  </div>
-                    <!-- End Table Part -->
-         </div>
-
-         <div class="AccountingDetails col-md-4">
-          <h4>Details</h4>
+                    <tbody *ngIf="orders.length === 0">
+                        <tr>
+                            <th colspan="6" style="text-align: center;">No Data Available</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- End Table Part -->
+        </div>
+        
+        <!-- <div class="AccountingDetails col-md-4" [hidden]=" ordersDetails.length === 0 || showDetails"> -->
+          <div class="AccountingDetails col-md-4" [hidden]="!showDetails">
+          <div class="col-md-12 detailheading" >
+            <h4>Details</h4>
+            <button (click)="showDetails = !showDetails">
+              <span style="color: #716ACA; font-weight: bold;">O</span>ut<span style="color: brown; font-weight: bold;"> ~></span>
+            </button> 
+          </div>
+          
           <table class="table table-hover">
             <thead>
               <tr style="background-color: #716ACA !important;">
@@ -103,13 +114,10 @@
                 <td>{{item.FirstName}}</td>
                 <td>{{item.Amount}}</td>
             </tr>
-
             </tbody>
           </table>
          </div>
-
         </div>
-  
          <!-- End Body Part -->
       </div>
     </div>

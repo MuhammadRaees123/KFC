@@ -5,11 +5,12 @@ import { Ratinglist } from '../../Interface/order-list';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FilterService } from '../../Services/filter.service';
+import { UserComponent } from '../user/user.component';
 
 @Component({
   selector: 'app-rider-rating',
   standalone: true,
-  imports: [SidebaarComponent, CommonModule, FormsModule],
+  imports: [SidebaarComponent, CommonModule, FormsModule, UserComponent],
   templateUrl: './rider-rating.component.html',
   styleUrl: './rider-rating.component.css'
 })
@@ -51,8 +52,8 @@ public BranchAreaCoachdata: any;
 
 ngOnInit() {
   this.loadList();
-  this.AreaCoachList();
-  this.BranchAreaCoachList();
+  this.AreaCoachList(this.region);
+  this.BranchAreaCoachList(this.region);
 
   // Method of Tomorrow date display by default
     // Calculate tomorrow's date
@@ -69,11 +70,24 @@ public region: any;
 public id: any;
 public BranchID: any;
 
-
-
+  //  Reset Values Method
+  resetForm() {
+    this.criteria = 0;
+    this.region = 0;
+    this.id = 0;
+    this.SrtartDat = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD;
+  
+    // Reset EndDate to tomorrow's date
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    this.EndDate = tomorrow.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+    
+    this.BranchID = 0;
+  }
+  
 loadList() {
   const body = {
-      AreaCoachId: this.id,
+      AreaCoachId: this.id,//AreaCoachId/ConsiderArea/Criteria
       BranchId: this.BranchID,
       Criteria: this.criteria,
       //EndTime: "2024-03-27T09:32:52.779Z",
@@ -123,10 +137,10 @@ loadList() {
 }
 
   // Area Coach Fetching Methods 
-  AreaCoachList() {
+  AreaCoachList(Region: number) {
     const body = {
-      Criteria: 0,
-      RegionId: this.region,
+      Criteria: this.criteria,
+      RegionId: Region,
     };
     this.filterServices.GetAreaCoach(body).subscribe(
       response => {
@@ -141,10 +155,10 @@ loadList() {
   }
 
     // Area Coach Branch Fetching Methods 
-    BranchAreaCoachList() {
+    BranchAreaCoachList(Region: number) {
       const body = {
         id: this.id,
-        RegionId: this.region,
+        RegionId: Region,
       };
     
       this.filterServices.GetAreaCoachBranches(body).subscribe(
